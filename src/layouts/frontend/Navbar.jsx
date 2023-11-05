@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../assets/frontend/js/script";
 import "./Navbar.css";
-import Logo from "../../assets/frontend/assets/img/logo.png";
+import Logo from "../../assets/frontend/assets/img/logo.svg";
 
 
 function Navbar() {
@@ -49,12 +49,15 @@ function Navbar() {
             >
               <span className="navbar-toggler-icon" />
             </button>
-            <img className="mx-auto d-block" src={Logo} alt="" width="50" height="50" />
-            <Link className="navbar-brand me-auto" to="/">
+            <img className="my-auto" src={Logo} alt="" width="50" height="50" />
+            <Link className="navbar-brand me-auto my-auto" to="/">
               Ceramics Heaven
             </Link>
+            </div>
+            <div className="d-flex">
+              
             {isLoggedIn === null ? (
-              <div className="position-absolute end-0 me-4">
+              <div className="position-absolute end-0 translate-middle">
                 <Link
                   type="button"
                   className="btn btn-outline-warning"
@@ -64,7 +67,7 @@ function Navbar() {
                 </Link>
               </div>
             ) : (
-              <div className="d-flex position-absolute end-0 me-4">
+              <div className="d-flex position-absolute end-0 translate-middle-y me-4">
                 <form className="d-flex">
                   <button
                     className="btn btn-outline-warning position-relative me-3"
