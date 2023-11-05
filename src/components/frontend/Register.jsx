@@ -14,13 +14,14 @@ function Register() {
     const navigate = useNavigate();
 
     const onSubmit = async (data, event) => {
-        // console.log('Register Form Submitted', data);
+        const {firstName, lastName, gender, mobile, email, password} = data;
+        const formData = {firstName, lastName, gender, mobile, email, password};
         
-        await axios.post("http://127.0.0.1:8080/register", data)
+        await axios.post("http://127.0.0.1:8080/register", formData)
         .then((res) => {
             if(res){
                 console.log(res);
-                toast.success("Login Successful..! Welcome");
+                toast.success("Registration Successful..! Welcome");
             }
           });
         event.target.reset();

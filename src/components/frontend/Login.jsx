@@ -10,8 +10,15 @@ function Login() {
 
     const navigate = useNavigate();
 
-    const onSubmit = (data, event) => {
-        console.log('Login Form Submitted', data);
+    const onSubmit = async (data, event) => {
+        // console.log('Login Form Submitted', data);
+        await axios.post("http://127.0.0.1:8080/login", data)
+        .then((res) => {
+            if(res){
+                console.log(res.data);
+                toast.success("Login Successful..! Welcome");
+            }
+          });
         event.target.reset();
         swal("Logged In..!", "Congratulations..!", "success").then(() => navigate("/admin"));
     };
