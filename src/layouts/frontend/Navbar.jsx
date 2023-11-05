@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../assets/frontend/js/script";
 import "./Navbar.css";
+import Logo from "../../assets/frontend/assets/img/logo.png";
+
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -33,7 +35,7 @@ function Navbar() {
   }, [onLogout]);
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg shadow sticky-top navbar-light bg-light py-3">
         <div className="container position-relative">
           <div className="d-flex">
             <button
@@ -47,6 +49,7 @@ function Navbar() {
             >
               <span className="navbar-toggler-icon" />
             </button>
+            <img className="mx-auto d-block" src={Logo} alt="" width="50" height="50" />
             <Link className="navbar-brand me-auto" to="/">
               Ceramics Heaven
             </Link>

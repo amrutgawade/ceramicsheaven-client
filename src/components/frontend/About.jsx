@@ -21,37 +21,35 @@ function About() {
         <div className="container">
           <div className="row content">
             <div className="col-lg-6">
-              <h2>Eum ipsam laborum deleniti velitena</h2>
+              <h2>Malushte Plumbing and Ceramics</h2>
               <h3>
-                Voluptatem dignissimos provident quasi corporis voluptates sit assum
-                perenda sruen jonee trave
+               Your Vision, Our Ceramics
               </h3>
             </div>
             <div className="col-lg-6 pt-4 pt-lg-0">
               <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum
+              Malushte Plumbing and Ceramics brings you the best,
+              never seen before designs and patterns uniquely fabricated
+              to present a splash of creativity in your surroundings.
+              We specialize in plumbing and ceramic products, offering a wide range 
+              of options to meet your needs. Whether you're looking for modern, 
+              traditional, or contemporary designs, we have a vast selection to choose from.
+
               </p>
               <ul>
                 <li>
-                  <i className="fa-solid fa-check-double" /> Ullamco laboris nisi ut
-                  aliquip ex ea commodo consequa
+                  <i className="fa-solid fa-check-double" /> A reputed ceramic shop offer high-quality ceramic products with a wide variety of designs, styles, and finishes.
                 </li>
                 <li>
-                  <i className="fa-solid fa-check-double" /> Duis aute irure dolor in
-                  reprehenderit in voluptate velit
+                  <i className="fa-solid fa-check-double" /> Exceptional customer service.
                 </li>
                 <li>
-                  <i className="fa-solid fa-check-double" /> Ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in
-                  reprehenderit in
+                  <i className="fa-solid fa-check-double" /> Should be able to guide customers, answer questions, and provide suggestion based on the customer's needs and preferences.
                 </li>
               </ul>
               <p className="fst-italic">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              With us, you're not just purchasing products; you're investing in the transformation of your space.
+              We're here to turn your vision into reality.
               </p>
             </div>
           </div>
@@ -75,9 +73,9 @@ function About() {
                   />
                 </div>
                 <div className="member-info">
-                  <h4>Walter White</h4>
-                  <span>Chief Executive Officer</span>
-                  <p>Explicabo voluptatem mollitia et repellat</p>
+                  <h4>Amrut Gawade</h4>
+                  <span>Full Stack Developer</span>
+                  <p>Pursuing B. E. Computer In GIT</p>
                   <div className="social">
                     <Link to="">
                       <div className='i'>
@@ -114,9 +112,9 @@ function About() {
                   />
                 </div>
                 <div className="member-info">
-                  <h4>Sarah Jhonson</h4>
-                  <span>Product Manager</span>
-                  <p>Aut maiores voluptates amet et quis</p>
+                  <h4>Rohit Kadam</h4>
+                  <span>Full Stack Developer</span>
+                  <p>Pursuing B. E. Computer In GIT</p>
                   <div className="social">
                     <Link to="">
                       <div className='i'>
@@ -153,9 +151,9 @@ function About() {
                   />
                 </div>
                 <div className="member-info">
-                  <h4>William Anderson</h4>
-                  <span>CTO</span>
-                  <p>Quisquam facilis cum velit laborum corrupti</p>
+                  <h4>Rutikesh Sawant</h4>
+                  <span>Backend Developer</span>
+                  <p>Pursuing B. E. Computer In GIT</p>
                   <div className="social">
                     <Link to="">
                       <div className='i'>
@@ -192,9 +190,9 @@ function About() {
                   />
                 </div>
                 <div className="member-info">
-                  <h4>Amanda Jepson</h4>
-                  <span>Accountant</span>
-                  <p>Dolorum tempora officiis odit laborum officiis</p>
+                  <h4>Yash Sagvekar</h4>
+                  <span>Frontend Developer</span>
+                  <p>Pursuing B. E. Computer In GIT</p>
                   <div className="social">
                     <Link to="">
                       <div className='i'>
