@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "../../assets/frontend/js/script";
 import "./Navbar.css";
 
 function Navbar() {
@@ -12,7 +13,6 @@ function Navbar() {
     setIsLoggedIn(localStorage.getItem("username"));
   };
 
-
   useEffect(() => {
     // console.log(isLoggedIn);
     if (isLoggedIn) {
@@ -24,7 +24,6 @@ function Navbar() {
     } else if (isLoggedIn == null) {
       const timer = setInterval(() => {
         setIsLoggedIn(localStorage.getItem("username"));
-
       }, 1000); // Run every second
 
       return () => {
@@ -32,91 +31,129 @@ function Navbar() {
       };
     }
   }, [onLogout]);
-
   return (
     <>
-      <nav className="sb-topnav navbar navbar-expand shadow bg-body rounded sticky-top bg-light">
-        <div className="container">
-          <span className="navbar-brand mb-0 h1">Ceramics Heaven</span>
-          <ul className="nav">
-            <li className="nav-item">
-              <Link className="nav-link text-warning" to={"/"}>
-                Home
-              </Link>
-              {/* <div className='text-decoration-underline'>{""}</div> */}
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-warning" to={"/products"}>
-                Products
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-warning" to={"/about"}>
-                About
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-warning" to={"/contact"}>
-                Contact
-              </Link>
-            </li>
-          </ul>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container position-relative">
           <div className="d-flex">
-            <form className="d-flex">
-              <button className="btn btn-outline-warning me-3" type="submit">
-                <i className="fa-solid fa-cart-shopping me-1" />
-                Cart
-                <span className="badge bg-dark text-white ms-1 rounded-pill">
-                  0
-                </span>
-              </button>
-            </form>
-
+            <button
+              className="navbar-toggler me-2"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon" />
+            </button>
+            <Link className="navbar-brand me-auto" to="/">
+              Ceramics Heaven
+            </Link>
             {isLoggedIn === null ? (
-              <Link className="btn btn-outline-warning" to={"/login"}>
-                Login
-              </Link>
+              <div className="position-absolute end-0 me-4">
+                <Link
+                  type="button"
+                  className="btn btn-outline-warning"
+                  to={"/login"}
+                >
+                  Login
+                </Link>
+              </div>
             ) : (
-              <ul className="navbar-nav ms-2">
-                <li className="nav-item dropdown">
-                  <Link
-                    className="nav-link"
-                    id="navbarDropdown"
-                    to="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
+              <div className="d-flex position-absolute end-0 me-4">
+                <form className="d-flex">
+                  <button
+                    className="btn btn-outline-warning position-relative me-3"
+                    type="submit"
                   >
-                    <i className="text-uppercase fw-bold fst-normal user">
-                      {isLoggedIn}
-                    </i>
-                  </Link>
-                  <ul
-                    className="dropdown-menu dropdown-menu-end"
-                    aria-labelledby="navbarDropdown"
-                  >
-                    <li>
-                      <Link className="dropdown-item" to="#">
-                        Profile
-                      </Link>
-                    </li>
+                    <i className="fa-solid fa-cart-shopping" />
+                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
+                      0
+                    </span>
+                  </button>
+                </form>
+                <ul className="navbar-nav ms-2">
+                  <li className="nav-item dropdown">
+                    <Link
+                      className="nav-link"
+                      id="navbarDropdown"
+                      to="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <i className="text-uppercase fw-bold fst-normal user">
+                        {isLoggedIn}
+                      </i>
+                    </Link>
+                    <ul
+                      className="dropdown-menu dropdown-menu-end position-absolute"
+                      aria-labelledby="navbarDropdown"
+                    >
+                      <li>
+                        <Link className="dropdown-item" to="#">
+                          Profile
+                        </Link>
+                      </li>
 
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <button
-                        className="dropdown-item"
-                        to="/"
-                        onClick={onLogout}
-                      >
-                        Logout
-                      </button>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
+                      <li>
+                        <button
+                          className="dropdown-item"
+                          to="/"
+                          onClick={onLogout}
+                        >
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
             )}
+          </div>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav ms-auto me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <Link
+                  className="nav-link text-warning"
+                  aria-current="page"
+                  to="/"
+                >
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link text-warning"
+                  aria-current="page"
+                  to="/products"
+                >
+                  Products
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link text-warning"
+                  aria-current="page"
+                  to="/about"
+                >
+                  About
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link text-warning"
+                  aria-current="page"
+                  to="/contact"
+                >
+                  Contact
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>
