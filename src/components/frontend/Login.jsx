@@ -2,6 +2,8 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import swal from 'sweetalert'
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 function Login() {
     const form = useForm();
@@ -12,7 +14,7 @@ function Login() {
 
     const onSubmit = async (data, event) => {
         // console.log('Login Form Submitted', data);
-        await axios.post("http://127.0.0.1:8080/login", data)
+        await axios.post("http://127.0.0.1:8082/login", data)
         .then((res) => {
             if(res){
                 console.log(res.data);

@@ -17,7 +17,7 @@ function Register() {
         const {firstName, lastName, gender, mobile, email, password} = data;
         const formData = {firstName, lastName, gender, mobile, email, password};
         
-        await axios.post("http://127.0.0.1:8080/register", formData)
+        await axios.post("http://127.0.0.1:8082/register", formData)
         .then((res) => {
             if(res){
                 console.log(res);
