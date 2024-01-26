@@ -31,27 +31,27 @@ function Footer() {
             <div className="mb-4 w-8 h-1 bg-red-500"></div>
             <ul className="leading-loose">
               <li>
-                <a href="#" class="hover:text-slate-400">
+                <a href="#" className="hover:text-slate-400">
                   Home
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-slate-400">
+                <a href="#" className="hover:text-slate-400">
                   Partners
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-slate-400">
+                <a href="#" className="hover:text-slate-400">
                   Blog
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-slate-400">
+                <a href="#" className="hover:text-slate-400">
                   Team
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-slate-400">
+                <a href="#" className="hover:text-slate-400">
                   Career
                 </a>
               </li>
@@ -62,22 +62,22 @@ function Footer() {
             <div className="mb-4 w-8 h-1 bg-red-500"></div>
             <ul className="leading-loose">
               <li>
-                <a href="#" class="hover:text-slate-400">
+                <a href="#" className="hover:text-slate-400">
                   Contact
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-slate-400">
+                <a href="#" className="hover:text-slate-400">
                   Support
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-slate-400">
+                <a href="#" className="hover:text-slate-400">
                   Docs
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-slate-400">
+                <a href="#" className="hover:text-slate-400">
                   Pricing
                 </a>
               </li>
@@ -88,22 +88,22 @@ function Footer() {
             <div className="mb-4 w-8 h-1 bg-red-500"></div>
             <ul className="leading-loose">
               <li>
-                <a href="#" class="hover:text-slate-400">
+                <a href="#" className="hover:text-slate-400">
                   Terms
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-slate-400">
+                <a href="#" className="hover:text-slate-400">
                   License
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-slate-400">
+                <a href="#" className="hover:text-slate-400">
                   Privacy
                 </a>
               </li>
               <li>
-                <a href="#" class="hover:text-slate-400">
+                <a href="#" className="hover:text-slate-400">
                   About
                 </a>
               </li>
