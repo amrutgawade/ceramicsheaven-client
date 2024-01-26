@@ -28,3 +28,18 @@
 .section-bg{
     background-color: #f8f9fa;
 }
+
+#carouselExampleCaptions .carousel-item img {
+  object-fit: cover;
+  object-position: bottom;
+  height: 70vh;
+  overflow: hidden;
+}
+@media screen and (max-width: 480px){
+  #carouselExampleCaptions .carousel-item img {
+    object-fit: cover;
+    object-position: bottom;
+    height: 50vh;
+    overflow: hidden;
+  }
+}

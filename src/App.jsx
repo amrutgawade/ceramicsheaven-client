@@ -1,53 +1,45 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import MasterLayout from "./layouts/admin/MasterLayout";
-import HomeLayout from "./layouts/frontend/HomeLayout";
+import { Route, Routes } from "react-router-dom";
+import MasterLayout from "./layouts/client/MasterLayout";
+import AdminLayout from "./layouts/admin/AdminLayout";
+import Error404 from "./pages/Error404";
+import Error401 from "./pages/Error401";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+import Reset from "./pages/Reset";
+import Home from "./pages/Home";
 import Dashboard from "./components/admin/Dashboard";
 import Profile from "./components/admin/Profile";
-import MainLayout from "./components/admin/MainLayout";
-import Login from "./components/frontend/Login";
-import Register from "./components/frontend/Register";
-import './App.css'
-import Home from "./components/frontend/Home";
-import About from "./components/frontend/About";
-import Contact from "./components/frontend/Contact";
-import Products from "./components/frontend/Products";
-import Item from "./components/frontend/Item";
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <HomeLayout />,
-    children: [
-      {path:'/', element: <Home />},
-      {path:'/login', element: <Login />},
-      {path:'/register', element: <Register />},
-      {path:'/products', element: <Products />},
-      {path:'/products/item', element: <Item />},
-      {path:'/about', element: <About />},
-      {path:'/contact', element: <Contact />},
-    ]
-  },
-  {
-    path: '/admin',
-    element: <MasterLayout />,
-    children: [
-      {
-        path: '/admin',
-        element: <MainLayout />,
-        children: [
-          { path: '/admin/', element: <Dashboard /> },
-          { path: '/admin/dashboard', element: <Dashboard /> },
-          { path: '/admin/profile', element: <Profile /> }
-        ]
-      },
-    ]
-  }
-
-]);
+import Products from "./components/admin/Products";
+import Orders from "./components/admin/Orders";
+import Customers from "./components/admin/Customers";
+import Transactions from "./components/admin/Transactions";
+import Message from "./components/admin/Message";
+import "./App.css";
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<MasterLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/Forgot-Password" element={<Reset />} />
+        </Route>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="/admin/profile" element={<Profile />} />
+          <Route path="/admin/products" element={<Products />} />
+          <Route path="/admin/orders" element={<Orders />} />
+          <Route path="/admin/customers" element={<Customers />} />
+          <Route path="/admin/transactions" element={<Transactions />} />
+          <Route path="/admin/message" element={<Message />} />
+        </Route>
+        <Route path="/*" element={<Error404 />} />
+      </Routes>
+    </>
+  );
 }
 
 export default App;

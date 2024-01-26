@@ -1,122 +1,122 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { FcBullish } from "react-icons/fc";
+import {
+  HiOutlineAnnotation,
+  HiOutlineCog,
+  HiOutlineCube,
+  HiOutlineDocumentText,
+  HiOutlineLogout,
+  HiOutlineQuestionMarkCircle,
+  HiOutlineShoppingCart,
+  HiOutlineUserCircle,
+  HiOutlineUsers,
+  HiOutlineViewGrid,
+} from "react-icons/hi";
+import { Link, useLocation } from "react-router-dom";
 
 function Sidebar() {
-
-
+  const { pathname } = useLocation();
+  console.log(pathname);
+  const DASHBOARD_SIDEBAR_LINKS = [
+    {
+      key: "dashboard",
+      label: "Dashboard",
+      path: "/admin",
+      icon: <HiOutlineViewGrid />,
+    },
+    {
+      key: "profile",
+      label: "Profile",
+      path: "/admin/profile",
+      icon: <HiOutlineUserCircle />,
+    },
+    {
+      key: "products",
+      label: "Products",
+      path: "/admin/products",
+      icon: <HiOutlineCube />,
+    },
+    {
+      key: "orders",
+      label: "Orders",
+      path: "/admin/orders",
+      icon: <HiOutlineShoppingCart />,
+    },
+    {
+      key: "customers",
+      label: "Customers",
+      path: "/admin/customers",
+      icon: <HiOutlineUsers />,
+    },
+    {
+      key: "transactions",
+      label: "Transactions",
+      path: "/admin/transactions",
+      icon: <HiOutlineDocumentText />,
+    },
+    {
+      key: "message",
+      label: "Message",
+      path: "/admin/message",
+      icon: <HiOutlineAnnotation />,
+    },
+  ];
+  const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
+    {
+      key: "settings",
+      label: "Settings",
+      path: "/admin/settings",
+      icon: <HiOutlineCog />,
+    },
+    {
+      key: "support",
+      label: "Help & Support",
+      path: "/admin/support",
+      icon: <HiOutlineQuestionMarkCircle />,
+    },
+  ];
   return (
-    <nav
-      className="sb-sidenav accordion sb-sidenav-dark"
-      id="sidenavAccordion"
-    >
-      <div className="sb-sidenav-menu">
-        <div className="nav">
-          <div className="sb-sidenav-menu-heading">Core</div>
-          <Link className="nav-link" to="/admin/dashboard">
-            <div className="sb-nav-link-icon">
-              <i className="fas fa-tachometer-alt" />
-            </div>
-            Dashboard
-          </Link>
-          <Link className="nav-link" to="/admin/profile">
-            <div className="sb-nav-link-icon">
-              <i className="fas fa-user" />
-            </div>
-            Profile
-          </Link>
+    <div className="flex flex-col p-3 w-60 bg-slate-900 text-white leading-5">
+      <div className="flex items-center gap-2 px-1 py-3">
+        <FcBullish fontSize={24} />
+        <span className="text-lg">Ceramics Heaven</span>
+      </div>
+      <div className="flex-1 inline-flex flex-col gap-1.5 mt-4">
+        {DASHBOARD_SIDEBAR_LINKS.map((item) => (
           <Link
-            className="nav-link collapsed"
-            to="#"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseLayouts"
-            aria-expanded="false"
-            aria-controls="collapseLayouts"
+            to={item.path}
+            key={item.key}
+            className={`${
+              pathname === item.path ? "bg-slate-800" : "text-slate-400"
+            } flex items-center gap-2 px-3 py-2 rounded hover:bg-slate-800 hover:text-white active:bg-slate-700 text-base`}
           >
-            <div className="sb-nav-link-icon">
-              <i className="fas fa-bag-shopping" />
-            </div>
-            Inventory
-            <div className="sb-sidenav-collapse-arrow">
-              <i className="fas fa-angle-down" />
-            </div>
+            <span className="text-xl">{item.icon}</span>
+            {item.label}
           </Link>
-          <div
-            className="collapse"
-            id="collapseLayouts"
-            aria-labelledby="headingOne"
-            data-bs-parent="#sidenavAccordion"
+        ))}
+      </div>
+      <div className="flex flex-col gap-1.5 pt-2 border-t border-slate-600">
+        {DASHBOARD_SIDEBAR_BOTTOM_LINKS.map((item) => (
+          <Link
+            to={item.path}
+            key={item.key}
+            className={`${
+              pathname === item.path ? "bg-slate-800" : "text-slate-400"
+            } flex items-center gap-2 px-3 py-2 rounded hover:bg-slate-800 hover:text-white active:bg-slate-700 text-base`}
           >
-            <nav className="sb-sidenav-menu-nested nav">
-              <Link className="nav-link" to="#">
-                Add Products
-              </Link>
-              <Link className="nav-link" to="#">
-                Manage Products
-              </Link>
-            </nav>
-          </div>
-
-          {/* <Link
-              className="nav-link collapsed"
-              to="#"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseLayouts"
-              aria-expanded="false"
-              aria-controls="collapseLayouts"
-            >
-              <div className="sb-nav-link-icon">
-                <i className="fas fa-user" />
-              </div>
-              Room Details
-              <div className="sb-sidenav-collapse-arrow">
-                <i className="fas fa-angle-down" />
-              </div>
-            </Link> */}
-          {/* <div
-              className="collapse"
-              id="collapseLayouts"
-              aria-labelledby="headingOne"
-              data-bs-parent="#sidenavAccordion"
-            >
-              <nav className="sb-sidenav-menu-nested nav">
-                <Link className="nav-link" to="layout-static.html">
-                  Add Rooms
-                </Link>
-                <Link className="nav-link" to="layout-sidenav-light.html">
-                  Manage Rooms
-                </Link>
-              </nav>
-            </div> */}
-
-          <Link className="nav-link" to="#">
-            <div className="sb-nav-link-icon">
-              <i className="fas fa-cart-shopping" />
-            </div>
-            Orders
+            <span className="text-xl">{item.icon}</span>
+            {item.label}
           </Link>
-          <Link className="nav-link" to="#">
-            <div className="sb-nav-link-icon">
-              <i className="fas fa-users" />
-            </div>
-            Users
-          </Link>
-
-          <Link className="nav-link" to="#">
-            <div className="sb-nav-link-icon">
-              <i className="fas fa-envelope" />
-            </div>
-            Complaints
-          </Link>
-
+        ))}
+        <div className="flex items-center gap-2 px-3 py-2 text-red-500 rounded hover:bg-slate-800 active:bg-slate-700 text-base cursor-pointer">
+          <span className="text-xl">
+            <HiOutlineLogout />
+          </span>
+          Logout
         </div>
       </div>
-      <div className="sb-sidenav-footer">
-        <div className="small">Logged in as:</div>
-        Admin
-      </div>
-    </nav>
+    </div>
   );
-
 }
 
 export default Sidebar;
