@@ -17,7 +17,7 @@ function Navbar() {
   return (
     <header className="bg-white text-base lg:text-sm shadow-md sticky top-0">
       <div
-        className={`bg-white items-center gap-x-14 px-4 max-w-screen-xl mx-auto lg:flex lg:px-8 lg:static ${
+        className={`bg-white items-center gap-x-14 px-4 max-w-screen-xl mx-auto lg:flex lg:static ${
           state ? "h-full fixed inset-x-0" : ""
         }`}
       >

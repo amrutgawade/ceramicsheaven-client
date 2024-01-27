@@ -1,5 +1,6 @@
 import React from "react";
 import { FcBullish } from "react-icons/fc";
+import { FaSquarePollVertical } from "react-icons/fa6";
 import {
   HiOutlineAnnotation,
   HiOutlineCog,
@@ -75,12 +76,13 @@ function Sidebar() {
     },
   ];
   return (
-    <div className="flex flex-col p-3 w-60 bg-slate-900 text-white leading-5">
-      <div className="flex items-center gap-2 px-1 py-3">
-        <FcBullish fontSize={24} />
-        <span className="text-lg">Ceramics Heaven</span>
-      </div>
-      <div className="flex-1 inline-flex flex-col gap-1.5 mt-4">
+    <aside className="flex flex-col p-6 w-[19%] bg-slate-900 text-white leading-5">
+      <Link to={"/admin"} className="flex items-center gap-2 px-1 py-3">
+        <FaSquarePollVertical fontSize={30} className="text-indigo-500" />
+        <span className="text-xl font-bold">Ceramics Heaven</span>
+      </Link>
+      <div className="flex-1 inline-flex flex-col gap-1.5 mt-6">
+        <h3 className="mb-2 ml-4 text-sm font-semibold text-slate-500">MENU</h3>
         {DASHBOARD_SIDEBAR_LINKS.map((item) => (
           <Link
             to={item.path}
@@ -114,7 +116,7 @@ function Sidebar() {
           Logout
         </div>
       </div>
-    </div>
+    </aside>
   );
 }
 
