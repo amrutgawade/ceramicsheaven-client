@@ -10,7 +10,7 @@ function MasterLayout() {
       <Toaster position="top-center" reverseOrder={false} />
       <div className="min-h-screen max-h-full flex flex-col">
         <Navbar />
-        <main className="md:py-8 md:min-h-[80vh]">
+        <main className="md:min-h-[80vh]">
           <Outlet />
         </main>
         <Footer />

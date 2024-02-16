@@ -24,6 +24,8 @@ function App() {
         <Route path="/" element={<MasterLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/products" element={<Login />} />
+          <Route path="/contact" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/Forgot-Password" element={<Reset />} />
         </Route>

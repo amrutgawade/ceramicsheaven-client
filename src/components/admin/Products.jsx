@@ -45,10 +45,6 @@ function Products() {
           <h3 className="text-gray-800 text-xl font-bold sm:text-2xl">
             All products
           </h3>
-          <p className="text-gray-600 mt-2">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
-          </p>
         </div>
         <div className="mt-3 md:mt-0">
           <a
