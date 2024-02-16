@@ -3,8 +3,6 @@ import { MdOutlinePendingActions } from "react-icons/md";
 import {
   LuArrowDown,
   LuArrowUp,
-  LuEye,
-  LuIndianRupee,
   LuShoppingBag,
   LuShoppingCart,
   LuUsers,

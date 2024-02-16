@@ -5,50 +5,118 @@ function Profile() {
   return (
     <div className="max-w-screen-xl mx-auto px-4 md:px-0">
       <h2 className="text-gray-800 text-xl font-bold sm:text-2xl">Profile</h2>
-      <div className="flex flex-col justify-center mt-6 bg-white shadow">
-        <h3 className="border-b py-4 px-7">Personal Information</h3>
-        <div className="p-7">
-          <div className="mb-4 flex flex-col gap-5.5">
-            <form action="#">
-              {/* <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
-                <div className="w-full sm:w-1/2">
-                  <label
-                    htmlFor="fullName"
-                    className="mb-3 block text-sm font-medium text-black dark:text-white"
-                  >
-                    Full Name
-                  </label>
-                  <div className="relative">
-                    <span className="absolute left-4.5 top-4">
-                      <FiUser />
-                    </span>
-                    <input
-                      type="text"
-                      className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                      id="fullName"
-                      placeholder="David John"
-                      value={"David John"}
-                    />
-                  </div>
-                </div>
-                <div className="w-full sm:w-1/2">
-                  <label
-                    htmlFor="phoneNumber"
-                    className="mb-3 block text-sm font-medium text-black dark:text-white"
-                  >
-                    Phone Number
-                  </label>
-                  <input
-                    type="text"
-                    name="phoneNumber"
-                    id="phoneNumber"
-                    className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                    placeholder="+91 9988779595"
-                    value={"+91 9988779595"}
-                  />
-                </div>
-              </div> */}
-            </form>
+      <div className="mt-6 grid grid-cols-1 gap-9 sm:grid-cols-2">
+        <div className="flex flex-col justify-center bg-white shadow">
+          <h3 className="border-b py-4 px-7 text-lg font-medium">
+            Personal Information
+          </h3>
+          <div className="flex flex-col gap-5 p-7">
+            <div className="flex flex-row gap-5">
+              <div>
+                <label
+                  htmlFor="firstName"
+                  className="block mb-3 text-black dark:text-white"
+                >
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  className="w-full px-5 py-3 outline-none border rounded"
+                  placeholder="First Name"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="lastName"
+                  className="block mb-3 text-black dark:text-white"
+                >
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  className="w-full px-5 py-3 outline-none border rounded"
+                  placeholder="Last Name"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="Name"
+                className="block mb-3 text-black dark:text-white"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                className="w-full px-5 py-3 outline-none border rounded"
+                placeholder="Email"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="Mobile"
+                className="block mb-3 text-black dark:text-white"
+              >
+                Mobile
+              </label>
+              <input
+                type="text"
+                className="w-full px-5 py-3 outline-none border rounded"
+                placeholder="Mobile number"
+              />
+            </div>
+            <button className="px-5 py-3 border-none outline-none text-white rounded bg-indigo-500">
+              Update Profile
+            </button>
+          </div>
+        </div>
+        <div className="flex flex-col justify-center bg-white shadow">
+          <h3 className="border-b py-4 px-7 text-lg font-medium">
+            Change Password
+          </h3>
+          <div className="flex flex-col gap-5 p-7">
+            <div>
+              <label
+                htmlFor="Name"
+                className="block mb-3 text-black dark:text-white"
+              >
+                Current Password
+              </label>
+              <input
+                type="password"
+                className="w-full px-5 py-3 outline-none border rounded"
+                placeholder="Enter Current Password"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="Name"
+                className="block mb-3 text-black dark:text-white"
+              >
+                New Password
+              </label>
+              <input
+                type="password"
+                className="w-full px-5 py-3 outline-none border rounded"
+                placeholder="Enter New Password"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="Name"
+                className="block mb-3 text-black dark:text-white"
+              >
+                Re-Enter New Password
+              </label>
+              <input
+                type="password"
+                className="w-full px-5 py-3 outline-none border rounded"
+                placeholder="Enter Re-Enter New Password"
+              />
+            </div>
+            <button className="px-5 py-3 border-none outline-none text-white rounded bg-indigo-500">
+              Change Password
+            </button>
           </div>
         </div>
       </div>

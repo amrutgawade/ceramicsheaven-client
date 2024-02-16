@@ -1,5 +1,4 @@
 import React from 'react'
-import './About.css'
 import team1 from '../../assets/frontend/assets/img/team/team-1.jpg'
 import team2 from '../../assets/frontend/assets/img/team/team-2.jpg'
 import team3 from '../../assets/frontend/assets/img/team/team-3.jpg'
