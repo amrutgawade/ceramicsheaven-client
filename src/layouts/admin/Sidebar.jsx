@@ -55,9 +55,9 @@ function Sidebar() {
       icon: <HiOutlineDocumentText />,
     },
     {
-      key: "message",
-      label: "Message",
-      path: "/admin/message",
+      key: "complaints",
+      label: "Complaints",
+      path: "/admin/complaints",
       icon: <HiOutlineAnnotation />,
     },
   ];
@@ -76,7 +76,7 @@ function Sidebar() {
     },
   ];
   return (
-    <aside className="flex flex-col p-6 w-[19%] bg-slate-900 text-white leading-5">
+    <aside className="flex flex-col p-6 h-screen w-[19%] bg-slate-900 text-white leading-5">
       <Link to={"/admin"} className="flex items-center gap-2 px-1 py-3">
         <FaSquarePollVertical fontSize={30} className="text-indigo-500" />
         <span className="text-xl font-bold">Ceramics Heaven</span>

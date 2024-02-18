@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import MasterLayout from "./layouts/client/MasterLayout";
 import AdminLayout from "./layouts/admin/AdminLayout";
@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Reset from "./pages/Reset";
 import Home from "./pages/Home";
+import Store from "./pages/Store";
 import Dashboard from "./components/admin/Dashboard";
 import Profile from "./components/admin/Profile";
 import Products from "./components/admin/Products";
@@ -15,28 +16,52 @@ import Orders from "./components/admin/Orders";
 import Customers from "./components/admin/Customers";
 import Transactions from "./components/admin/Transactions";
 import Message from "./components/admin/Message";
+import UserContext from "./context/UserContext";
 import "./App.css";
+import ManageProduct from "./components/admin/ManageProduct";
+import AdminLogin from "./pages/AdminLogin";
+import { Toaster } from "react-hot-toast";
 
 function App() {
+  const { user, token } = useContext(UserContext);
   return (
     <>
+      <Toaster position="top-center" reverseOrder={false} />
       <Routes>
         <Route path="/" element={<MasterLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={token && user ? <Error401 /> : <Login />}
+          />
+          <Route
+            path="/signup"
+            element={token && user ? <Error401 /> : <SignUp />}
+          />
           <Route path="/products" element={<Login />} />
+          <Route path="/store" element={<Store />} />
           <Route path="/contact" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
           <Route path="/Forgot-Password" element={<Reset />} />
         </Route>
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route
+          path="/admin"
+          element={token && user ? <AdminLayout /> : <AdminLogin />}
+        >
           <Route index element={<Dashboard />} />
           <Route path="/admin/profile" element={<Profile />} />
           <Route path="/admin/products" element={<Products />} />
+          <Route
+            path="/admin/products/add"
+            element={<ManageProduct title={"Add Product"} />}
+          />
+          <Route
+            path="/admin/products/update"
+            element={<ManageProduct title={"Update Product"} />}
+          />
           <Route path="/admin/orders" element={<Orders />} />
           <Route path="/admin/customers" element={<Customers />} />
           <Route path="/admin/transactions" element={<Transactions />} />
-          <Route path="/admin/message" element={<Message />} />
+          <Route path="/admin/complaints" element={<Message />} />
         </Route>
         <Route path="/*" element={<Error404 />} />
       </Routes>

@@ -9,9 +9,9 @@ function Navbar() {
 
   // Replace javascript:void(0) paths with your paths
   const navigation = [
-    { title: "Home", path: "javascript:void(0)" },
-    { title: "Store", path: "javascript:void(0)" },
-    { title: "Contact", path: "javascript:void(0)" },
+    { title: "Home", path: "/" },
+    { title: "Store", path: "/store" },
+    { title: "Contact", path: "/contact" },
   ];
 
   return (
@@ -114,12 +114,12 @@ function Navbar() {
             {navigation.map((item, idx) => {
               return (
                 <li key={idx}>
-                  <a
-                    href={item.path}
+                  <Link
+                    to={item.path}
                     className="block text-gray-700 hover:text-gray-900"
                   >
                     {item.title}
-                  </a>
+                  </Link>
                 </li>
               );
             })}

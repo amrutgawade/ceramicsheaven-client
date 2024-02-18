@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function Message() {
-  return (
-    <div>Message</div>
-  )
+  return <div>Complaints</div>;
 }
 
-export default Message
+export default Message;

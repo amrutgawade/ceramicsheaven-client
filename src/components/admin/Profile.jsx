@@ -1,5 +1,4 @@
 import React from "react";
-import { FiUser } from "react-icons/fi";
 
 function Profile() {
   return (
@@ -38,6 +37,22 @@ function Profile() {
                   placeholder="Last Name"
                 />
               </div>
+            </div>
+            <div>
+              <label
+                htmlFor="Gender"
+                className="block mb-3 text-black dark:text-white"
+              >
+                Gender
+              </label>
+              <select
+                className="w-full px-5 py-3 outline-none border rounded"
+              >
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
             </div>
             <div>
               <label
