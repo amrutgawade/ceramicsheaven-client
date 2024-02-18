@@ -21,6 +21,7 @@ import "./App.css";
 import ManageProduct from "./components/admin/ManageProduct";
 import AdminLogin from "./pages/AdminLogin";
 import { Toaster } from "react-hot-toast";
+import AddProduct from "./components/admin/AddProduct";
 
 function App() {
   const { user, token } = useContext(UserContext);
@@ -47,21 +48,25 @@ function App() {
           path="/admin"
           element={token && user ? <AdminLayout /> : <AdminLogin />}
         >
-          <Route index element={<Dashboard />} />
-          <Route path="/admin/profile" element={<Profile />} />
-          <Route path="/admin/products" element={<Products />} />
-          <Route
-            path="/admin/products/add"
-            element={<ManageProduct title={"Add Product"} />}
-          />
-          <Route
-            path="/admin/products/update"
-            element={<ManageProduct title={"Update Product"} />}
-          />
-          <Route path="/admin/orders" element={<Orders />} />
-          <Route path="/admin/customers" element={<Customers />} />
-          <Route path="/admin/transactions" element={<Transactions />} />
-          <Route path="/admin/complaints" element={<Message />} />
+          {token && user ? (
+            <>
+              <Route index element={<Dashboard />} />
+              <Route path="/admin/profile" element={<Profile />} />
+              <Route path="/admin/products" element={<Products />} />
+              <Route
+                path="/admin/products/add"
+                element={<AddProduct />}
+              />
+              <Route
+                path="/admin/products/update"
+                element={<ManageProduct title={"Update Product"} />}
+              />
+              <Route path="/admin/orders" element={<Orders />} />
+              <Route path="/admin/customers" element={<Customers />} />
+              <Route path="/admin/transactions" element={<Transactions />} />
+              <Route path="/admin/complaints" element={<Message />} />
+            </>
+          ) : null}
         </Route>
         <Route path="/*" element={<Error404 />} />
       </Routes>

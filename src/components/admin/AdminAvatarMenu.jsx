@@ -1,9 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function AdminAvatarMenu({ params }) {
   const [state, setState] = useState(false);
   const profileRef = useRef();
+  const navigate = useNavigate();
+
+  const name = params.user.split(" ");
+  const Avatar = name[0].charAt(0) + name[1].charAt(0);
 
   const navigation = [
     { title: "Dashboard", path: "javascript:void(0)" },
@@ -15,6 +20,7 @@ function AdminAvatarMenu({ params }) {
     localStorage.clear();
     params.setUser(null);
     params.setToken(null);
+    navigate("/admin");
     toast.success("Logout Successful");
   };
 
@@ -32,7 +38,7 @@ function AdminAvatarMenu({ params }) {
           className="hidden w-10 h-10 outline-none bg-red-600 text-white tracking-widest rounded-full ring-offset-2 ring-gray-200 lg:focus:ring-2 lg:block"
           onClick={() => setState(!state)}
         >
-          {params.user[0] + "" + params.user[6]}
+          {Avatar}
           {/* <img
             src="src\assets\frontend\assets\img\team\team-1.jpg"
             className="w-full h-full rounded-full"

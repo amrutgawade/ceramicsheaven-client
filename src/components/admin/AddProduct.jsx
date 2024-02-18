@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function UpdateProduct() {
+function AddProduct() {
   const [inputList, setInputList] = useState([]);
   const addSizeHandler = () => {
     const list = [...inputList, []];
@@ -21,7 +21,7 @@ function UpdateProduct() {
   return (
     <div className="max-w-screen-xl mx-auto px-4 md:px-0">
       <h2 className="text-gray-800 mb-4 text-xl font-bold sm:text-2xl">
-        Update Existing Product
+        Add New Product
       </h2>
       <div className="flex flex-col justify-center bg-white shadow">
         <h3 className="border-b py-4 px-7 text-lg font-medium">
@@ -236,7 +236,7 @@ function UpdateProduct() {
 
           <div className="flex gap-5 mt-4">
             <button className=" px-5 py-3 border-none outline-none text-white rounded bg-indigo-500">
-              Update Product
+              Add Product
             </button>
             <button className=" px-5 py-3 border-none outline-none text-white rounded bg-red-500">
               Reset
@@ -248,4 +248,4 @@ function UpdateProduct() {
   );
 }
 
-export default UpdateProduct;
+export default AddProduct;
