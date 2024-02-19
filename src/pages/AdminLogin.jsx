@@ -36,13 +36,11 @@ function AdminLogin() {
           if (result.data.role == "admin") {
             const { firstName, lastName } = result.data;
             const activeUser = firstName + " " + lastName;
-            console.log(activeUser);
             localStorage.setItem("token", res.data.jwt);
             localStorage.setItem("user", activeUser);
             setToken(localStorage.getItem("token"));
             setUser(localStorage.getItem("user"));
             toast.success("Login Successful");
-            console.log(res.data);
           } else {
             localStorage.clear();
           }

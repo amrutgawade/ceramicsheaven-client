@@ -7,6 +7,9 @@ import {
   LuShoppingCart,
   LuUsers,
 } from "react-icons/lu";
+import BarChart from "./BarChart";
+import PieChart from "./PieChart";
+import ColumnChart from "./ColumnChart";
 
 function Dashboard() {
   return (
@@ -78,9 +81,13 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      <div className="mt-8 flex  gap-x-8">
-        <div className="basis-[65%]">A</div>
-        <div className="flex-1">B</div>
+      <div className="mt-8 flex gap-x-8">
+        <div className="flex-1 flex shadow-lg border border-indigo-100 pt-7 pb-2 px-5">
+          <BarChart />
+        </div>
+        <div className="basis-[35%] flex shadow-lg border border-indigo-100 pt-7 pb-2 px-5">
+          <ColumnChart />
+        </div>
       </div>
     </div>
   );
