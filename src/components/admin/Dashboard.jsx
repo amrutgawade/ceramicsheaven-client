@@ -15,7 +15,7 @@ function Dashboard() {
   return (
     <div className="max-w-screen-xl mx-auto px-4 md:px-0">
       {/* <h3 className="text-gray-800 text-xl font-bold sm:text-2xl">Dashboard</h3> */}
-      <div className="grid grid-cols-4 gap-x-8">
+      <div className="grid md:grid-cols-4 md:gap-x-8 gap-y-4">
         <div className="flex flex-col items-start justify-center p-6 h-fit w-auto bg-white shadow rounded">
           <LuShoppingCart
             fontSize={50}
@@ -81,7 +81,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      <div className="mt-8 flex gap-x-8">
+      <div className="mt-8 md:flex gap-x-8">
         <div className="flex-1 flex shadow-lg border border-indigo-100 pt-7 pb-2 px-5">
           <BarChart />
         </div>

@@ -9,7 +9,7 @@ function AdminLayout() {
       <Sidebar />
       <div className="flex-1 overflow-y-scroll relative">
         <Header />
-        <div className="p-8">
+        <div className="md:p-8">
           <Outlet />
         </div>
       </div>

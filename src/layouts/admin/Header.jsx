@@ -6,7 +6,7 @@ import AdminAvatarMenu from "../../components/admin/AdminAvatarMenu";
 function Header() {
   const { user, setUser, setToken } = useContext(UserContext);
   return (
-    <div className="bg-white h-20 px-8 flex items-center justify-between border-b border-gray-200 shadow-md sticky top-0 z-10">
+    <div className="bg-white h-20 px-8 hidden md:flex items-center justify-between border-b border-gray-200 shadow-md sticky top-0 z-10">
       <div className="relative">
         <HiOutlineSearch
           fontSize={20}
