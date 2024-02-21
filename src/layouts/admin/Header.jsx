@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import UserContext from "../../context/UserContext";
-import AdminAvatarMenu from "../../components/admin/AdminAvatarMenu";
+import AdminAvatarMenu from "./AdminAvatarMenu";
 
 function Header() {
   const { user, setUser, setToken } = useContext(UserContext);

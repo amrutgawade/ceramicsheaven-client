@@ -10,31 +10,34 @@ function Products() {
       brand: "Kajaria",
       category: "Indoor",
       quantity: "22",
-      price: "₹100K",
+      price: "₹10",
     },
     {
-      product: "https://ik.imagekit.io/dj/tiles/tiles-2.jpg?updatedAt=1708156724029",
+      product:
+        "https://ik.imagekit.io/dj/tiles/tiles-2.jpg?updatedAt=1708156724029",
       name: "Tile 2",
       brand: "SOMANY",
       category: "Outdoor",
       quantity: "12",
-      price: "₹90K",
+      price: "₹90",
     },
     {
-      product: "https://ik.imagekit.io/dj/tiles/tiles-6.jpg?updatedAt=1708156725845",
+      product:
+        "https://ik.imagekit.io/dj/tiles/tiles-6.jpg?updatedAt=1708156725845",
       name: "Tile 3",
       brand: "AGL Tiles",
       category: "Outdoor",
       quantity: "34",
-      price: "₹80K",
+      price: "₹80",
     },
     {
-      product: "https://ik.imagekit.io/dj/tiles/tiles-7.jpg?updatedAt=1708156724072",
+      product:
+        "https://ik.imagekit.io/dj/tiles/tiles-7.jpg?updatedAt=1708156724072",
       name: "Tile 4",
       brand: "Bajaj Tiles",
       category: "Outdoor",
       quantity: "10",
-      price: "₹120K",
+      price: "₹12",
     },
     {
       product:
@@ -43,7 +46,7 @@ function Products() {
       brand: "JOHNSON",
       category: "Outdoor",
       quantity: "44",
-      price: "₹75K",
+      price: "₹75",
     },
   ];
   return (
@@ -78,7 +81,9 @@ function Products() {
           <tbody className="text-gray-600 divide-y">
             {tableItems.map((item, idx) => (
               <tr key={idx}>
-                <td className="px-1 py-4 whitespace-nowrap text-center">{idx+1}</td>
+                <td className="px-1 py-4 whitespace-nowrap text-center">
+                  {idx + 1}
+                </td>
                 <td className="flex items-center gap-x-3 py-3 px-6 whitespace-nowrap">
                   <img src={item.product} className="w-16 h-16 rounded-full" />
                   <div>
@@ -93,8 +98,12 @@ function Products() {
                 <td className="px-6 py-4 whitespace-nowrap text-center">
                   {item.category}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-center">{item.quantity}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-center">{item.price}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-center">
+                  {item.quantity}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-center">
+                  {item.price}/Piece
+                </td>
                 <td className="text-center px-6 whitespace-nowrap space-x-2 gap-1">
                   <Link
                     className="py-2 px-3 font-medium text-indigo-600 border hover:border-indigo-500 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg"
@@ -102,9 +111,7 @@ function Products() {
                   >
                     Edit
                   </Link>
-                  <button
-                    className="py-2 leading-none px-3 font-medium border hover:border-red-500 text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg"
-                  >
+                  <button className="py-2 leading-none px-3 font-medium border hover:border-red-500 text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg">
                     Delete
                   </button>
                 </td>

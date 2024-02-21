@@ -52,6 +52,7 @@ function Customers() {
         <table className="w-full table-auto text-sm text-left">
           <thead className="bg-gray-50 text-gray-600 font-medium border-b">
             <tr>
+              <th className="py-3 px-6 text-center">No</th>
               <th className="py-3 px-6">Username</th>
               <th className="py-3 px-6 text-center">Mobile</th>
               <th className="py-3 px-6 text-center">Register Date</th>
@@ -62,8 +63,11 @@ function Customers() {
           <tbody className="text-gray-600 divide-y">
             {tableItems.map((item, idx) => (
               <tr key={idx}>
-                <td className="flex items-center gap-x-3 py-3 px-6 whitespace-nowrap">
-                  <img src={item.avatar} className="w-10 h-10 rounded-full" />
+                <td className="py-4 px-6 whitespace-nowrap text-center">
+                  {idx + 1}
+                </td>
+                <td className="py-3 px-6 whitespace-nowrap">
+                  {/* <img src={item.avatar} className="w-10 h-10 rounded-full" /> */}
                   <div>
                     <span className="block text-gray-700 text-sm font-medium">
                       {item.name}
