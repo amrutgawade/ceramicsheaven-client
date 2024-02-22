@@ -1,28 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 function AddProduct() {
-  const [inputList, setInputList] = useState([]);
+  const [imageURL, setImageURL] = useState("");
+  const [title, setTitle] = useState("");
+  const [brand, setBrand] = useState("");
+  const [colour, setColour] = useState("");
+  const [quantity, setQuantity] = useState(0);
+  const [price, setPrice] = useState(0);
+  const [salePrice, setSalePrice] = useState(0);
+  const [discountPercentage, setDiscountPercentage] = useState(0);
+  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
+  const [sizes, setSizes] = useState([{ width: "", height: "", quantity: "" }]);
   const addSizeHandler = () => {
-    const list = [...inputList, []];
-    setInputList(list);
+    setSizes([...sizes, { width: "", height: "", quantity: "" }]);
   };
 
-  const removeSizeHandler = (i) => {
-    const deleteList = [...inputList];
-    deleteList.splice(i, 1);
-    setInputList(deleteList);
+  const removeSizeHandler = (index) => {
+    const newSizes = [...sizes];
+    newSizes.splice(index, 1);
+    setSizes(newSizes);
   };
 
-  const inputChangeHandler = (e, i) => {
-    const inputData = [...inputList];
-    inputData[i] = e.target.value;
-    setInputList(inputData);
+  const inputChangeHandler = (e, index) => {
+    const { name, value } = e.target;
+    const newSizes = [...sizes];
+    newSizes[index][name] = value;
+    setSizes(newSizes);
   };
   const addProductHandler = () => {
-    console.log(inputList);
+    const inputData = {
+      imageURL,
+      title,
+      brand,
+      colour,
+      quantity,
+      price,
+      salePrice,
+      discountPercentage,
+      category,
+      description,
+      sizes,
+    };
+    console.log(inputData);
+    console.log(sizes);
     toast.success("Product Added Successfully");
   };
+
+  useEffect(() => {
+    let result = ((price - salePrice) / price) * 100;
+    console.log(typeof result); 
+    setDiscountPercentage(result.toString());
+  }, [price, salePrice]);
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 md:px-0">
@@ -46,6 +76,10 @@ function AddProduct() {
                 type="text"
                 className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
                 placeholder="Image URL"
+                onChange={(e) => {
+                  setImageURL(e.target.value);
+                }}
+                value={imageURL}
               />
             </div>
             <div className="grid grid-cols-2 gap-5">
@@ -60,6 +94,10 @@ function AddProduct() {
                   type="text"
                   className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
                   placeholder="Title"
+                  onChange={(e) => {
+                    setTitle(e.target.value);
+                  }}
+                  value={title}
                 />
               </div>
               <div>
@@ -73,6 +111,10 @@ function AddProduct() {
                   type="text"
                   className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
                   placeholder="Brand"
+                  onChange={(e) => {
+                    setBrand(e.target.value);
+                  }}
+                  value={brand}
                 />
               </div>
               <div>
@@ -86,6 +128,10 @@ function AddProduct() {
                   type="text"
                   className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
                   placeholder="Colour"
+                  onChange={(e) => {
+                    setColour(e.target.value);
+                  }}
+                  value={colour}
                 />
               </div>
               <div>
@@ -96,9 +142,13 @@ function AddProduct() {
                   Quantity
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
-                  placeholder="Quantity"
+                  placeholder="Quantity Per Box"
+                  onChange={(e) => {
+                    setQuantity(e.target.value);
+                  }}
+                  value={quantity}
                 />
               </div>
             </div>
@@ -111,35 +161,45 @@ function AddProduct() {
                   Price
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
                   placeholder="Price"
+                  onChange={(e) => {
+                    setPrice(e.target.value);
+                  }}
+                  value={price}
                 />
               </div>
               <div>
                 <label
-                  htmlFor="discountedprice"
+                  htmlFor="discountedPrice"
                   className="block mb-3 text-black dark:text-white"
                 >
-                  Discounted Price
+                  Sale Price
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
-                  placeholder="Discounted Price"
+                  placeholder="Sale Price"
+                  onChange={(e) => {
+                    setSalePrice(e.target.value);
+                  }}
+                  value={salePrice}
                 />
               </div>
               <div>
                 <label
-                  htmlFor="quantity"
+                  htmlFor="discountPercentage"
                   className="block mb-3 text-black dark:text-white"
                 >
                   Discount Percentage
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
                   placeholder="Discount Percentage"
+                  value={discountPercentage}
+                  disabled
                 />
               </div>
             </div>
@@ -150,11 +210,17 @@ function AddProduct() {
               >
                 Category
               </label>
-              <select className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500">
+              <select
+                className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                }}
+                defaultValue={category}
+              >
                 <option value="">Select</option>
-                <option value="male">Indoor</option>
-                <option value="female">Outdoor</option>
-                <option value="other">Bathroom</option>
+                <option value="indoor">Indoor</option>
+                <option value="outdoor">Outdoor</option>
+                <option value="bathroom">Bathroom</option>
               </select>
             </div>
             <div>
@@ -169,11 +235,15 @@ function AddProduct() {
                 className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500 resize-none"
                 placeholder="Desciption"
                 rows={5}
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+                value={description}
               ></textarea>
             </div>
             <div className="flex justify-between items-center -mx-8">
               <h3 className="border-b py-4 px-7 text-lg font-medium">
-                Product Information
+                Product Dimensions
               </h3>
               <button
                 onClick={(e) => addSizeHandler(e)}
@@ -183,7 +253,7 @@ function AddProduct() {
               </button>
             </div>
 
-            {inputList.map((data, i) => {
+            {sizes.map((data, i) => {
               return (
                 <div
                   className="flex items-center justify-between gap-x-5 mt-4"
@@ -198,6 +268,8 @@ function AddProduct() {
                     </label>
                     <input
                       type="text"
+                      name="width"
+                      value={sizes.width}
                       onChange={(e) => inputChangeHandler(e, i)}
                       className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
                       placeholder="Width"
@@ -212,6 +284,8 @@ function AddProduct() {
                     </label>
                     <input
                       type="text"
+                      name="height"
+                      value={sizes.height}
                       onChange={(e) => inputChangeHandler(e, i)}
                       className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
                       placeholder="Height"
@@ -226,6 +300,8 @@ function AddProduct() {
                     </label>
                     <input
                       type="text"
+                      name="quantity"
+                      value={sizes.quantity}
                       onChange={(e) => inputChangeHandler(e, i)}
                       className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
                       placeholder="Quantity"
