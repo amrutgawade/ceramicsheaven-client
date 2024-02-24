@@ -4,12 +4,13 @@ import PaginationButtons from "../Utility/PaginationButtons";
 function Orders() {
   const [limit, setLimit] = useState(5);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [orders, setOrders] = useState([]);
 
   const ordersItems = [
     {
+      id: 1,
       name: "Solo learn app",
       date: "Oct 9, 2023",
       status: "Pending",
@@ -17,6 +18,7 @@ function Orders() {
       quantity: "2300",
     },
     {
+      id: 2,
       name: "Window wrapper",
       date: "Oct 12, 2023",
       status: "Delivered",
@@ -24,6 +26,7 @@ function Orders() {
       quantity: "230",
     },
     {
+      id: 3,
       name: "Unity loroin",
       date: "Oct 22, 2023",
       status: "Pending",
@@ -31,6 +34,7 @@ function Orders() {
       quantity: "10",
     },
     {
+      id: 4,
       name: "Background remover",
       date: "Jan 5, 2023",
       status: "Delivered",
@@ -38,6 +42,7 @@ function Orders() {
       quantity: "23",
     },
     {
+      id: 5,
       name: "Colon tiger",
       date: "Jan 6, 2023",
       status: "Delivered",
@@ -45,6 +50,7 @@ function Orders() {
       quantity: "500",
     },
     {
+      id: 6,
       name: "Unity loroin",
       date: "Oct 22, 2023",
       status: "Pending",
@@ -52,6 +58,7 @@ function Orders() {
       quantity: "10",
     },
     {
+      id: 7,
       name: "Background remover",
       date: "Jan 5, 2023",
       status: "Delivered",
@@ -59,6 +66,7 @@ function Orders() {
       quantity: "23",
     },
     {
+      id: 8,
       name: "Colon tiger",
       date: "Jan 6, 2023",
       status: "Delivered",
@@ -66,6 +74,7 @@ function Orders() {
       quantity: "500",
     },
     {
+      id: 9,
       name: "Unity loroin",
       date: "Oct 22, 2023",
       status: "Pending",
@@ -73,6 +82,7 @@ function Orders() {
       quantity: "10",
     },
     {
+      id: 10,
       name: "Background remover",
       date: "Jan 5, 2023",
       status: "Delivered",
@@ -80,6 +90,7 @@ function Orders() {
       quantity: "23",
     },
     {
+      id: 11,
       name: "Colon tiger",
       date: "Jan 6, 2023",
       status: "Delivered",
@@ -87,6 +98,7 @@ function Orders() {
       quantity: "500",
     },
     {
+      id: 12,
       name: "Unity loroin",
       date: "Oct 22, 2023",
       status: "Pending",
@@ -94,6 +106,7 @@ function Orders() {
       quantity: "10",
     },
     {
+      id: 13,
       name: "Background remover",
       date: "Jan 5, 2023",
       status: "Delivered",
@@ -101,6 +114,7 @@ function Orders() {
       quantity: "23",
     },
     {
+      id: 14,
       name: "Colon tiger",
       date: "Jan 6, 2023",
       status: "Delivered",
@@ -108,6 +122,7 @@ function Orders() {
       quantity: "500",
     },
     {
+      id: 15,
       name: "Unity loroin",
       date: "Oct 22, 2023",
       status: "Pending",
@@ -115,6 +130,7 @@ function Orders() {
       quantity: "10",
     },
     {
+      id: 16,
       name: "Background remover",
       date: "Jan 5, 2023",
       status: "Delivered",
@@ -122,6 +138,111 @@ function Orders() {
       quantity: "23",
     },
     {
+      id: 17,
+      name: "Colon tiger",
+      date: "Jan 6, 2023",
+      status: "Delivered",
+      price: "₹9.000",
+      quantity: "500",
+    },
+    {
+      id: 18,
+      name: "Background remover",
+      date: "Jan 5, 2023",
+      status: "Delivered",
+      price: "₹5.000",
+      quantity: "23",
+    },
+    {
+      id: 19,
+      name: "Colon tiger",
+      date: "Jan 6, 2023",
+      status: "Delivered",
+      price: "₹9.000",
+      quantity: "500",
+    },
+    {
+      id: 20,
+      name: "Unity loroin",
+      date: "Oct 22, 2023",
+      status: "Pending",
+      price: "₹20.000",
+      quantity: "10",
+    },
+    {
+      id: 21,
+      name: "Background remover",
+      date: "Jan 5, 2023",
+      status: "Delivered",
+      price: "₹5.000",
+      quantity: "23",
+    },
+    {
+      id: 22,
+      name: "Colon tiger",
+      date: "Jan 6, 2023",
+      status: "Delivered",
+      price: "₹9.000",
+      quantity: "500",
+    },
+    {
+      id: 23,
+      name: "Unity loroin",
+      date: "Oct 22, 2023",
+      status: "Pending",
+      price: "₹20.000",
+      quantity: "10",
+    },
+    {
+      id: 24,
+      name: "Background remover",
+      date: "Jan 5, 2023",
+      status: "Delivered",
+      price: "₹5.000",
+      quantity: "23",
+    },
+    {
+      id: 25,
+      name: "Colon tiger",
+      date: "Jan 6, 2023",
+      status: "Delivered",
+      price: "₹9.000",
+      quantity: "500",
+    },
+    {
+      id: 26,
+      name: "Background remover",
+      date: "Jan 5, 2023",
+      status: "Delivered",
+      price: "₹5.000",
+      quantity: "23",
+    },
+    {
+      id: 27,
+      name: "Colon tiger",
+      date: "Jan 6, 2023",
+      status: "Delivered",
+      price: "₹9.000",
+      quantity: "500",
+    },
+    {
+      id: 28,
+      name: "Unity loroin",
+      date: "Oct 22, 2023",
+      status: "Pending",
+      price: "₹20.000",
+      quantity: "10",
+    },
+    {
+      id: 29,
+      name: "Background remover",
+      date: "Jan 5, 2023",
+      status: "Delivered",
+      price: "₹5.000",
+      quantity: "23",
+    },
+    {
+      id: 30,
       name: "Colon tiger",
       date: "Jan 6, 2023",
       status: "Delivered",
@@ -131,11 +252,8 @@ function Orders() {
   ];
 
   useEffect(() => {
-    setTotalPages(Math.ceil(ordersItems.length / limit));
-  }, [limit]);
-
-  useEffect(() => {
     const getOrders = function (page, limit) {
+      console.log(page);
       let array = [];
       for (
         let i = (page - 1) * limit;
@@ -148,10 +266,12 @@ function Orders() {
     };
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
-    setOrders(getOrders(currentPage, limit));
+    }, 1000);
+    setTotalPages(Math.ceil(ordersItems.length / limit));
+    setOrders(getOrders(currentPage + 1, limit));
+    // console.log(currentPage);
     console.log(orders);
-  }, [limit]);
+  }, [limit, currentPage]);
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 md:px-0">
@@ -204,7 +324,7 @@ function Orders() {
                 {orders.map((item, idx) => (
                   <tr key={idx}>
                     <td className="pr-1 py-4 whitespace-nowrap text-center">
-                      {idx + 1}
+                      {item.id}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">{item.name}</td>
                     <td className="pr-6 py-4 whitespace-nowrap text-center">

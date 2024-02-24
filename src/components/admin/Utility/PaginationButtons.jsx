@@ -5,10 +5,11 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 function PaginationButtons({ setCurrentPage, currentPage, totalPages }) {
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
-    console.log(currentPage);
+    // console.log(currentPage);
   };
   const showNextButton = currentPage !== totalPages - 1;
   const showPrevButton = currentPage !== 0;
+  console.log(showPrevButton);
   return (
     <div>
       <ReactPaginate

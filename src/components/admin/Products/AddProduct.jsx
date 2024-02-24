@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 function AddProduct() {
-  const [imageURL, setImageURL] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [title, setTitle] = useState("");
   const [brand, setBrand] = useState("");
-  const [colour, setColour] = useState("");
-  const [quantity, setQuantity] = useState(0);
+  const [thickness, setThickness] = useState("");
+  const [waterAbsorption, setWaterAbsorption] = useState("");
+  const [color, setColor] = useState("");
+  const [qtyPerBox, setQtyPerBox] = useState(0);
   const [price, setPrice] = useState(0);
-  const [salePrice, setSalePrice] = useState(0);
-  const [discountPercentage, setDiscountPercentage] = useState(0);
-  const [category, setCategory] = useState("");
+  const [discountPrice, setDiscountPrice] = useState(0);
+  const [discountPercent, setDiscountPercent] = useState(0);
+  const [categoryName, setCategoryName] = useState("");
   const [description, setDescription] = useState("");
   const [sizes, setSizes] = useState([{ width: "", height: "", quantity: "" }]);
   const addSizeHandler = () => {
@@ -31,28 +33,30 @@ function AddProduct() {
   };
   const addProductHandler = () => {
     const inputData = {
-      imageURL,
+      imageUrl,
       title,
       brand,
-      colour,
-      quantity,
+      color,
+      thickness,
+      waterAbsorption,
+      qtyPerBox,
       price,
-      salePrice,
-      discountPercentage,
-      category,
+      discountPrice,
+      discountPercent,
+      categoryName,
       description,
       sizes,
     };
     console.log(inputData);
-    console.log(sizes);
+    // Axios request
     toast.success("Product Added Successfully");
   };
 
   useEffect(() => {
-    let result = ((price - salePrice) / price) * 100;
-    console.log(typeof result); 
-    setDiscountPercentage(result.toString());
-  }, [price, salePrice]);
+    let result = ((price - discountPrice) / price) * 100;
+    console.log(Math.round(result));
+    setDiscountPercent(Math.round(result));
+  }, [price, discountPrice]);
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 md:px-0">
@@ -77,9 +81,9 @@ function AddProduct() {
                 className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
                 placeholder="Image URL"
                 onChange={(e) => {
-                  setImageURL(e.target.value);
+                  setImageUrl(e.target.value);
                 }}
-                value={imageURL}
+                value={imageUrl}
               />
             </div>
             <div className="grid grid-cols-2 gap-5">
@@ -117,38 +121,74 @@ function AddProduct() {
                   value={brand}
                 />
               </div>
+
               <div>
                 <label
-                  htmlFor="colour"
+                  htmlFor="thickness"
                   className="block mb-3 text-black dark:text-white"
                 >
-                  Colour
+                  Thickness
                 </label>
                 <input
                   type="text"
                   className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
-                  placeholder="Colour"
+                  placeholder="Thickness"
                   onChange={(e) => {
-                    setColour(e.target.value);
+                    setThickness(e.target.value);
                   }}
-                  value={colour}
+                  value={thickness}
                 />
               </div>
               <div>
                 <label
-                  htmlFor="quantity"
+                  htmlFor="waterAbsorption"
                   className="block mb-3 text-black dark:text-white"
                 >
-                  Quantity
+                  Water Absorption
+                </label>
+                <input
+                  type="text"
+                  className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
+                  placeholder="Water Absorption"
+                  onChange={(e) => {
+                    setWaterAbsorption(e.target.value);
+                  }}
+                  value={waterAbsorption}
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="color"
+                  className="block mb-3 text-black dark:text-white"
+                >
+                  Color
+                </label>
+                <input
+                  type="text"
+                  className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
+                  placeholder="Color"
+                  onChange={(e) => {
+                    setColor(e.target.value);
+                  }}
+                  value={color}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="qtyPerBox"
+                  className="block mb-3 text-black dark:text-white"
+                >
+                  Quantity Per Box
                 </label>
                 <input
                   type="number"
                   className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
                   placeholder="Quantity Per Box"
                   onChange={(e) => {
-                    setQuantity(e.target.value);
+                    setQtyPerBox(e.target.value);
                   }}
-                  value={quantity}
+                  value={qtyPerBox}
                 />
               </div>
             </div>
@@ -175,21 +215,21 @@ function AddProduct() {
                   htmlFor="discountedPrice"
                   className="block mb-3 text-black dark:text-white"
                 >
-                  Sale Price
+                  Discount Price
                 </label>
                 <input
                   type="number"
                   className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
-                  placeholder="Sale Price"
+                  placeholder="Discount Price"
                   onChange={(e) => {
-                    setSalePrice(e.target.value);
+                    setDiscountPrice(e.target.value);
                   }}
-                  value={salePrice}
+                  value={discountPrice}
                 />
               </div>
               <div>
                 <label
-                  htmlFor="discountPercentage"
+                  htmlFor="discountPercent"
                   className="block mb-3 text-black dark:text-white"
                 >
                   Discount Percentage
@@ -198,7 +238,7 @@ function AddProduct() {
                   type="number"
                   className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
                   placeholder="Discount Percentage"
-                  value={discountPercentage}
+                  value={discountPercent}
                   disabled
                 />
               </div>
@@ -213,9 +253,9 @@ function AddProduct() {
               <select
                 className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
                 onChange={(e) => {
-                  setCategory(e.target.value);
+                  setCategoryName(e.target.value);
                 }}
-                defaultValue={category}
+                defaultValue={categoryName}
               >
                 <option value="">Select</option>
                 <option value="indoor">Indoor</option>
