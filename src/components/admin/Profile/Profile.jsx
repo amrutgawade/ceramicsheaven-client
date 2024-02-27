@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { axiosInstance } from "../Utility/axiosApiConfig";
 
 function Profile() {
   const [firstName, setFirstName] = useState("");
@@ -23,17 +24,28 @@ function Profile() {
     }
   };
 
-  const updateProfileHandler = () => {
-    toast.success("Profile Updated");
+  const updateProfileHandler = async () => {
+    const updateUser = {
+      firstName,
+      lastName,
+      email,
+      gender,
+      mobile: Number(mobile),
+    };
+    console.log(updateUser);
+    const response = await axiosInstance
+      .put("http://localhost:8081/api/users/profile/update", updateUser)
+      .then((res) => {
+        toast.success("Profile Updated");
+      })
+      .catch((err) => {
+        // console.log(err);
+        toast.error("Profile Update Failed");
+      });
   };
   const fetchData = async () => {
-    const response = await axios.get(
-      "http://localhost:8081/api/users/profile",
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
+    const response = await axiosInstance.get(
+      "http://localhost:8081/api/users/profile"
     );
     console.log(response.data);
     setFirstName(response.data.firstName);
@@ -100,7 +112,7 @@ function Profile() {
               </label>
               <select
                 onChange={(e) => inputChangeHandler("gender", e.target.value)}
-                defaultValue={gender}
+                value={gender}
                 className="w-full px-5 py-3 outline-none border bg-indigo-50 rounded"
               >
                 <option value="">Select</option>

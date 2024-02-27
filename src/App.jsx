@@ -55,12 +55,9 @@ function App() {
               <Route index element={<Dashboard />} />
               <Route path="/admin/profile" element={<Profile />} />
               <Route path="/admin/products" element={<Products />} />
+              <Route path="/admin/products/add" element={<AddProduct />} />
               <Route
-                path="/admin/products/add"
-                element={<AddProduct />}
-              />
-              <Route
-                path="/admin/products/update"
+                path="/admin/products/update/:id"
                 element={<ManageProduct title={"Update Product"} />}
               />
               <Route path="/admin/orders" element={<Orders />} />

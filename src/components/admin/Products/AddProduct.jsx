@@ -1,12 +1,12 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { axiosInstance } from "../Utility/axiosApiConfig";
 
 function AddProduct() {
   const [imageUrl, setImageUrl] = useState("");
   const [title, setTitle] = useState("");
   const [brand, setBrand] = useState("");
-  const [thickness, setThickness] = useState("");
-  const [waterAbsorption, setWaterAbsorption] = useState("");
   const [color, setColor] = useState("");
   const [qtyPerBox, setQtyPerBox] = useState(0);
   const [price, setPrice] = useState(0);
@@ -14,9 +14,9 @@ function AddProduct() {
   const [discountPercent, setDiscountPercent] = useState(0);
   const [categoryName, setCategoryName] = useState("");
   const [description, setDescription] = useState("");
-  const [sizes, setSizes] = useState([{ width: "", height: "", quantity: "" }]);
+  const [sizes, setSizes] = useState([{ width: 0, height: 0, quantity: 0 }]);
   const addSizeHandler = () => {
-    setSizes([...sizes, { width: "", height: "", quantity: "" }]);
+    setSizes([...sizes, { width: 0, height: 0, quantity: 0 }]);
   };
 
   const removeSizeHandler = (index) => {
@@ -28,33 +28,51 @@ function AddProduct() {
   const inputChangeHandler = (e, index) => {
     const { name, value } = e.target;
     const newSizes = [...sizes];
-    newSizes[index][name] = value;
+    newSizes[index][name] = Number(value);
     setSizes(newSizes);
   };
-  const addProductHandler = () => {
-    const inputData = {
+  const addProductHandler = async () => {
+    const productData = {
       imageUrl,
       title,
       brand,
       color,
-      thickness,
-      waterAbsorption,
-      qtyPerBox,
-      price,
-      discountPrice,
-      discountPercent,
+      qtyPerBox: Number(qtyPerBox),
+      price: Number(price),
+      discountPrice: Number(discountPrice),
+      discountPercent: Number(discountPercent),
       categoryName,
       description,
       sizes,
     };
-    console.log(inputData);
+    console.log(productData);
     // Axios request
-    toast.success("Product Added Successfully");
+    const response = await axiosInstance
+      .post("http://localhost:8081/api/admin/product/", productData)
+      .then((res) => {
+        console.log(res.data);
+        setImageUrl("");
+        setTitle("");
+        setBrand("");
+        setColor("");
+        setQtyPerBox(0);
+        setPrice(0);
+        setDiscountPrice(0);
+        setDiscountPercent(0);
+        setCategoryName("");
+        setDescription("");
+        setSizes([{ width: null, height: null, quantity: null }]);
+        toast.success("Product Added Successfully");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Product Not Added");
+      });
   };
 
   useEffect(() => {
     let result = ((price - discountPrice) / price) * 100;
-    console.log(Math.round(result));
+    // console.log(Math.round(result));
     setDiscountPercent(Math.round(result));
   }, [price, discountPrice]);
 
@@ -119,41 +137,6 @@ function AddProduct() {
                     setBrand(e.target.value);
                   }}
                   value={brand}
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="thickness"
-                  className="block mb-3 text-black dark:text-white"
-                >
-                  Thickness
-                </label>
-                <input
-                  type="text"
-                  className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
-                  placeholder="Thickness"
-                  onChange={(e) => {
-                    setThickness(e.target.value);
-                  }}
-                  value={thickness}
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="waterAbsorption"
-                  className="block mb-3 text-black dark:text-white"
-                >
-                  Water Absorption
-                </label>
-                <input
-                  type="text"
-                  className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
-                  placeholder="Water Absorption"
-                  onChange={(e) => {
-                    setWaterAbsorption(e.target.value);
-                  }}
-                  value={waterAbsorption}
                 />
               </div>
 
@@ -307,7 +290,7 @@ function AddProduct() {
                       Width
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       name="width"
                       value={sizes.width}
                       onChange={(e) => inputChangeHandler(e, i)}
@@ -323,7 +306,7 @@ function AddProduct() {
                       Height
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       name="height"
                       value={sizes.height}
                       onChange={(e) => inputChangeHandler(e, i)}
@@ -339,7 +322,7 @@ function AddProduct() {
                       Quantity
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       name="quantity"
                       value={sizes.quantity}
                       onChange={(e) => inputChangeHandler(e, i)}
