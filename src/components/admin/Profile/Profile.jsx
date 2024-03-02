@@ -43,6 +43,7 @@ function Profile() {
         toast.error("Profile Update Failed");
       });
   };
+  
   const fetchData = async () => {
     const response = await axiosInstance.get(
       "http://localhost:8081/api/users/profile"
