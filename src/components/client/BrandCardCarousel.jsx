@@ -3,16 +3,12 @@ import brand1 from "../../assets/frontend/img/brands/agl.png";
 import brand2 from "../../assets/frontend/img/brands/jhonson.png";
 import brand3 from "../../assets/frontend/img/brands/kajaria.png";
 import brand4 from "../../assets/frontend/img/brands/somany.png";
-import AliceCarousel from "react-alice-carousel";
-import "react-alice-carousel/lib/alice-carousel.css";
 import BrandCard from "./BrandCard";
-import { Button } from "@mui/material";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function BrandCardCarousel() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [carouselInstance, setCarouselInstance] = useState(null);
-
   const brands = [
     {
       imageUrl: brand1,
@@ -33,85 +29,90 @@ function BrandCardCarousel() {
       imageUrl: brand4,
       brand: "H&R Johnson (India)",
     },
+    {
+      imageUrl: brand3,
+      brand: "Asian Granito India",
+    },
+
+    {
+      imageUrl: brand4,
+      brand: "H&R Johnson (India)",
+    },
   ];
 
-  const responsive = {
-    0: { items: 1 },
-    720: { items: 3 },
-    1024: { items: 5.5 },
+  function NextArrow(props) {
+    const { onClick, currentSlide, slideCount } = props;
+    return (
+      <div
+        className={`${
+          slideCount % 4 == currentSlide ? "hidden" : "block"
+        } slick-arrow slick-next flex justify-center items-center px-6 rounded h-20 bg-black/50 hover:bg-black/50`}
+        onClick={onClick}
+      />
+    );
+  }
+  function PrevArrow(props) {
+    const { onClick, currentSlide } = props;
+    return (
+      <div
+        className={`${
+          currentSlide == 0 ? "hidden" : "block"
+        } slick-arrow slick-prev z-10 flex justify-center items-center px-6 rounded h-20 bg-black/50 hover:bg-black/50`}
+        onClick={onClick}
+      />
+    );
+  }
+
+  var settings = {
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          arrows: false,
+          infinite: true,
+          speed: 500,
+          autoplay: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
   };
-
-  const slidePrev = () => {
-    if (carouselInstance) {
-      carouselInstance.slidePrev();
-    }
-  };
-
-  const slideNext = () => {
-    if (carouselInstance) {
-      carouselInstance.slideNext();
-    }
-  };
-
-  const syncActiveIndex = ({ item }) => setActiveIndex(item);
-
-  const items = brands.map((item) => <BrandCard product={item} key={item} />);
   return (
     <div className="relative px-4 lg:px-8">
       <h2 className="text-2xl font-extrabold text-center text-gray-800 py-5">
         Popular Brand's
       </h2>
-      <div className="relative p-5">
-        <AliceCarousel
-          items={items}
-          disableButtonsControls
-          responsive={responsive}
-          disableDotsControls
-          onSlideChanged={syncActiveIndex}
-          activeIndex={activeIndex}
-          ref={(carousel) => setCarouselInstance(carousel)}
-        />
-
-        {activeIndex < items.length - 3 && (
-          <Button
-            variant="contained"
-            className="z-50"
-            onClick={slideNext}
-            sx={{
-              position: "absolute",
-              top: "8rem",
-              right: "-3rem",
-              transform: "translate(-50%) rotate(90deg)",
-              bgcolor: "white",
-            }}
-            aria-label="next"
-          >
-            <KeyboardArrowLeftIcon
-              sx={{ transform: "rotate(90deg)", color: "black" }}
-            />
-          </Button>
-        )}
-
-        {activeIndex > 0 && (
-          <Button
-            variant="contained"
-            className="z-50"
-            onClick={slidePrev}
-            sx={{
-              position: "absolute",
-              top: "8rem",
-              left: "-2rem",
-              transform: "translate(50%) rotate(90deg)",
-              bgcolor: "white",
-            }}
-            aria-label="prev"
-          >
-            <KeyboardArrowLeftIcon
-              sx={{ transform: "rotate(-90deg)", color: "black" }}
-            />
-          </Button>
-        )}
-      </div>
+      <Slider {...settings}>
+        {brands.map((item) => (
+          <BrandCard product={item} key={item} />
+        ))}
+      </Slider>
+      {/* <h1 className="sm:hidden text-center mt-2 font-semibold">Swipe</h1> */}
     </div>
   );
 }
