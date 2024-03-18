@@ -11,7 +11,7 @@ function NextArrow(props) {
   return (
     <div
       className={
-        "hidden slick-arrow slick-next absolute right-5 sm:flex justify-center items-center px-6 rounded h-20 bg-black/50 hover:bg-black/50"
+        "hidden slick-arrow slick-next absolute right-5 sm:flex justify-center items-center px-5 rounded h-20 bg-black/50 hover:bg-black/50"
       }
       onClick={onClick}
     />
@@ -22,7 +22,7 @@ function PrevArrow(props) {
   return (
     <div
       className={
-        "hidden slick-arrow slick-prev absolute z-10 left-5 sm:flex justify-center items-center px-6 rounded h-20 bg-black/50 hover:bg-black/50"
+        "hidden slick-arrow slick-prev absolute z-10 left-5 sm:flex justify-center items-center px-5 rounded h-20 bg-black/50 hover:bg-black/50"
       }
       onClick={onClick}
     />

@@ -9,7 +9,7 @@ function Home() {
       <MainCarousel />
       <div className="space-y-10 py-20">
         <BrandCardCarousel />
-        {/* <CategorySectionCarousel /> */}
+        <CategorySectionCarousel />
       </div>
     </>
   );

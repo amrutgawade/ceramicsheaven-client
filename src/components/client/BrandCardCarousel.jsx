@@ -46,7 +46,7 @@ function BrandCardCarousel() {
       <div
         className={`${
           slideCount % 4 == currentSlide ? "hidden" : "block"
-        } slick-arrow slick-next flex justify-center items-center px-6 rounded h-20 bg-black/50 hover:bg-black/50`}
+        } slick-arrow slick-next flex justify-center items-center px-5 rounded h-20 bg-black/50 hover:bg-black/50`}
         onClick={onClick}
       />
     );
@@ -57,7 +57,7 @@ function BrandCardCarousel() {
       <div
         className={`${
           currentSlide == 0 ? "hidden" : "block"
-        } slick-arrow slick-prev z-10 flex justify-center items-center px-6 rounded h-20 bg-black/50 hover:bg-black/50`}
+        } slick-arrow slick-prev z-10 flex justify-center items-center px-5 rounded h-20 bg-black/50 hover:bg-black/50`}
         onClick={onClick}
       />
     );
@@ -104,9 +104,10 @@ function BrandCardCarousel() {
   };
   return (
     <div className="relative px-4 lg:px-8">
-      <h2 className="text-2xl font-extrabold text-center text-gray-800 py-5">
-        Popular Brand's
+      <h2 className="text-3xl font-extrabold text-center text-gray-800">
+        Popular Brands
       </h2>
+      <div className="w-16 h-[5px] bg-red-500 mx-auto mb-8"></div>
       <Slider {...settings}>
         {brands.map((item) => (
           <BrandCard product={item} key={item} />
