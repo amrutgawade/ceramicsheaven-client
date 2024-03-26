@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PaginationButtons from "../Utility/PaginationButtons";
-import { axiosInstance } from "../Utility/axiosApiConfig";
+import UserContext from "../../../context/UserContext";
+import axios from "axios";
 
 function Products() {
+  const { token } = useContext(UserContext);
   const [limit, setLimit] = useState(5);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
@@ -61,8 +63,12 @@ function Products() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await axiosInstance
-        .get("http://localhost:8081/api/admin/product/all")
+      await axios
+        .get("http://localhost:8081/api/admin/product/all", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((res) => {
           const data = res.data;
           setTableItems(data);
