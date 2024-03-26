@@ -105,7 +105,7 @@ function Sidebar() {
       <FaChevronCircleRight
         onClick={() => setIsExpanded(!isExpanded)}
         className={
-          "w-5 h-5 rounded-full bg-slate-700 absolute top-7 -right-[0.6rem] z-20 ease-linear duration-500" +
+          "w-7 h-7 rounded-full bg-slate-700 absolute border-4 border-slate-900 top-7 -right-[0.6rem] z-20 ease-linear duration-500" +
           (isExpanded ? " rotate-180" : " rotate-0")
         }
       />

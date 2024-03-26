@@ -1,9 +1,11 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { axiosInstance } from "../Utility/axiosApiConfig";
+import UserContext from "../../../context/UserContext";
 
 function Profile() {
+  const { token } = useContext(UserContext);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [gender, setGender] = useState("");
@@ -43,10 +45,15 @@ function Profile() {
         toast.error("Profile Update Failed");
       });
   };
-  
+
   const fetchData = async () => {
-    const response = await axiosInstance.get(
-      "http://localhost:8081/api/users/profile"
+    const response = await axios.get(
+      "http://localhost:8081/api/users/profile",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     console.log(response.data);
     setFirstName(response.data.firstName);

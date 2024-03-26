@@ -17,41 +17,95 @@ function AdminLogin() {
   };
 
   const loginHandler = async () => {
-    const response = await axios
+    await axios
       .post("http://localhost:8081/auth/signin", {
         email: username,
         password,
       })
       .then(async (res) => {
-        if (res.data.message == "SignIn Successfull" && res.status == 201) {
-          const result = await axios.get(
-            "http://localhost:8081/api/users/profile",
-            {
-              headers: {
-                Authorization: `Bearer ${res.data.jwt}`,
-              },
-            }
-          );
-          console.log(result.data);
-          if (result.data.role == "admin") {
-            const { firstName, lastName } = result.data;
-            const activeUser = firstName + " " + lastName;
-            localStorage.setItem("token", res.data.jwt);
-            localStorage.setItem("user", activeUser);
-            setToken(localStorage.getItem("token"));
-            setUser(localStorage.getItem("user"));
-            toast.success("Login Successful");
+        const { jwt } = res.data;
+        // Decode JWT token to extract email & authorities
+        try {
+          const [, payloadBase64] = jwt.split(".");
+          const payloadJson = atob(payloadBase64);
+          const payload = JSON.parse(payloadJson);
+          // console.log("Email:", payload.email);
+          console.log("Authorities:", payload.authorities);
+          if (
+            res.data.message == "SignIn Successfull" &&
+            res.status == 201 &&
+            payload.authorities == "ADMIN,USER"
+          ) {
+            const result = await axios.get(
+              "http://localhost:8081/api/users/profile",
+              {
+                headers: {
+                  Authorization: `Bearer ${jwt}`,
+                },
+              }
+            );
+            localStorage.setItem(
+              "user",
+              result.data.firstName + " " + result.data.lastName
+            );
+            setUser(
+              result.data.firstName + " " + result.data.lastName ||
+                localStorage.getItem("user")
+            );
+            localStorage.setItem("token", jwt);
+            setToken(jwt || localStorage.getItem("token"));
+            toast.success("Login Success");
           } else {
-            localStorage.clear();
+            toast.error("Unauthorized Access");
           }
-        } else {
-          toast.error("Incorrect Username or Password..!");
+        } catch (error) {
+          console.error("Error decoding JWT:", error);
+          toast.error("Invalid Username or Password");
         }
       })
       .catch((err) => {
-        toast.error("Server Error..!");
+        console.log(err);
       });
+
+    console.log(response);
   };
+
+  // const loginHandler = async () => {
+  //   const response = await axios
+  //     .post("http://localhost:8081/auth/signin", {
+  //       email: username,
+  //       password,
+  //     })
+  //     .then(async (res) => {
+  //       if (res.data.message == "SignIn Successfull" && res.status == 201) {
+  //         const result = await axios.get(
+  //           "http://localhost:8081/api/users/profile",
+  //           {
+  //             headers: {
+  //               Authorization: `Bearer ${res.data.jwt}`,
+  //             },
+  //           }
+  //         );
+  //         console.log(result.data);
+  //         if (result.data.role == "ADMIN,USER") {
+  //           const { firstName, lastName } = result.data;
+  //           const activeUser = firstName + " " + lastName;
+  //           localStorage.setItem("token", res.data.jwt);
+  //           localStorage.setItem("user", activeUser);
+  //           setToken(localStorage.getItem("token"));
+  //           setUser(localStorage.getItem("user"));
+  //           toast.success("Login Successful");
+  //         } else {
+  //           localStorage.clear();
+  //         }
+  //       } else {
+  //         toast.error("Incorrect Username or Password..!");
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       toast.error("Server Error..!");
+  //     });
+  // };
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center px-4">
       <div className="max-w-sm w-full text-gray-600 space-y-5">
