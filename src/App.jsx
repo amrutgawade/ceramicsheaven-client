@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import Reset from "./pages/Reset";
 import Home from "./pages/Home";
 import Store from "./pages/Store";
+import Contact from "./pages/Contact";
 import Dashboard from "./components/admin/Dashboard/Dashboard";
 import Profile from "./components/admin/Profile/Profile";
 import Products from "./components/admin/Products/Products";
@@ -35,9 +36,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={token ? <Error401 /> : <Login />} />
           <Route path="/signup" element={token ? <Error401 /> : <SignUp />} />
-          <Route path="/products" element={<Login />} />
+          {/* <Route path="/products" element={<Login />} /> */}
           <Route path="/store" element={<Store />} />
-          <Route path="/contact" element={<Login />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/Forgot-Password" element={<Reset />} />
         </Route>
         <Route path="/admin" element={token ? <AdminLayout /> : <AdminLogin />}>

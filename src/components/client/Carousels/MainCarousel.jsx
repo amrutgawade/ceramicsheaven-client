@@ -1,7 +1,7 @@
 import React from "react";
-import slide1 from "../../assets/frontend/img/slide/slide-1.jpg";
-import slide2 from "../../assets/frontend/img/slide/slide-2.jpg";
-import slide3 from "../../assets/frontend/img/slide/slide-3.jpg";
+import slide1 from "../../../assets/frontend/img/slide/slide-1.jpg";
+import slide2 from "../../../assets/frontend/img/slide/slide-2.jpg";
+import slide3 from "../../../assets/frontend/img/slide/slide-3.jpg";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

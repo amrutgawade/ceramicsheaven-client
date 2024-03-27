@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import category1 from "../../assets/frontend/img/categories/bathroom.jpg";
-import category2 from "../../assets/frontend/img/categories/hall.jpg";
-import category3 from "../../assets/frontend/img/categories/indoor.jpg";
-import category4 from "../../assets/frontend/img/categories/kitchen.jpeg";
-import category5 from "../../assets/frontend/img/categories/outdoor.jpg";
-import CategoryCard from "./CategoryCard";
+import category1 from "../../../assets/frontend/img/categories/bathroom.jpg";
+import category2 from "../../../assets/frontend/img/categories/hall.jpg";
+import category3 from "../../../assets/frontend/img/categories/indoor.jpg";
+import category4 from "../../../assets/frontend/img/categories/kitchen.jpeg";
+import category5 from "../../../assets/frontend/img/categories/outdoor.jpg";
+import CategoryCard from "../Cards/CategoryCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

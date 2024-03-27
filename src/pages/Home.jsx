@@ -1,7 +1,7 @@
 import React from "react";
-import MainCarousel from "../components/client/MainCarousel";
-import BrandCardCarousel from "../components/client/BrandCardCarousel";
-import CategorySectionCarousel from "../components/client/CategorySectionCarousel";
+import MainCarousel from "../components/client/Carousels/MainCarousel";
+import BrandCardCarousel from "../components/client/Carousels/BrandCardCarousel";
+import CategorySectionCarousel from "../components/client/Carousels/CategorySectionCarousel";
 
 function Home() {
   return (

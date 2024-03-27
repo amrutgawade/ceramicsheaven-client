@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import brand1 from "../../assets/frontend/img/brands/agl.png";
-import brand2 from "../../assets/frontend/img/brands/jhonson.png";
-import brand3 from "../../assets/frontend/img/brands/kajaria.png";
-import brand4 from "../../assets/frontend/img/brands/somany.png";
-import BrandCard from "./BrandCard";
+import brand1 from "../../../assets/frontend/img/brands/agl.png";
+import brand2 from "../../../assets/frontend/img/brands/jhonson.png";
+import brand3 from "../../../assets/frontend/img/brands/kajaria.png";
+import brand4 from "../../../assets/frontend/img/brands/somany.png";
+import BrandCard from "../Cards/BrandCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
