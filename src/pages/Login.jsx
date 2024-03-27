@@ -1,7 +1,78 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import UserContext from "../context/UserContext";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Login() {
+  const { setUser, setToken, setRole } = useContext(UserContext);
+  const navigate = useNavigate();
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const inputChangeHandler = (id, value) => {
+    if (id === "email") {
+      setEmail(value);
+    } else if (id === "password") {
+      setPassword(value);
+    }
+  };
+
+  const loginHandler = async () => {
+    await axios
+      .post("http://localhost:8081/auth/signin", {
+        email,
+        password,
+      })
+      .then(async (res) => {
+        const { jwt } = res.data;
+        // Decode JWT token to extract email & authorities
+        try {
+          const [, payloadBase64] = jwt.split(".");
+          const payloadJson = atob(payloadBase64);
+          const payload = JSON.parse(payloadJson);
+          // console.log("Email:", payload.email);
+          console.log("Authorities:", payload.authorities);
+          localStorage.setItem("auth", payload.authorities);
+          setRole(payload.authorities);
+          if (res.data.message == "SignIn Successfull" && res.status == 201) {
+            const result = await axios.get(
+              "http://localhost:8081/api/users/profile",
+              {
+                headers: {
+                  Authorization: `Bearer ${jwt}`,
+                },
+              }
+            );
+            localStorage.setItem(
+              "user",
+              result.data.firstName + " " + result.data.lastName
+            );
+            setUser(
+              result.data.firstName + " " + result.data.lastName ||
+                localStorage.getItem("user")
+            );
+            localStorage.setItem("token", jwt);
+            setToken(jwt || localStorage.getItem("token"));
+            toast.success("Login Success");
+            navigate("/");
+          } else {
+            toast.error("Unauthorized Access");
+          }
+        } catch (error) {
+          console.error("Error decoding JWT:", error);
+          toast.error("Invalid Username or Password");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    console.log(response);
+  };
+
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center px-4">
       <div className="max-w-sm w-full text-gray-600 space-y-5">
@@ -13,7 +84,7 @@ function Login() {
           />
           <div className="mt-5">
             <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
-              Log in to your account
+              Login
             </h3>
           </div>
         </div>
@@ -23,19 +94,34 @@ function Login() {
             <input
               type="email"
               required
+              onChange={(e) => inputChangeHandler("email", e.target.value)}
+              value={email}
               className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-red-600 shadow-sm rounded-lg"
             />
           </div>
-          <div>
+          <div className="relative">
             <label className="font-medium">Password</label>
             <input
-              type="password"
+              type={passwordVisible ? "text" : "password"}
               required
+              onChange={(e) => inputChangeHandler("password", e.target.value)}
+              value={password}
               className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-red-600 shadow-sm rounded-lg"
             />
+            {passwordVisible ? (
+              <FaEyeSlash
+                onClick={() => setPasswordVisible(!passwordVisible)}
+                className="text-xl cursor-pointer absolute top-11 right-3"
+              />
+            ) : (
+              <FaEye
+                onClick={() => setPasswordVisible(!passwordVisible)}
+                className="text-xl cursor-pointer absolute top-11 right-3"
+              />
+            )}
           </div>
-          <div className="flex items-center justify-between text-sm">
-            <div className="flex items-center gap-x-3">
+          <div className="flex items-center justify-end text-sm">
+            {/* <div className="flex items-center gap-x-3">
               <input
                 type="checkbox"
                 id="remember-me-checkbox"
@@ -46,7 +132,7 @@ function Login() {
                 className="relative flex w-5 h-5 bg-white peer-checked:bg-red-600 rounded-md border ring-offset-2 ring-red-600 duration-150 peer-active:ring cursor-pointer after:absolute after:inset-x-0 after:top-[3px] after:m-auto after:w-1.5 after:h-2.5 after:border-r-2 after:border-b-2 after:border-white after:rotate-45"
               ></label>
               <span>Remember me</span>
-            </div>
+            </div> */}
             <Link
               to="/Forgot-Password"
               className="text-center text-red-600 hover:text-red-500"
@@ -54,11 +140,14 @@ function Login() {
               Forgot password?
             </Link>
           </div>
-          <button className="w-full px-4 py-2 text-white font-medium bg-red-600 hover:bg-red-500 active:bg-red-600 rounded-lg duration-150">
-            Sign in
+          <button
+            onClick={loginHandler}
+            className="w-full px-4 py-2 text-white font-medium bg-red-600 hover:bg-red-500 active:bg-red-600 rounded-lg duration-150"
+          >
+            Login
           </button>
         </form>
-        <button className="w-full flex items-center justify-center gap-x-3 py-2.5 border rounded-lg text-sm font-medium hover:bg-gray-50 duration-150 active:bg-gray-100">
+        {/* <button className="w-full flex items-center justify-center gap-x-3 py-2.5 border rounded-lg text-sm font-medium hover:bg-gray-50 duration-150 active:bg-gray-100">
           <svg
             className="w-5 h-5"
             viewBox="0 0 48 48"
@@ -90,7 +179,7 @@ function Login() {
             </defs>
           </svg>
           Continue with Google
-        </button>
+        </button> */}
         <p className="text-center">
           Don't have an account?{" "}
           <Link

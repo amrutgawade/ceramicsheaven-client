@@ -1,15 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
 
-function AvatarMenu(props) {
+function AvatarMenu({ params }) {
   const [state, setState] = useState(false);
   const profileRef = useRef();
 
+  const name = params.user.split(" ");
+  const Avatar = name[0].charAt(0) + name[1].charAt(0);
+
   const navigation = [
-    { title: "Dashboard", path: "javascript:void(0)" },
-    { title: "Analytics", path: "javascript:void(0)" },
-    { title: "Profile", path: "javascript:void(0)" },
-    { title: "Settings", path: "javascript:void(0)" },
+    { title: "My Profile", path: "javascript:void(0)" },
+    { title: "Orders", path: "javascript:void(0)" },
+    { title: "Notifications", path: "javascript:void(0)" },
   ];
+
+  const logoutHandler = () => {
+    localStorage.clear();
+    params.setUser(null);
+    params.setToken(null);
+    navigate("/admin");
+    toast.success("Logout Successful");
+  };
 
   useEffect(() => {
     const handleDropDown = (e) => {
@@ -24,7 +34,8 @@ function AvatarMenu(props) {
           ref={profileRef}
           className="hidden w-10 h-10 outline-none bg-red-600 text-white tracking-widest rounded-full ring-offset-2 ring-gray-200 lg:focus:ring-2 lg:block"
           onClick={() => setState(!state)}
-        >AG
+        >
+          {Avatar}
           {/* <img
             src="src\assets\frontend\assets\img\team\team-1.jpg"
             className="w-full h-full rounded-full"
@@ -47,7 +58,7 @@ function AvatarMenu(props) {
           </li>
         ))}
         <button
-          onClick={() => props.setLogin(false)}
+          onClick={logoutHandler}
           className="block w-full text-justify text-gray-600 hover:text-gray-900 border-t py-3 lg:hover:bg-gray-50 lg:p-3"
         >
           Logout

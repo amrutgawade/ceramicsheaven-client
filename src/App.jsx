@@ -27,22 +27,26 @@ import { Toaster } from "react-hot-toast";
 import AddProduct from "./components/admin/Products/AddProduct";
 
 function App() {
-  const { token } = useContext(UserContext);
+  const { token, role } = useContext(UserContext);
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <Routes>
         <Route path="/" element={<MasterLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={token ? <Error401 /> : <Login />} />
-          <Route path="/signup" element={token ? <Error401 /> : <SignUp />} />
-          {/* <Route path="/products" element={<Login />} /> */}
+          {token ? null : (
+            <>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+            </>
+          )}
+
           <Route path="/store" element={<Store />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/Forgot-Password" element={<Reset />} />
         </Route>
-        <Route path="/admin" element={token ? <AdminLayout /> : <AdminLogin />}>
-          {token ? (
+        <Route path="/admin" element={token && (role == "ADMIN,USER") ? <AdminLayout /> : <AdminLogin />}>
+          {token && (role == "ADMIN,USER") ? (
             <>
               <Route index element={<Dashboard />} />
               <Route path="/admin/profile" element={<Profile />} />

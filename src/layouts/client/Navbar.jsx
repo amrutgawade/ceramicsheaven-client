@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import AvatarMenu from "../../components/client/AvatarMenu";
+import React, { useContext, useState } from "react";
+import AvatarMenu from "./AvatarMenu";
 import { BsCart } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import UserContext from "../../context/UserContext";
 
 function Navbar() {
+  const { token, user, setUser, setToken } = useContext(UserContext);
   const [state, setState] = useState(false);
   const [login, setLogin] = useState(false);
 
@@ -36,14 +38,14 @@ function Navbar() {
           </Link>
 
           <div className="lg:hidden flex gap-8">
-          {login && (
-          <Link className="lg:hidden relative text-2xl">
-            <span className="absolute text-center text-[10px] text-white -top-3 -right-2 bg-red-700 rounded-full h-4 w-4 flex items-center justify-center">
-              2
-            </span>
-            <BsCart />
-          </Link>
-        )}
+            {token && (
+              <Link className="lg:hidden relative text-2xl">
+                <span className="absolute text-center text-[10px] text-white -top-3 -right-2 bg-red-700 rounded-full h-4 w-4 flex items-center justify-center">
+                  2
+                </span>
+                <BsCart />
+              </Link>
+            )}
             <button
               className="text-gray-500 hover:text-gray-800"
               onClick={() => setState(!state)}
@@ -124,7 +126,7 @@ function Navbar() {
               );
             })}
 
-            {login ? (
+            {token ? (
               <>
                 <Link className="lg:block hidden relative text-2xl">
                   <span className="absolute text-center text-[10px] text-white -top-3 -right-2 bg-red-700 rounded-full h-4 w-4 flex items-center justify-center">
@@ -132,11 +134,10 @@ function Navbar() {
                   </span>
                   <BsCart />
                 </Link>
-                <AvatarMenu setLogin={setLogin} />
+                <AvatarMenu params={{ user, setUser, setToken }} />
               </>
             ) : (
               <Link
-                onClick={() => setLogin(true)}
                 to={"/login"}
                 className="block text-center lg:w-auto w-full px-4 py-2 bg-red-600 hover:bg-red-500 rounded text-white"
               >
