@@ -6,6 +6,7 @@ import axios from "axios";
 
 function Products() {
   const { token } = useContext(UserContext);
+  const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(5);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
@@ -126,6 +127,7 @@ function Products() {
         <input
           placeholder="Search..."
           type="text"
+          onChange={(e) => setSearch(e.target.value)}
           className="w-fit px-5 py-3 outline-none border border-indigo-200 bg-indigo-50 rounded"
         />
         <select
@@ -158,47 +160,53 @@ function Products() {
               </tr>
             </thead>
             <tbody className="text-gray-600 divide-y">
-              {products.map((item, idx) => (
-                <tr key={idx}>
-                  <td className="px-1 py-4 whitespace-nowrap text-center">
-                    {item.idx}
-                  </td>
-                  <td className="flex items-center gap-x-3 py-3 px-6 whitespace-nowrap">
-                    <img
-                      src={item.imageUrl}
-                      className="w-16 h-16 rounded-full"
-                    />
-                    <div>
-                      <span className="block text-gray-700 text-sm font-medium">
-                        {item.title}
-                      </span>
-                      <span className="block text-gray-700 text-xs">
-                        {item.brand}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-center">
-                    {item.color}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-center">
-                    {item.quantity}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-center">
-                    ₹{item.price}/Box
-                  </td>
-                  <td className="text-center px-6 whitespace-nowrap space-x-2 gap-1">
-                    <Link
-                      className="py-2 px-3 font-medium text-indigo-600 border hover:border-indigo-500 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg"
-                      to={`/admin/products/update/${item.id}`}
-                    >
-                      Edit
-                    </Link>
-                    <button className="py-2 leading-none px-3 font-medium border hover:border-red-500 text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg">
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {products
+                .filter((item) => {
+                  return search.toLowerCase() === ""
+                    ? item
+                    : item.title.toLowerCase().includes(search);
+                })
+                .map((item, idx) => (
+                  <tr key={idx}>
+                    <td className="px-1 py-4 whitespace-nowrap text-center">
+                      {item.idx}
+                    </td>
+                    <td className="flex items-center gap-x-3 py-3 px-6 whitespace-nowrap">
+                      <img
+                        src={item.imageUrl}
+                        className="w-16 h-16 rounded-full"
+                      />
+                      <div>
+                        <span className="block text-gray-700 text-sm font-medium">
+                          {item.title}
+                        </span>
+                        <span className="block text-gray-700 text-xs">
+                          {item.brand}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      {item.color}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      {item.quantity}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      ₹{item.price}/Box
+                    </td>
+                    <td className="text-center px-6 whitespace-nowrap space-x-2 gap-1">
+                      <Link
+                        className="py-2 px-3 font-medium text-indigo-600 border hover:border-indigo-500 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg"
+                        to={`/admin/products/update/${item.id}`}
+                      >
+                        Edit
+                      </Link>
+                      <button className="py-2 leading-none px-3 font-medium border hover:border-red-500 text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
