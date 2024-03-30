@@ -6,7 +6,7 @@ function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="text-base lg:text-sm bg-slate-800 text-slate-300">
-      <div className="sm:flex py-6 px-4 max-w-screen-xl mx-auto">
+      <div className="sm:flex py-6 max-w-screen-xl mx-auto">
         <div className="basis-[40%]">
           <Link className="flex items-center" to="/">
             <img

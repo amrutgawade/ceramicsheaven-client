@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import brand1 from "../../../assets/frontend/img/brands/agl.png";
 import brand2 from "../../../assets/frontend/img/brands/jhonson.png";
 import brand3 from "../../../assets/frontend/img/brands/kajaria.png";
