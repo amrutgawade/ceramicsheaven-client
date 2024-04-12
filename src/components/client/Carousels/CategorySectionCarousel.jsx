@@ -128,8 +128,8 @@ function CategorySectionCarousel() {
       </h2>
       <div className="w-16 h-[5px] bg-red-500 mx-auto mb-8"></div>
       <Slider {...settings}>
-        {category.map((item) => (
-          <CategoryCard product={item} key={item.brand} />
+        {category.map((item, idx) => (
+          <CategoryCard product={item} key={idx} />
         ))}
       </Slider>
     </div>

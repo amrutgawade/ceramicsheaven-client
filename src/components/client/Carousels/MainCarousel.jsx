@@ -51,9 +51,8 @@ function MainCarousel() {
   return (
     <Slider {...settings}>
       {mainCarouselData.map((item, index) => (
-        <div className="flex w-full h-[560px] items-center">
+        <div key={index} className="flex w-full h-[560px] items-center">
           <img
-            key={index}
             className="object-cover w-full h-full"
             role="presentation"
             src={item.image}
