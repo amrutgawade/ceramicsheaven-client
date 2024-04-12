@@ -1,67 +1,98 @@
-import React, { Fragment, useState } from "react";
-import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  ChevronDownIcon,
+  FunnelIcon,
+  MinusIcon,
+  PlusIcon,
+  Squares2X2Icon,
+} from "@heroicons/react/20/solid";
+import ProductCard from "../components/client/Cards/ProductCard";
+import axios from "axios";
+import UserContext from "../context/UserContext";
+import { Link } from "react-router-dom";
 
 function Store() {
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const { token } = useContext(UserContext);
+  const [products, setProducts] = useState([]);
+  console.log(products);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const sortOptions = [
-    { name: 'Most Popular', href: '#', current: true },
-    { name: 'Best Rating', href: '#', current: false },
-    { name: 'Newest', href: '#', current: false },
-    { name: 'Price: Low to High', href: '#', current: false },
-    { name: 'Price: High to Low', href: '#', current: false },
-  ]
+    { name: "Most Popular", href: "#", current: true },
+    { name: "Best Rating", href: "#", current: false },
+    { name: "Newest", href: "#", current: false },
+    { name: "Price: Low to High", href: "#", current: false },
+    { name: "Price: High to Low", href: "#", current: false },
+  ];
   const subCategories = [
-    { name: 'Totes', href: '#' },
-    { name: 'Backpacks', href: '#' },
-    { name: 'Travel Bags', href: '#' },
-    { name: 'Hip Bags', href: '#' },
-    { name: 'Laptop Sleeves', href: '#' },
-  ]
+    { name: "Totes", href: "#" },
+    { name: "Backpacks", href: "#" },
+    { name: "Travel Bags", href: "#" },
+    { name: "Hip Bags", href: "#" },
+    { name: "Laptop Sleeves", href: "#" },
+  ];
   const filters = [
     {
-      id: 'color',
-      name: 'Color',
+      id: "color",
+      name: "Color",
       options: [
-        { value: 'white', label: 'White', checked: false },
-        { value: 'beige', label: 'Beige', checked: false },
-        { value: 'blue', label: 'Blue', checked: true },
-        { value: 'brown', label: 'Brown', checked: false },
-        { value: 'green', label: 'Green', checked: false },
-        { value: 'purple', label: 'Purple', checked: false },
+        { value: "white", label: "White", checked: false },
+        { value: "beige", label: "Beige", checked: false },
+        { value: "blue", label: "Blue", checked: true },
+        { value: "brown", label: "Brown", checked: false },
+        { value: "green", label: "Green", checked: false },
+        { value: "purple", label: "Purple", checked: false },
       ],
     },
     {
-      id: 'category',
-      name: 'Category',
+      id: "category",
+      name: "Category",
       options: [
-        { value: 'new-arrivals', label: 'New Arrivals', checked: false },
-        { value: 'sale', label: 'Sale', checked: false },
-        { value: 'travel', label: 'Travel', checked: true },
-        { value: 'organization', label: 'Organization', checked: false },
-        { value: 'accessories', label: 'Accessories', checked: false },
+        { value: "new-arrivals", label: "New Arrivals", checked: false },
+        { value: "sale", label: "Sale", checked: false },
+        { value: "travel", label: "Travel", checked: true },
+        { value: "organization", label: "Organization", checked: false },
+        { value: "accessories", label: "Accessories", checked: false },
       ],
     },
     {
-      id: 'size',
-      name: 'Size',
+      id: "size",
+      name: "Size",
       options: [
-        { value: '2l', label: '2L', checked: false },
-        { value: '6l', label: '6L', checked: false },
-        { value: '12l', label: '12L', checked: false },
-        { value: '18l', label: '18L', checked: false },
-        { value: '20l', label: '20L', checked: false },
-        { value: '40l', label: '40L', checked: true },
+        { value: "2l", label: "2L", checked: false },
+        { value: "6l", label: "6L", checked: false },
+        { value: "12l", label: "12L", checked: false },
+        { value: "18l", label: "18L", checked: false },
+        { value: "20l", label: "20L", checked: false },
+        { value: "40l", label: "40L", checked: true },
       ],
     },
-  ]
+  ];
 
-  
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
 
+  const fetchData = async () => {
+    await axios
+      .get("http://localhost:8081/api/products/all", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        const data = res.data;
+        setProducts(data);
+        // console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <div className="bg-white">
       <div>
@@ -112,7 +143,7 @@ function classNames(...classes) {
                   {/* Filters */}
                   <form className="mt-4 border-t border-gray-200">
                     <h3 className="sr-only">Categories</h3>
-                    <ul
+                    {/* <ul
                       role="list"
                       className="px-2 py-3 font-medium text-gray-900"
                     >
@@ -123,7 +154,7 @@ function classNames(...classes) {
                           </a>
                         </li>
                       ))}
-                    </ul>
+                    </ul> */}
 
                     {filters.map((section) => (
                       <Disclosure
@@ -268,7 +299,7 @@ function classNames(...classes) {
               {/* Filters */}
               <form className="hidden lg:block">
                 <h3 className="sr-only">Categories</h3>
-                <ul
+                {/* <ul
                   role="list"
                   className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900"
                 >
@@ -277,7 +308,7 @@ function classNames(...classes) {
                       <a href={category.href}>{category.name}</a>
                     </li>
                   ))}
-                </ul>
+                </ul> */}
 
                 {filters.map((section) => (
                   <Disclosure
@@ -339,7 +370,34 @@ function classNames(...classes) {
               </form>
 
               {/* Product grid */}
-              <div className="lg:col-span-3">{/* Your content */}</div>
+              <div className="lg:col-span-3 grid grid-cols-3">
+                {products.map((item) => (
+                  <Link
+                    key={item.id}
+                    to={`/store/product/${item.id}`}
+                    className="mx-auto my-4 cursor-pointer flex flex-col gap-x-8 bg-white rounded shadow-lg overflow-hidden w-56 border border-solid border-gray-300 "
+                  >
+                    <div className="w-full h-44">
+                      <img
+                        className="object-cover w-full h-full"
+                        src={item.imageUrl}
+                        alt={item.brand}
+                      />
+                    </div>
+
+                    <div className="w-full max-h-fit p-4">
+                      <h3 className="text-base mb-1 font-medium text-gray-900">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm mb-1 font-light text-gray-900">
+                        {item.brand}
+                      </p>
+                      <p className="text-sm text-green-500">₹{item.price}</p>
+                    </div>
+                  </Link>
+                ))}
+                {/* Your content */}
+              </div>
             </div>
           </section>
         </main>

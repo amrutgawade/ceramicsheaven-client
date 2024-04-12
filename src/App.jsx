@@ -25,6 +25,7 @@ import ManageProduct from "./components/admin/Products/ManageProduct";
 import AdminLogin from "./pages/AdminLogin";
 import { Toaster } from "react-hot-toast";
 import AddProduct from "./components/admin/Products/AddProduct";
+import ViewProduct from "./components/client/Store/ViewProduct";
 
 function App() {
   const { token, role } = useContext(UserContext);
@@ -42,6 +43,7 @@ function App() {
           )}
 
           <Route path="/store" element={<Store />} />
+          <Route path="/store/product/:id" element={<ViewProduct />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/Forgot-Password" element={<Reset />} />
         </Route>
