@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import AvatarMenu from "./AvatarMenu";
+import logo from "../../assets/frontend/img/logo.svg"
 import { BsCart } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import UserContext from "../../context/UserContext";
@@ -7,7 +8,6 @@ import UserContext from "../../context/UserContext";
 function Navbar() {
   const { token, user, setUser, setToken } = useContext(UserContext);
   const [state, setState] = useState(false);
-  const [login, setLogin] = useState(false);
 
   // Replace javascript:void(0) paths with your paths
   const navigation = [
@@ -26,7 +26,7 @@ function Navbar() {
         <div className="flex items-center justify-between py-3 lg:py-5 lg:block">
           <Link className="flex items-center" to="/">
             <img
-              src="src\assets\frontend\assets\img\logo.svg"
+              src={logo}
               height={50}
               width={50}
               alt="CeramicsHeaven logo"

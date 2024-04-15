@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from "../../assets/frontend/img/logo.svg"
 import { FaFacebook, FaInstagram, FaTwitter, FaWhatsapp } from "react-icons/fa";
 
 function Footer() {
@@ -10,7 +11,7 @@ function Footer() {
         <div className="basis-[40%]">
           <Link className="flex items-center" to="/">
             <img
-              src="src\assets\frontend\assets\img\logo.svg"
+              src={logo}
               height={50}
               width={50}
               alt="CeramicsHeaven logo"
