@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { HiOutlineSearch } from "react-icons/hi";
-import UserContext from "../../context/UserContext";
 import AdminAvatarMenu from "./AdminAvatarMenu";
+import { useSelector } from "react-redux";
 
 function Header() {
-  const { user, setUser, setToken } = useContext(UserContext);
+  const user = useSelector((state) => state.user);
   return (
     <div className="bg-white h-20 px-8 hidden md:flex items-center justify-between border-b border-gray-200 shadow-md sticky top-0 z-10">
       <div className="relative">
@@ -26,7 +26,7 @@ function Header() {
           </h6>
         </div>
 
-        <AdminAvatarMenu params={{ user, setUser, setToken }} />
+        <AdminAvatarMenu user={user} />
       </div>
     </div>
   );

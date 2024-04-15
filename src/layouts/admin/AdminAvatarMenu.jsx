@@ -1,13 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { setToken, setUser } from "../../features/auth/authSlice";
 
-function AdminAvatarMenu({ params }) {
+function AdminAvatarMenu({ user }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [state, setState] = useState(false);
   const profileRef = useRef();
-  const navigate = useNavigate();
 
-  const name = params.user.split(" ");
+  const name = user.split(" ");
   const Avatar = name[0].charAt(0) + name[1].charAt(0);
 
   const navigation = [
@@ -18,8 +21,8 @@ function AdminAvatarMenu({ params }) {
 
   const logoutHandler = () => {
     localStorage.clear();
-    params.setUser(null);
-    params.setToken(null);
+    dispatch(setUser(null));
+    dispatch(setToken(null));
     navigate("/admin");
     toast.success("Logout Successful");
   };

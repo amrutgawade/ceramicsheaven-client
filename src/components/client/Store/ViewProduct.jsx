@@ -1,24 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
-import UserContext from "../../../context/UserContext";
+import { TiArrowBack } from "react-icons/ti";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 function ViewProduct() {
-  const { token } = useContext(UserContext);
   const { pathname } = useLocation();
   const [product, setProduct] = useState({});
   const [sizes, setSizes] = useState([]);
   const fetchData = async () => {
     await axios
-      .get(`http://localhost:8081/api/products/${pathname.slice(15)}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(`http://localhost:8081/products/${pathname.slice(15)}`, {})
       .then((res) => {
         const data = res.data;
         setProduct(data);
-        setSizes(data.sizes)
+        setSizes(data.sizes);
         console.log(data);
       })
       .catch((err) => {
@@ -30,7 +25,16 @@ function ViewProduct() {
   }, []);
   return (
     <section className="text-gray-600 body-font overflow-hidden">
-      <div className="container px-5 py-24 mx-auto">
+      <div className="container px-5 py-8 mx-auto">
+        <div className="lg:w-4/5 mx-auto mb-4 flex items-center flex-wrap">
+          <TiArrowBack className="text-indigo-500" />
+          <button
+            onClick={() => history.back()}
+            className="block bg-indigo-50 text-indigo-500 px-4 py-1 ml-1 rounded border "
+          >
+            Back
+          </button>
+        </div>
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <img
             alt="ecommerce"
@@ -161,8 +165,10 @@ function ViewProduct() {
                 <span className="mr-3">Sizes:</span>
                 <div className="relative">
                   <select className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
-                    {sizes.map((item,idx)=>(
-                        <option key={idx} value={item}>{item.width + " x " + item.height}</option>
+                    {sizes.map((item, idx) => (
+                      <option key={idx} value={item}>
+                        {item.width + " x " + item.height}
+                      </option>
                     ))}
                   </select>
                   <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
@@ -191,9 +197,7 @@ function ViewProduct() {
               <s className="title-font font-medium text-2xl text-gray-600">
                 ₹{product.price}
               </s>
-              <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-                Add to Cart
-              </button>
+
               {/* <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                 <svg
                   fill="currentColor"
@@ -206,6 +210,14 @@ function ViewProduct() {
                   <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
                 </svg>
               </button> */}
+            </div>
+            <div className="flex items-center justify-between gap-x-8 mt-8">
+              <button className="block w-full text-white bg-zinc-800 border-0 py-2 px-6 focus:outline-none hover:bg-zinc-700 rounded">
+                Add to Cart
+              </button>
+              <button className="block w-full text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">
+                Buy Now
+              </button>
             </div>
           </div>
         </div>

@@ -1,15 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import AvatarMenu from "./AvatarMenu";
-import logo from "../../assets/frontend/img/logo.svg"
+import logo from "../../assets/frontend/img/logo.svg";
 import { BsCart } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import UserContext from "../../context/UserContext";
+import { useSelector } from "react-redux";
 
 function Navbar() {
-  const { token, user, setUser, setToken } = useContext(UserContext);
+  const token = useSelector((state) => state.token);
+  const user = useSelector((state) => state.user);
   const [state, setState] = useState(false);
 
-  // Replace javascript:void(0) paths with your paths
   const navigation = [
     { title: "Home", path: "/" },
     { title: "Store", path: "/store" },
@@ -134,7 +134,7 @@ function Navbar() {
                   </span>
                   <BsCart />
                 </Link>
-                <AvatarMenu params={{ user, setUser, setToken }} />
+                <AvatarMenu user={user} />
               </>
             ) : (
               <Link

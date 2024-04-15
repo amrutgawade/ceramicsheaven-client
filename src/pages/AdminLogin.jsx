@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
+import logo from "../assets/frontend/img/logo.svg";
 import toast from "react-hot-toast";
-import UserContext from "../context/UserContext";
+import { useDispatch } from "react-redux";
+import { setRole, setToken, setUser } from "../features/auth/authSlice";
 
 function AdminLogin() {
-  const { setUser, setToken, setRole } = useContext(UserContext);
+  const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -32,7 +34,8 @@ function AdminLogin() {
           // console.log("Email:", payload.email);
           console.log("Authorities:", payload.authorities);
           localStorage.setItem("auth", payload.authorities);
-          setRole(payload.authorities)
+          dispatch(setRole(payload.authorities));
+
           if (
             res.data.message == "SignIn Successfull" &&
             res.status == 201 &&
@@ -50,12 +53,11 @@ function AdminLogin() {
               "user",
               result.data.firstName + " " + result.data.lastName
             );
-            setUser(
-              result.data.firstName + " " + result.data.lastName ||
-                localStorage.getItem("user")
+            dispatch(
+              setUser(result.data.firstName + " " + result.data.lastName)
             );
             localStorage.setItem("token", jwt);
-            setToken(jwt || localStorage.getItem("token"));
+            dispatch(setToken(jwt));
             toast.success("Login Success");
           } else {
             toast.error("Unauthorized Access");
@@ -69,18 +71,13 @@ function AdminLogin() {
         console.log(err);
       });
 
-    console.log(response);
+    // console.log(response);
   };
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center px-4">
       <div className="max-w-sm w-full text-gray-600 space-y-5">
         <div className="text-center pb-8">
-          <img
-            src="src\assets\frontend\assets\img\logo.svg"
-            width={150}
-            className="mx-auto"
-            alt="Logo"
-          />
+          <img src={logo} width={150} className="mx-auto" alt="Logo" />
           <div className="mt-2">
             <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
               Admin Login

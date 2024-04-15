@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import MasterLayout from "./layouts/client/MasterLayout";
 import AdminLayout from "./layouts/admin/AdminLayout";
 import Error404 from "./pages/Error404";
@@ -19,16 +19,18 @@ import Transactions from "./components/admin/Transactions/Transactions";
 import Message from "./components/admin/Message";
 import Settings from "./components/admin/Settings/Settings";
 import Support from "./components/admin/Support/Support";
-import UserContext from "./context/UserContext";
 import "./App.css";
 import ManageProduct from "./components/admin/Products/ManageProduct";
 import AdminLogin from "./pages/AdminLogin";
 import { Toaster } from "react-hot-toast";
 import AddProduct from "./components/admin/Products/AddProduct";
 import ViewProduct from "./components/client/Store/ViewProduct";
+import { useSelector } from "react-redux";
 
 function App() {
-  const { token, role } = useContext(UserContext);
+  const token = useSelector((state) => state.token);
+  const role = useSelector((state) => state.role);
+
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
@@ -47,8 +49,13 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/Forgot-Password" element={<Reset />} />
         </Route>
-        <Route path="/admin" element={token && (role == "ADMIN,USER") ? <AdminLayout /> : <AdminLogin />}>
-          {token && (role == "ADMIN,USER") ? (
+        <Route
+          path="/admin"
+          element={
+            token && role == "ADMIN,USER" ? <AdminLayout /> : <AdminLogin />
+          }
+        >
+          {token && role == "ADMIN,USER" ? (
             <>
               <Route index element={<Dashboard />} />
               <Route path="/admin/profile" element={<Profile />} />

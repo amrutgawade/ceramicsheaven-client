@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PaginationButtons from "../Utility/PaginationButtons";
-import UserContext from "../../../context/UserContext";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 function Products() {
-  const { token } = useContext(UserContext);
+  const token = useSelector((state) => state.token);
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(5);
   const [loading, setLoading] = useState(true);
@@ -65,7 +65,7 @@ function Products() {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get("http://localhost:8081/api/admin/product/all", {
+        .get("http://localhost:8081/products/all", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -104,7 +104,7 @@ function Products() {
     setProducts(result);
   }, [limit, currentPage, tableItems]);
 
-  console.log(products);
+  // console.log(products);
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 md:px-0">

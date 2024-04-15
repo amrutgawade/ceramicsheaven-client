@@ -15,14 +15,15 @@ import {
   HiOutlineViewGrid,
 } from "react-icons/hi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import UserContext from "../../context/UserContext";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { setToken, setUser } from "../../features/auth/authSlice";
 
 function Sidebar() {
-  const { setUser, setToken } = useContext(UserContext);
-  const [isExpanded, setIsExpanded] = useState(true);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isExpanded, setIsExpanded] = useState(true);
   const { pathname } = useLocation();
 
   const variants = {
@@ -91,8 +92,8 @@ function Sidebar() {
 
   const logoutHandler = () => {
     localStorage.clear();
-    setUser(null);
-    setToken(null);
+    dispatch(setUser(null));
+    dispatch(setToken(null));
     navigate("/admin");
     toast.success("Logout Successful");
   };
@@ -116,7 +117,7 @@ function Sidebar() {
           (isExpanded ? " px-6" : " justify-center px-0")
         }
       >
-        <FaSquarePollVertical fontSize={35} className="text-indigo-500" />
+        <FaSquarePollVertical fontSize={35} className="text-red-500 mt-1" />
         {isExpanded && (
           <span className="text-xl font-bold">
             Ceramics <span className="text-red-500">Heaven</span>

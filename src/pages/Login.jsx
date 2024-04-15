@@ -1,12 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import UserContext from "../context/UserContext";
+import logo from "../assets/frontend/img/logo.svg";
+import { setRole, setToken, setUser } from "../features/auth/authSlice";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 
 function Login() {
-  const { setUser, setToken, setRole } = useContext(UserContext);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [email, setEmail] = useState("");
@@ -36,7 +38,8 @@ function Login() {
           // console.log("Email:", payload.email);
           console.log("Authorities:", payload.authorities);
           localStorage.setItem("auth", payload.authorities);
-          setRole(payload.authorities);
+          dispatch(setRole(payload.authorities));
+
           if (res.data.message == "SignIn Successfull" && res.status == 201) {
             const result = await axios.get(
               "http://localhost:8081/api/users/profile",
@@ -50,12 +53,11 @@ function Login() {
               "user",
               result.data.firstName + " " + result.data.lastName
             );
-            setUser(
-              result.data.firstName + " " + result.data.lastName ||
-                localStorage.getItem("user")
+            dispatch(
+              setUser(result.data.firstName + " " + result.data.lastName)
             );
             localStorage.setItem("token", jwt);
-            setToken(jwt || localStorage.getItem("token"));
+            dispatch(setToken(jwt));
             toast.success("Login Success");
             navigate("/");
           } else {
@@ -70,18 +72,14 @@ function Login() {
         console.log(err);
       });
 
-    console.log(response);
+    // console.log(response);
   };
 
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center px-4">
       <div className="max-w-sm w-full text-gray-600 space-y-5">
         <div className="text-center pb-8">
-          <img
-            src="src\assets\frontend\assets\img\logo.svg"
-            width={150}
-            className="mx-auto"
-          />
+          <img src={logo} width={150} className="mx-auto" />
           <div className="mt-5">
             <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
               Login

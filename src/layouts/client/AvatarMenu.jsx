@@ -1,23 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setToken, setUser } from "../../features/auth/authSlice";
+import toast from "react-hot-toast";
 
-function AvatarMenu({ params }) {
+function AvatarMenu({ user }) {
+  const dispatch = useDispatch();
   const [state, setState] = useState(false);
   const profileRef = useRef();
 
-  const name = params.user.split(" ");
+  const name = user.split(" ");
   const Avatar = name[0].charAt(0) + name[1].charAt(0);
 
   const navigation = [
-    { title: "My Profile", path: "javascript:void(0)" },
-    { title: "Orders", path: "javascript:void(0)" },
-    { title: "Notifications", path: "javascript:void(0)" },
+    { title: "My Profile", path: "/" },
+    { title: "Orders", path: "/" },
+    { title: "Notifications", path: "/" },
   ];
 
   const logoutHandler = () => {
     localStorage.clear();
-    params.setUser(null);
-    params.setToken(null);
-    navigate("/admin");
+    dispatch(setUser(null));
+    dispatch(setToken(null));
     toast.success("Logout Successful");
   };
 

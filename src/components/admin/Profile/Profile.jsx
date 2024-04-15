@@ -2,15 +2,18 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { axiosInstance } from "../Utility/axiosApiConfig";
-import UserContext from "../../../context/UserContext";
+import { useSelector } from "react-redux";
 
 function Profile() {
-  const { token } = useContext(UserContext);
+  const token = useSelector((state) => state.token);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
   const inputChangeHandler = (id, value) => {
     if (id === "firstName") {
@@ -23,6 +26,12 @@ function Profile() {
       setEmail(value);
     } else if (id === "mobile") {
       setMobile(value);
+    } else if (id === "oldPassword") {
+      setOldPassword(value);
+    } else if (id === "newPassword") {
+      setNewPassword(value);
+    } else if (id === "confirmNewPassword") {
+      setConfirmNewPassword(value);
     }
   };
 
@@ -34,7 +43,7 @@ function Profile() {
       gender,
       mobile: Number(mobile),
     };
-    console.log(updateUser);
+    // console.log(updateUser);
     const response = await axiosInstance
       .put("http://localhost:8081/api/users/profile/update", updateUser)
       .then((res) => {
@@ -46,6 +55,42 @@ function Profile() {
       });
   };
 
+  const updatePasswordHandler = async () => {
+    if (oldPassword == "" || newPassword == "" || confirmNewPassword == "") {
+      toast.error("Please fill all fields");
+    } else if (oldPassword == newPassword) {
+      toast.error("Current & New Password must be differet");
+    } else if (newPassword != confirmNewPassword) {
+      toast.error("Confirm Password Doesn't Match");
+    } else {
+      const updatePassword = {
+        currentPassword: oldPassword,
+        newPassword,
+      };
+      // console.log(updatePassword);
+      const response = await axiosInstance
+        .post(
+          "http://localhost:8081/api/users/profile/updatePassword",
+          updatePassword
+        )
+        .then((res) => {
+          // console.log(res.data);
+          if (res.data.message == "Current password is not valid") {
+            toast.error(res.data.message);
+          } else {
+            toast.success(res.data.message);
+            setOldPassword("");
+            setNewPassword("");
+            setConfirmNewPassword("");
+          }
+        })
+        .catch((err) => {
+          // console.log(err);
+          toast.error("Wrong Old Password");
+        });
+    }
+  };
+
   const fetchData = async () => {
     const response = await axios.get(
       "http://localhost:8081/api/users/profile",
@@ -55,7 +100,7 @@ function Profile() {
         },
       }
     );
-    console.log(response.data);
+    // console.log(response.data);
     setFirstName(response.data.firstName);
     setLastName(response.data.lastName);
     setGender(response.data.gender);
@@ -184,6 +229,10 @@ function Profile() {
                 type="password"
                 className="w-full px-5 py-3 outline-none border rounded"
                 placeholder="Enter Current Password"
+                onChange={(e) =>
+                  inputChangeHandler("oldPassword", e.target.value)
+                }
+                value={oldPassword}
               />
             </div>
             <div>
@@ -197,6 +246,10 @@ function Profile() {
                 type="password"
                 className="w-full px-5 py-3 outline-none border rounded"
                 placeholder="Enter New Password"
+                onChange={(e) =>
+                  inputChangeHandler("newPassword", e.target.value)
+                }
+                value={newPassword}
               />
             </div>
             <div>
@@ -210,9 +263,16 @@ function Profile() {
                 type="password"
                 className="w-full px-5 py-3 outline-none border rounded"
                 placeholder="Enter Re-Enter New Password"
+                onChange={(e) =>
+                  inputChangeHandler("confirmNewPassword", e.target.value)
+                }
+                value={confirmNewPassword}
               />
             </div>
-            <button className="px-5 py-3 border-none outline-none text-white rounded bg-indigo-500">
+            <button
+              className="px-5 py-3 border-none outline-none text-white rounded bg-indigo-500"
+              onClick={updatePasswordHandler}
+            >
               Change Password
             </button>
           </div>

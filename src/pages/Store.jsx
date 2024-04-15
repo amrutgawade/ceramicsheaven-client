@@ -8,13 +8,10 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
-import ProductCard from "../components/client/Cards/ProductCard";
 import axios from "axios";
-import UserContext from "../context/UserContext";
 import { Link } from "react-router-dom";
 
 function Store() {
-  const { token } = useContext(UserContext);
   const [products, setProducts] = useState([]);
   console.log(products);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -25,13 +22,13 @@ function Store() {
     { name: "Price: Low to High", href: "#", current: false },
     { name: "Price: High to Low", href: "#", current: false },
   ];
-  const subCategories = [
-    { name: "Totes", href: "#" },
-    { name: "Backpacks", href: "#" },
-    { name: "Travel Bags", href: "#" },
-    { name: "Hip Bags", href: "#" },
-    { name: "Laptop Sleeves", href: "#" },
-  ];
+  // const subCategories = [
+  //   { name: "Totes", href: "#" },
+  //   { name: "Backpacks", href: "#" },
+  //   { name: "Travel Bags", href: "#" },
+  //   { name: "Hip Bags", href: "#" },
+  //   { name: "Laptop Sleeves", href: "#" },
+  // ];
   const filters = [
     {
       id: "color",
@@ -76,11 +73,7 @@ function Store() {
 
   const fetchData = async () => {
     await axios
-      .get("http://localhost:8081/api/products/all", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get("http://localhost:8081/products/all", {})
       .then((res) => {
         const data = res.data;
         setProducts(data);
@@ -221,8 +214,8 @@ function Store() {
         </Transition.Root>
 
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-8">
+            <h1 className="text-xl lg:text-4xl font-bold tracking-tight text-gray-900">
               New Arrivals
             </h1>
 
@@ -370,14 +363,14 @@ function Store() {
               </form>
 
               {/* Product grid */}
-              <div className="lg:col-span-3 grid grid-cols-3">
+              <div className="lg:col-span-3 grid grid-cols-2 lg:grid-cols-3">
                 {products.map((item) => (
                   <Link
                     key={item.id}
                     to={`/store/product/${item.id}`}
-                    className="mx-auto my-4 cursor-pointer flex flex-col gap-x-8 bg-white rounded shadow-lg overflow-hidden w-56 border border-solid border-gray-300 "
+                    className="mx-auto my-2 cursor-pointer flex flex-col gap-x-8 bg-white rounded shadow-lg overflow-hidden w-40 lg:w-56 border border-solid border-gray-300 "
                   >
-                    <div className="w-full h-44">
+                    <div className="w-full h-32 lg:h-44">
                       <img
                         className="object-cover w-full h-full"
                         src={item.imageUrl}
@@ -385,8 +378,8 @@ function Store() {
                       />
                     </div>
 
-                    <div className="w-full max-h-fit p-4">
-                      <h3 className="text-base mb-1 font-medium text-gray-900">
+                    <div className="w-full max-h-fit px-4 py-2">
+                      <h3 className="text-base mb-0.5 font-medium text-gray-900">
                         {item.title}
                       </h3>
                       <p className="text-sm mb-1 font-light text-gray-900">
