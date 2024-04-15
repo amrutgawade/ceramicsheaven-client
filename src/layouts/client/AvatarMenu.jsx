@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setToken, setUser } from "../../features/auth/authSlice";
+import { setRole, setToken, setUser } from "../../features/auth/authSlice";
 import toast from "react-hot-toast";
 
 function AvatarMenu({ user }) {
@@ -21,6 +21,7 @@ function AvatarMenu({ user }) {
     localStorage.clear();
     dispatch(setUser(null));
     dispatch(setToken(null));
+    dispatch(setRole(null));
     toast.success("Logout Successful");
   };
 

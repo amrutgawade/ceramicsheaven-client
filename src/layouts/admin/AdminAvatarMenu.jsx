@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { setToken, setUser } from "../../features/auth/authSlice";
+import { setRole, setToken, setUser } from "../../features/auth/authSlice";
 
 function AdminAvatarMenu({ user }) {
   const dispatch = useDispatch();
@@ -23,6 +23,7 @@ function AdminAvatarMenu({ user }) {
     localStorage.clear();
     dispatch(setUser(null));
     dispatch(setToken(null));
+    dispatch(setRole(null));
     navigate("/admin");
     toast.success("Logout Successful");
   };

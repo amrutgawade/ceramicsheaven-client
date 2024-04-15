@@ -18,7 +18,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
-import { setToken, setUser } from "../../features/auth/authSlice";
+import { setRole, setToken, setUser } from "../../features/auth/authSlice";
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -94,6 +94,7 @@ function Sidebar() {
     localStorage.clear();
     dispatch(setUser(null));
     dispatch(setToken(null));
+    dispatch(setRole(null));
     navigate("/admin");
     toast.success("Logout Successful");
   };

@@ -38,13 +38,12 @@ function MainCarousel() {
 
   var settings = {
     dots: true,
-    fade: true,
     infinite: true,
-    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 10000,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
-    waitForAnimate: false,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
