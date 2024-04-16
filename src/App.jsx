@@ -26,6 +26,7 @@ import { Toaster } from "react-hot-toast";
 import AddProduct from "./components/admin/Products/AddProduct";
 import ViewProduct from "./components/client/Store/ViewProduct";
 import { useSelector } from "react-redux";
+import AddToCart from "./components/client/AddToCart/AddToCart";
 
 function App() {
   const { token, role } = useSelector((state) => state.auth);
@@ -42,6 +43,7 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
             </>
           )}
+          {token && <Route path="/cart" element={<AddToCart />} />}
 
           <Route path="/store" element={<Store />} />
           <Route path="/store/product/:id" element={<ViewProduct />} />

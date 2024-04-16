@@ -128,9 +128,9 @@ function Navbar() {
 
             {token ? (
               <>
-                <Link className="lg:block hidden relative text-2xl">
+                <Link to={"/cart"} className="lg:block hidden relative text-2xl">
                   <span className="absolute text-center text-[10px] text-white -top-3 -right-2 bg-red-700 rounded-full h-4 w-4 flex items-center justify-center">
-                    2
+                    3
                   </span>
                   <BsCart />
                 </Link>
