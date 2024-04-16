@@ -5,7 +5,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 function Products() {
-  const token = useSelector((state) => state.token);
+  const { token } = useSelector((state) => state.auth);
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(5);
   const [loading, setLoading] = useState(true);

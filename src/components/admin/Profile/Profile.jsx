@@ -5,7 +5,7 @@ import { axiosInstance } from "../Utility/axiosApiConfig";
 import { useSelector } from "react-redux";
 
 function Profile() {
-  const token = useSelector((state) => state.token);
+  const { token } = useSelector((state) => state.auth);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [gender, setGender] = useState("");

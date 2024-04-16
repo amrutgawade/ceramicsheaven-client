@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    product: []
+    productItems: []
 }
 
 const productSlice = createSlice({
@@ -12,6 +12,6 @@ const productSlice = createSlice({
     }
 })
 
-export const { setLogin, setLogout, setUser, setToken } = productSlice.actions
+export const { } = productSlice.actions
 
 export default productSlice.reducer

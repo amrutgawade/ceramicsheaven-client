@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function Navbar() {
-  const token = useSelector((state) => state.token);
-  const user = useSelector((state) => state.user);
+  const { token, user } = useSelector((state) => state.auth);
   const [state, setState] = useState(false);
 
   const navigation = [
@@ -117,6 +116,7 @@ function Navbar() {
               return (
                 <li key={idx}>
                   <Link
+                    onClick={() => setState(!state)}
                     to={item.path}
                     className="block text-gray-700 hover:text-gray-900"
                   >
@@ -139,6 +139,7 @@ function Navbar() {
             ) : (
               <Link
                 to={"/login"}
+                onClick={() => setState(!state)}
                 className="block text-center lg:w-auto w-full px-4 py-2 bg-red-600 hover:bg-red-500 rounded text-white"
               >
                 Login

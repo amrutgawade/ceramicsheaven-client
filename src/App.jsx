@@ -28,8 +28,7 @@ import ViewProduct from "./components/client/Store/ViewProduct";
 import { useSelector } from "react-redux";
 
 function App() {
-  const token = useSelector((state) => state.token);
-  const role = useSelector((state) => state.role);
+  const { token, role } = useSelector((state) => state.auth);
 
   return (
     <>

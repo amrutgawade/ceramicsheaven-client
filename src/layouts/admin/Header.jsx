@@ -4,7 +4,7 @@ import AdminAvatarMenu from "./AdminAvatarMenu";
 import { useSelector } from "react-redux";
 
 function Header() {
-  const user = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.auth);
   return (
     <div className="bg-white h-20 px-8 hidden md:flex items-center justify-between border-b border-gray-200 shadow-md sticky top-0 z-10">
       <div className="relative">
