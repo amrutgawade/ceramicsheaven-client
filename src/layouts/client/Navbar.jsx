@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AvatarMenu from "./AvatarMenu";
 import logo from "../../assets/frontend/img/logo.svg";
 import { BsCart } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { axiosInstance } from "../../components/admin/Utility/axiosApiConfig";
+import {
+  addCartItem,
+  seTotalPrice,
+  setDiscount,
+  setTotalDiscountedPrice,
+  setTotalItem,
+} from "../../features/cart/cartSlice";
 
 function Navbar() {
   const { token, user } = useSelector((state) => state.auth);
+  const { totalItem } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
   const [state, setState] = useState(false);
 
   const navigation = [
@@ -14,6 +24,27 @@ function Navbar() {
     { title: "Store", path: "/store" },
     { title: "Contact", path: "/contact" },
   ];
+
+  const fetchData = async () => {
+    await axiosInstance
+      .get("http://localhost:8081/api/cart/", {})
+      .then((res) => {
+        const data = res.data;
+        dispatch(addCartItem(data.cartItems));
+        dispatch(setTotalItem(data.totalItem));
+        dispatch(seTotalPrice(data.totalPrice));
+        dispatch(setTotalDiscountedPrice(data.totalDiscountedPrice));
+        dispatch(setDiscount(data.discount));
+        // console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [totalItem]);
 
   return (
     <header className="bg-white text-base lg:text-sm shadow-md sticky top-0 z-50">
@@ -38,9 +69,9 @@ function Navbar() {
 
           <div className="lg:hidden flex gap-8">
             {token && (
-              <Link className="lg:hidden relative text-2xl">
+              <Link to={"/cart"} className="lg:hidden relative text-2xl">
                 <span className="absolute text-center text-[10px] text-white -top-3 -right-2 bg-red-700 rounded-full h-4 w-4 flex items-center justify-center">
-                  2
+                  {totalItem}
                 </span>
                 <BsCart />
               </Link>
@@ -128,9 +159,12 @@ function Navbar() {
 
             {token ? (
               <>
-                <Link to={"/cart"} className="lg:block hidden relative text-2xl">
+                <Link
+                  to={"/cart"}
+                  className="lg:block hidden relative text-2xl"
+                >
                   <span className="absolute text-center text-[10px] text-white -top-3 -right-2 bg-red-700 rounded-full h-4 w-4 flex items-center justify-center">
-                    3
+                    {totalItem}
                   </span>
                   <BsCart />
                 </Link>

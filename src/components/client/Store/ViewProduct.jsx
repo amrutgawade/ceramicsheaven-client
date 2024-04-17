@@ -2,11 +2,66 @@ import React, { useContext, useEffect, useState } from "react";
 import { TiArrowBack } from "react-icons/ti";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import { axiosInstance } from "../../admin/Utility/axiosApiConfig";
+import { useDispatch } from "react-redux";
+import {
+  addCartItem,
+  seTotalPrice,
+  setDiscount,
+  setTotalDiscountedPrice,
+  setTotalItem,
+} from "../../../features/cart/cartSlice";
+import toast from "react-hot-toast";
 
 function ViewProduct() {
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
   const [product, setProduct] = useState({});
   const [sizes, setSizes] = useState([]);
+  const [size, setSize] = useState("");
+  const [quantity, SetQuantity] = useState(1);
+
+  const increment = () => {
+    SetQuantity(Number(quantity) + 1);
+  };
+  const decrement = () => {
+    SetQuantity(Number(quantity) - 1);
+  };
+
+  const addToCartHandler = async (productId) => {
+    const cartItem = {
+      productId,
+      quantity: Number(quantity),
+      size,
+    };
+    await axiosInstance
+      .put("http://localhost:8081/api/cart/add", cartItem)
+      .then((res) => {
+        const data = res.data;
+        toast.success(data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // console.log(data.cartItems);
+    // const fetchData = async () => {
+    await axiosInstance
+      .get("http://localhost:8081/api/cart/", {})
+      .then((res) => {
+        const fetchData = res.data;
+        dispatch(addCartItem(fetchData.cartItems));
+        dispatch(setTotalItem(fetchData.totalItem));
+        dispatch(seTotalPrice(fetchData.totalPrice));
+        dispatch(setTotalDiscountedPrice(fetchData.totalDiscountedPrice));
+        dispatch(setDiscount(fetchData.discount));
+        console.log(fetchData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // };
+  };
+
   const fetchData = async () => {
     await axios
       .get(`http://localhost:8081/products/${pathname.slice(15)}`, {})
@@ -113,44 +168,6 @@ function ViewProduct() {
                 </svg>
                 <span className="text-gray-600 ml-3">4 Reviews</span>
               </span>
-              {/* <span className="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2s">
-                <a className="text-gray-500">
-                  <svg
-                    fill="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-5 h-5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-                  </svg>
-                </a>
-                <a className="text-gray-500">
-                  <svg
-                    fill="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-5 h-5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-                  </svg>
-                </a>
-                <a className="text-gray-500">
-                  <svg
-                    fill="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-5 h-5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                  </svg>
-                </a>
-              </span> */}
             </div>
             <p className="leading-relaxed">{product.discription}</p>
             <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
@@ -164,10 +181,17 @@ function ViewProduct() {
               <div className="flex ml-6 items-center">
                 <span className="mr-3">Sizes:</span>
                 <div className="relative">
-                  <select className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
+                  <select
+                    onChange={(e) => {
+                      setSize(e.target.value);
+                    }}
+                    defaultValue={size}
+                    className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10"
+                  >
+                    <option value="">Select Size</option>
                     {sizes.map((item, idx) => (
-                      <option key={idx} value={item}>
-                        {item.width + " x " + item.height}
+                      <option key={idx} value={item.width + "X" + item.height}>
+                        {item.width + " X " + item.height}
                       </option>
                     ))}
                   </select>
@@ -185,6 +209,30 @@ function ViewProduct() {
                     </svg>
                   </span>
                 </div>
+              </div>
+            </div>
+            <div className="flex mb-6">
+              <div className="flex items-center gap-x-2 text-white">
+                <p className="text-black">Quantity</p>
+                <button
+                  onClick={decrement}
+                  className="block py-2 px-4 rounded bg-zinc-800 border"
+                >
+                  -
+                </button>
+                <input
+                  className="text-center text-black w-16 py-2 border outline-none"
+                  type="number"
+                  defaultValue={1}
+                  onChange={(e) => SetQuantity(e.target.value)}
+                  value={quantity}
+                />
+                <button
+                  onClick={increment}
+                  className="block py-2 px-4 rounded bg-zinc-800 border"
+                >
+                  +
+                </button>
               </div>
             </div>
             <div className="flex">
@@ -212,7 +260,10 @@ function ViewProduct() {
               </button> */}
             </div>
             <div className="flex items-center justify-between gap-x-8 mt-8">
-              <button className="block w-full text-white bg-zinc-800 border-0 py-2 px-6 focus:outline-none hover:bg-zinc-700 rounded">
+              <button
+                onClick={() => addToCartHandler(product.id)}
+                className="block w-full text-white bg-zinc-800 border-0 py-2 px-6 focus:outline-none hover:bg-zinc-700 rounded"
+              >
                 Add to Cart
               </button>
               <button className="block w-full text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">
