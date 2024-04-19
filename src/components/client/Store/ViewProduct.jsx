@@ -185,6 +185,9 @@ function ViewProduct() {
                     onChange={(e) => {
                       setSize(e.target.value);
                     }}
+                    // onContextMenuCapture={(e) => {
+                    //   setSize(e.target.value);
+                    // }}
                     defaultValue={size}
                     className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10"
                   >
@@ -261,6 +264,7 @@ function ViewProduct() {
             </div>
             <div className="flex items-center justify-between gap-x-8 mt-8">
               <button
+                type="submit"
                 onClick={() => addToCartHandler(product.id)}
                 className="block w-full text-white bg-zinc-800 border-0 py-2 px-6 focus:outline-none hover:bg-zinc-700 rounded"
               >

@@ -27,6 +27,10 @@ import AddProduct from "./components/admin/Products/AddProduct";
 import ViewProduct from "./components/client/Store/ViewProduct";
 import { useSelector } from "react-redux";
 import AddToCart from "./components/client/AddToCart/AddToCart";
+import Checkout from "./components/client/Checkout/Checkout";
+import OrderSummary from "./components/client/Order/OrderSummary";
+import AllOrders from "./components/client/Order/AllOrders";
+import Notifications from "./components/client/Notifications/Notifications";
 
 function App() {
   const { token, role } = useSelector((state) => state.auth);
@@ -44,9 +48,13 @@ function App() {
             </>
           )}
           {token && <Route path="/cart" element={<AddToCart />} />}
+          {token && <Route path="/checkout" element={<Checkout />} />}
 
           <Route path="/store" element={<Store />} />
           <Route path="/store/product/:id" element={<ViewProduct />} />
+          <Route path="/orders" element={<AllOrders />} />
+          <Route path="/orders/:id" element={<OrderSummary />} />
+          <Route path="/notifications" element={<Notifications />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/Forgot-Password" element={<Reset />} />
         </Route>

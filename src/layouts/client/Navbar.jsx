@@ -35,7 +35,6 @@ function Navbar() {
         dispatch(seTotalPrice(data.totalPrice));
         dispatch(setTotalDiscountedPrice(data.totalDiscountedPrice));
         dispatch(setDiscount(data.discount));
-        // console.log(data);
       })
       .catch((err) => {
         console.log(err);

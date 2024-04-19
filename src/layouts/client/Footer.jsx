@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/frontend/img/logo.svg"
+import logo from "../../assets/frontend/img/logo.svg";
 import { FaFacebook, FaInstagram, FaTwitter, FaWhatsapp } from "react-icons/fa";
 
 function Footer() {
@@ -21,9 +21,12 @@ function Footer() {
               Ceramics <span className="text-red-500">Heaven</span>
             </span>
           </Link>
-          <p className="mt-2 mb-8 px-2 lg:pr-24 text-justify">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore
-            possimus non quis alias vel sapiente nisi nemo ipsa impedit dolorem.
+          <p className="mt-2 mb-8 px-2 leading-relaxed tracking- lg:pr-24 text-justify">
+            Welcome to CeramicsHeaven, your ultimate destination for all things
+            ceramics.With a wide selection of high-quality ceramics to choose
+            from, you'll find the perfect tiles to suit your style and budget.
+            Explore our collection today and turn your design dreams into
+            reality with CeramicsHeaven.
           </p>
         </div>
         <div className="sm:grid grid-cols-3 gap-5 sm:ml-8 ml-2 basis-[60%]">
@@ -77,11 +80,11 @@ function Footer() {
                   Docs
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="#" className="hover:text-slate-400">
                   Pricing
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="text-slate-300">
@@ -117,26 +120,42 @@ function Footer() {
         <div className="lg:flex items-center justify-between">
           <p className="my-6 text-center lg:text-start">
             &copy; 2022-{year}{" "}
+            <span className="text-red-500 hover:text-red-600 font-semibold cursor-pointer">
+              CeramicsHeavan.
+            </span>{" "}
+            All rights reserved. Designed & Developed by
             <a
-              className="text-red-500 hover:text-red-600 font-semibold cursor-pointer"
+              className="text-indigo-500 hover:text-indigo-600 font-semibold cursor-pointer"
               target="_blank"
               href="https://freakdevs.in"
             >
-              FreakDevs.{" "}
+              {" "}
+              FreakDevs
             </a>
-            All rights reserved.
           </p>
           <div className="flex items-center justify-center gap-5 text-xl lg:mb-0 mb-4">
-            <a href="#" className="hover:bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-1 rounded-md">
+            <a
+              href="#"
+              className="hover:bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-1 rounded-md"
+            >
               <FaInstagram />
             </a>
-            <a href="#" className="hover:text-[#316FF6] hover:bg-white p-1 rounded-md">
+            <a
+              href="#"
+              className="hover:text-[#316FF6] hover:bg-white p-1 rounded-md"
+            >
               <FaFacebook />
             </a>
-            <a href="#" className="hover:text-[#25D366] hover:bg-white p-1 rounded-md">
+            <a
+              href="#"
+              className="hover:text-[#25D366] hover:bg-white p-1 rounded-md"
+            >
               <FaWhatsapp />
             </a>
-            <a href="#" className="hover:text-[#1DA1F2] hover:bg-white p-1 rounded-md">
+            <a
+              href="#"
+              className="hover:text-[#1DA1F2] hover:bg-white p-1 rounded-md"
+            >
               <FaTwitter />
             </a>
           </div>

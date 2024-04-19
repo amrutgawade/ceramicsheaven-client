@@ -13,8 +13,8 @@ function AvatarMenu({ user }) {
 
   const navigation = [
     { title: "My Profile", path: "/" },
-    { title: "Orders", path: "/" },
-    { title: "Notifications", path: "/" },
+    { title: "Orders", path: "/orders" },
+    { title: "Notifications", path: "/notifications" },
   ];
 
   const logoutHandler = () => {
