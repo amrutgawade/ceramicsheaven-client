@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 function OrderPlaced() {
   const { orderPlaced } = useSelector((state) => state.order);
   return (
-    <div className="grid grid-col-2 grid-flow-col gap-x-24">
-      <div className="h-full w-[35rem] object-cover bg-repeat">
+    <div className="grid grid-col-2 lg:grid-flow-col gap-x-24">
+      <div className="h-full md:w-[35rem] object-cover bg-repeat">
         <img
           className="w-full h-full rounded object-cover bg-repeat"
           src={summaryImage}
@@ -19,7 +19,7 @@ function OrderPlaced() {
           <p className="text-sm font-medium text-indigo-500">
             Payment successful
           </p>
-          <h2 className="text-5xl font-bold my-2">Thanks for ordering</h2>
+          <h2 className="text-3xl md:text-5xl font-bold my-2">Thanks for ordering</h2>
           <p>
             We appreciate your order, we’re currently processing it. So hang
             tight and we’ll send you confirmation very soon!
@@ -77,7 +77,7 @@ function OrderPlaced() {
             <span>₹{orderPlaced.totalDiscountedPrice + 50}</span>
           </div>
         </div>
-        <div className="grid grid-col-2 grid-flow-col border-b py-4">
+        <div className="grid grid-col-2 md:grid-flow-col gap-y-4 border-b py-4">
           <div>
             <h5 className="text-base font-medium mb-1">Shipping Address</h5>
             <p className="text-sm">

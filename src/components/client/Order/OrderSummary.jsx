@@ -21,15 +21,15 @@ function OrderSummary() {
         const data = res.data;
         dispatch(setOrderSummary(data));
         sessionStorage.setItem("orderSummary", JSON.stringify(data));
-        // if (data.orderStatus == "PLACED") {
-        //   setStep(0);
-        // } else if (data.orderStatus == "CONFIRMED") {
-        //   setStep(1);
-        // } else if (data.orderStatus == "SHIPPED") {
-        //   setStep(2);
-        // } else if (data.orderStatus == "DELIVERED") {
-        //   setStep(3);
-        // }
+        if (data.orderStatus == "PLACED") {
+          setStep(1);
+        } else if (data.orderStatus == "CONFIRMED") {
+          setStep(2);
+        } else if (data.orderStatus == "SHIPPED") {
+          setStep(3);
+        } else if (data.orderStatus == "DELIVERED") {
+          setStep(4);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -40,32 +40,54 @@ function OrderSummary() {
     fetchData();
   }, []);
   return (
-    <div className="px-28 my-12">
+    <div className="p-4 md:px-28 md:my-12">
       <Box sx={{ width: "100%" }}>
-        
         <div className="flex flex-col">
           <div className="py-4 border-b">
             <p className="text-sm font-medium text-indigo-500 uppercase">
               Order {orderSummary?.orderStatus} successfully
             </p>
-            <h2 className="text-5xl font-bold my-2">Track Your Order</h2>
+            <h2 className="text-3xl md:text-5xl font-bold my-2">
+              Track Your Order
+            </h2>
             <p>
               We appreciate your order, we’re currently processing it. So hang
               tight and we’ll send you confirmation very soon!
             </p>
-            <Stepper className="my-8" activeStep={step}>
-          {steps.map((label, index) => {
-            const stepProps = {};
-            const labelProps = {};
-            return (
-              <Step key={label} {...stepProps}>
-                <StepLabel {...labelProps}>{label}</StepLabel>
-              </Step>
-            );
-          })}
-        </Stepper>
             <p className="font-medium mt-8 ">Tracking number</p>
-            <p className="font-medium text-indigo-500">{orderSummary?.id}</p>
+            <p className="font-medium text-sm text-indigo-500">
+              {orderSummary?.id}
+            </p>
+            <div className="hidden md:block">
+              <Stepper className="my-8 flex-wrap" activeStep={step}>
+                {steps.map((label, index) => {
+                  const stepProps = {};
+                  const labelProps = {};
+                  return (
+                    <Step key={label} {...stepProps}>
+                      <StepLabel {...labelProps}>{label}</StepLabel>
+                    </Step>
+                  );
+                })}
+              </Stepper>
+            </div>
+            <div className="block md:hidden">
+              <Stepper
+                className="my-2 flex-wrap"
+                orientation="vertical"
+                activeStep={step}
+              >
+                {steps.map((label, index) => {
+                  const stepProps = {};
+                  const labelProps = {};
+                  return (
+                    <Step key={label} {...stepProps}>
+                      <StepLabel {...labelProps}>{label}</StepLabel>
+                    </Step>
+                  );
+                })}
+              </Stepper>
+            </div>
           </div>
           {orderSummary?.orderItems.map((item, idx) => (
             <div
@@ -120,7 +142,7 @@ function OrderSummary() {
               <span>₹{orderSummary?.totalDiscountedPrice + 50}</span>
             </div>
           </div>
-          <div className="grid grid-col-2 grid-flow-col border-b py-4">
+          <div className="grid grid-col-1 md:grid-col-2 md:grid-flow-col border-b gap-y-4 py-4">
             <div>
               <h5 className="text-base font-medium mb-1">Shipping Address</h5>
               <p className="text-sm">

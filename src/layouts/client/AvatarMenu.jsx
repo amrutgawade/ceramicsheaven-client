@@ -4,7 +4,7 @@ import { setRole, setToken, setUser } from "../../features/auth/authSlice";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
-function AvatarMenu({ user }) {
+function AvatarMenu({ user, setStates }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [state, setState] = useState(false);
@@ -14,7 +14,7 @@ function AvatarMenu({ user }) {
   const Avatar = name[0].charAt(0) + name[1].charAt(0);
 
   const navigation = [
-    { title: "My Profile", path: "/" },
+    { title: "My Profile", path: "/profile" },
     { title: "Orders", path: "/orders" },
     { title: "Notifications", path: "/notifications" },
   ];
@@ -58,6 +58,7 @@ function AvatarMenu({ user }) {
         {navigation.map((item, idx) => (
           <li key={idx}>
             <Link
+              onClick={() => setStates(false)}
               className="block text-gray-600 hover:text-gray-900 lg:hover:bg-gray-50 lg:p-3"
               to={item.path}
             >

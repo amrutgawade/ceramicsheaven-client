@@ -31,6 +31,7 @@ import Checkout from "./components/client/Checkout/Checkout";
 import OrderSummary from "./components/client/Order/OrderSummary";
 import AllOrders from "./components/client/Order/AllOrders";
 import Notifications from "./components/client/Notifications/Notifications";
+import UserProfile from "./components/client/UserProfile/UserProfile";
 
 function App() {
   const { token, role } = useSelector((state) => state.auth);
@@ -52,6 +53,7 @@ function App() {
           )}
           {token && <Route path="/cart" element={<AddToCart />} />}
           {token && <Route path="/checkout" element={<Checkout />} />}
+          {token && <Route path="/profile" element={<UserProfile />} />}
 
           <Route path="/store" element={<Store />} />
           <Route path="/store/product/:id" element={<ViewProduct />} />

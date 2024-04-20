@@ -26,7 +26,7 @@ export default function Checkout() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
   return (
-    <div className="px-10 lg:px-28 mt-12 mb-8">
+    <div className="px-4 lg:px-28 mt-12 mb-8">
       <Box sx={{ width: "100%" }}>
         <Stepper activeStep={Number(step)}>
           {steps.map((label, index) => {

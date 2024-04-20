@@ -167,7 +167,7 @@ function Navbar() {
                   </span>
                   <BsCart />
                 </Link>
-                <AvatarMenu user={user} />
+                <AvatarMenu user={user} setStates={setState} />
               </>
             ) : (
               <Link
