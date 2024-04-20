@@ -35,6 +35,7 @@ const AddressCard = () => {
       zipCode,
       mobile,
     };
+    sessionStorage.setItem("shippingAddress", JSON.stringify(shippingAddress));
     dispatch(addshippingAddress(shippingAddress));
     navigate("/checkout?step=2");
   };

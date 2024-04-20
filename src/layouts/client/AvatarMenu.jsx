@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setRole, setToken, setUser } from "../../features/auth/authSlice";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function AvatarMenu({ user }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [state, setState] = useState(false);
   const profileRef = useRef();
@@ -19,9 +21,11 @@ function AvatarMenu({ user }) {
 
   const logoutHandler = () => {
     localStorage.clear();
+    sessionStorage.clear();
     dispatch(setUser(null));
     dispatch(setToken(null));
     dispatch(setRole(null));
+    navigate("/");
     toast.success("Logout Successful");
   };
 

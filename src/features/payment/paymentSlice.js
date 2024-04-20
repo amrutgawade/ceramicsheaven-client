@@ -1,16 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    shippingAddress: {
-        id: null,
-        firstName: "",
-        lastName: "",
-        streetAddress: "",
-        city: "",
-        state: "",
-        zipCode: "",
-        mobile: "",
-    },
+    shippingAddress: JSON.parse(sessionStorage.getItem("orderSummary")),
     paymentMethod: ""
 }
 
@@ -19,14 +10,7 @@ const paymentSlice = createSlice({
     initialState,
     reducers: {
         addshippingAddress: (state, action) => {
-            state.shippingAddress.id = action.payload.id
-            state.shippingAddress.firstName = action.payload.firstName
-            state.shippingAddress.lastName = action.payload.lastName
-            state.shippingAddress.streetAddress = action.payload.streetAddress
-            state.shippingAddress.city = action.payload.city
-            state.shippingAddress.state = action.payload.state
-            state.shippingAddress.zipCode = action.payload.zipCode
-            state.shippingAddress.mobile = action.payload.mobile
+            state.shippingAddress = { ...action.payload }
         },
         setPaymentMethod: (state, action) => {
             state.paymentMethod = action.payload

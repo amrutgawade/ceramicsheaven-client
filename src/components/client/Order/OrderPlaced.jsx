@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function OrderPlaced() {
   const { orderSummary } = useSelector((state) => state.order);
-  console.log(orderSummary);
+  // console.log(orderSummary);
   return (
     <div className="grid grid-col-2 grid-flow-col gap-x-24">
       <div className="h-full w-[35rem] object-cover bg-repeat">

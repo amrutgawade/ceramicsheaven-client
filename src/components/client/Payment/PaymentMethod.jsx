@@ -22,7 +22,7 @@ const plans = [
 ];
 function PaymentMethod() {
   const { shippingAddress } = useSelector((state) => state.payment);
-  console.log(shippingAddress);
+  // console.log(shippingAddress);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selected, setSelected] = useState(plans[0]);

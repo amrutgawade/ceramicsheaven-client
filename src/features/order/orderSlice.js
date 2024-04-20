@@ -11,10 +11,13 @@ const orderSlice = createSlice({
     reducers: {
         setOrderSummary: (state, action) => {
             state.orderSummary = { ...action.payload }
+        },
+        setOrderItems: (state, action) => {
+            state.orderItems = [...action.payload]
         }
     }
 })
 
-export const { setOrderSummary } = orderSlice.actions
+export const { setOrderSummary, setOrderItems } = orderSlice.actions
 
 export default orderSlice.reducer
