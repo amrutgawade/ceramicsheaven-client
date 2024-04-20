@@ -29,11 +29,8 @@ function OrderPlaced() {
           <p className="font-medium text-indigo-500">{orderSummary.orderId}</p>
         </div>
         {/* Map */}
-        {orderSummary.orderItems.map((item) => (
-          <div
-            key={item.orderId}
-            className="flex justify-between border-b py-2 lg:py-4"
-          >
+        {orderSummary.orderItems.map((item, idx) => (
+          <div key={idx} className="flex justify-between border-b py-2 lg:py-4">
             <div className="flex flex-row gap-x-8">
               <img
                 className="h-32 w-24 lg:h-32 lg:w-24 rounded object-cover"
@@ -84,9 +81,13 @@ function OrderPlaced() {
         <div className="grid grid-col-2 grid-flow-col border-b py-4">
           <div>
             <h5 className="text-base font-medium mb-1">Shipping Address</h5>
-            <p className="text-sm">Amrut Gawade</p>
-            <p className="text-sm">21, Padlos, Bamanwadi</p>
-            <p className="text-sm">Sawantwadi, Maharashtra - 416514</p>
+            <p className="text-sm">
+              {orderSummary.shippingAddress.firstName +
+                " " +
+                orderSummary.shippingAddress.lastName}
+            </p>
+            <p className="text-sm">{orderSummary.shippingAddress.streetAddress}</p>
+            <p className="text-sm">{orderSummary.shippingAddress.city}, {orderSummary.shippingAddress.state} - {orderSummary.shippingAddress.zipCode}</p>
           </div>
           <div>
             <h5 className="text-base font-medium mb-1">Payment Information</h5>

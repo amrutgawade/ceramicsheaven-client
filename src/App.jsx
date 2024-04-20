@@ -34,6 +34,9 @@ import Notifications from "./components/client/Notifications/Notifications";
 
 function App() {
   const { token, role } = useSelector((state) => state.auth);
+  // const { cartItems } = useSelector((state) => state.cart);
+  // console.log(cartItems.length);
+  // const Navigate = useNavigate();
 
   return (
     <>

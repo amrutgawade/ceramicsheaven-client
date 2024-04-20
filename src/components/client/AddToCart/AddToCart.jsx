@@ -243,7 +243,7 @@ function AddToCart() {
               <span>₹{totalDiscountedPrice + 50}</span>
             </div>
             <Link
-              to={"/checkout?step=1"}
+              to={`${cartItems.length != 0 ? "/checkout?step=1" : "/cart"} `}
               className="mt-8 text-center block bg-indigo-600 hover:bg-indigo-700 text-white rounded py-3"
             >
               Checkout

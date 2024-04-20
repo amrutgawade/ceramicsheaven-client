@@ -3,8 +3,9 @@ import { RadioGroup } from "@headlessui/react";
 import { axiosInstance } from "../../admin/Utility/axiosApiConfig";
 import toast from "react-hot-toast";
 import { setOrderSummary } from "../../../features/order/orderSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { emptyCart } from "../../../features/cart/cartSlice";
 const plans = [
   {
     name: "Cash on Delivery",
@@ -20,18 +21,24 @@ const plans = [
   },
 ];
 function PaymentMethod() {
+  const { shippingAddress } = useSelector((state) => state.payment);
+  console.log(shippingAddress);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selected, setSelected] = useState(plans[0]);
 
   const paymentHandler = async (paymentMethod) => {
-    console.log(paymentMethod);
+    // console.log(paymentMethod);
     await axiosInstance
-      .post(`http://localhost:8081/api/payment/${paymentMethod}`, {})
+      .post(
+        `http://localhost:8081/api/payment/${paymentMethod}`,
+        shippingAddress
+      )
       .then((res) => {
         console.log(res.data);
         sessionStorage.setItem("orderSummary", JSON.stringify(res.data));
         dispatch(setOrderSummary(res.data));
+        dispatch(emptyCart());
         toast.success("Order Placed");
         navigate("/checkout?step=3");
       })

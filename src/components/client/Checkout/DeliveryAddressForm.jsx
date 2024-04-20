@@ -10,9 +10,6 @@ import { addAddress } from "../../../features/auth/authSlice";
 
 const DeliveryAddressForm = () => {
   const dispatch = useDispatch();
-  // const { address } = useSelector((state) => state.auth);
-  // console.log(address);
-  //   const [address, setAddress] = useState({});
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
@@ -36,7 +33,6 @@ const DeliveryAddressForm = () => {
       .catch((err) => {
         console.log(err);
       });
-    // console.log("address", address);
   };
 
   const fetchData = async () => {
