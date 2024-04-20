@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setRole, setToken, setUser } from "../../features/auth/authSlice";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function AvatarMenu({ user }) {
   const navigate = useNavigate();
@@ -57,12 +57,12 @@ function AvatarMenu({ user }) {
       >
         {navigation.map((item, idx) => (
           <li key={idx}>
-            <a
+            <Link
               className="block text-gray-600 hover:text-gray-900 lg:hover:bg-gray-50 lg:p-3"
-              href={item.path}
+              to={item.path}
             >
               {item.title}
-            </a>
+            </Link>
           </li>
         ))}
         <button

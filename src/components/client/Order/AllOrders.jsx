@@ -3,6 +3,7 @@ import { axiosInstance } from "../../admin/Utility/axiosApiConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { setOrderItems } from "../../../features/order/orderSlice";
 import { Link } from "react-router-dom";
+import { Avatar, AvatarGroup } from "@mui/material";
 
 function AllOrders() {
   const { orderItems } = useSelector((state) => state.order);
@@ -27,17 +28,16 @@ function AllOrders() {
       <h2 className="text-2xl md:text-4xl font-bold mb-8">All Orders</h2>
       <div className="flex flex-col gap-y-4">
         {orderItems.map((item, idx) => (
-          <div className="flex items-center justify-between border px-8 py-4 bg-slate-200 space-x-10 rounded w-full">
-            <div className="w-1/6">
-              <div className="flex -space-x-2">
-                {item.orderItems.map((item, id) => (
-                  <img
-                    className="inline-block h-10 w-10 rounded-full ring-2 ring-indigo-300"
-                    src={item.product.imageUrl}
-                    alt=""
-                  />
-                ))}
-              </div>
+          <div
+            key={idx}
+            className="flex items-center justify-between border px-8 py-4 bg-slate-200 space-x-10 rounded w-full"
+          >
+            <div className="w-1/6 flex">
+                <AvatarGroup max={3} total={Number(item.totalItem)}>
+                  {item.orderItems.map((itemImg, id) => (
+                    <Avatar key={id} alt="" src={itemImg.product.imageUrl} />
+                  ))}
+                </AvatarGroup>
             </div>
             <div>
               <h2 className="font-semibold">Order Id</h2>
@@ -45,7 +45,7 @@ function AllOrders() {
             </div>
             <div>
               <h2 className="font-semibold">Date Placed</h2>
-              <p className="">{item.orderDate}</p>
+              <p className="">{item.orderDate.substring(0, 10)}</p>
             </div>
             <div>
               <h2 className="font-semibold">Total Amount</h2>

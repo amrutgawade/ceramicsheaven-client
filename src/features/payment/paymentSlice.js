@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    shippingAddress: JSON.parse(sessionStorage.getItem("orderSummary")),
-    paymentMethod: ""
+    shippingAddress: JSON.parse(sessionStorage.getItem("shippingAddress")),
 }
 
 const paymentSlice = createSlice({
     name: "payment",
     initialState,
     reducers: {
-        addshippingAddress: (state, action) => {
-            state.shippingAddress = { ...action.payload }
+        addshippingAddress: (state1, action) => {
+            const { firstName, lastName, streetAddress, city, state, zipCode, mobile } = action.payload
+            state1.shippingAddress = { firstName, lastName, streetAddress, city, state, zipCode, mobile }
         },
         setPaymentMethod: (state, action) => {
             state.paymentMethod = action.payload

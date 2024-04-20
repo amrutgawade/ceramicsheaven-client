@@ -16,7 +16,6 @@ const AddressCard = () => {
   const setShippingAddressHandler = (idx) => {
     const data = address.filter((item) => item.id == idx);
     const {
-      id,
       firstName,
       lastName,
       streetAddress,
@@ -26,7 +25,6 @@ const AddressCard = () => {
       mobile,
     } = data[0];
     const shippingAddress = {
-      id,
       firstName,
       lastName,
       streetAddress,

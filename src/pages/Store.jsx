@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 function Store() {
   const [products, setProducts] = useState([]);
-  console.log(products);
+  // console.log(products);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const sortOptions = [
     { name: "Most Popular", href: "#", current: true },
