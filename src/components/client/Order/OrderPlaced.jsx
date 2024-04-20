@@ -4,8 +4,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function OrderPlaced() {
-  const { orderSummary } = useSelector((state) => state.order);
-  // console.log(orderSummary);
+  const { orderPlaced } = useSelector((state) => state.order);
   return (
     <div className="grid grid-col-2 grid-flow-col gap-x-24">
       <div className="h-full w-[35rem] object-cover bg-repeat">
@@ -26,10 +25,10 @@ function OrderPlaced() {
             tight and we’ll send you confirmation very soon!
           </p>
           <p className="font-medium mt-8 ">Tracking number</p>
-          <p className="font-medium text-indigo-500">{orderSummary.orderId}</p>
+          <p className="font-medium text-indigo-500">{orderPlaced.orderId}</p>
         </div>
         {/* Map */}
-        {orderSummary.orderItems.map((item, idx) => (
+        {orderPlaced.orderItems.map((item, idx) => (
           <div key={idx} className="flex justify-between border-b py-2 lg:py-4">
             <div className="flex flex-row gap-x-8">
               <img
@@ -55,18 +54,18 @@ function OrderPlaced() {
         <div className="flex flex-col text-sm md:text-base">
           <div className="pb-2 pt-4 flex justify-between">
             <p>Total price</p>
-            <span className="font-semibold">₹{orderSummary.totalPrice}</span>
+            <span className="font-semibold">₹{orderPlaced.totalPrice}</span>
           </div>
           <div className="py-2 flex justify-between">
             <p>Discounted price</p>
             <span className="font-semibold">
-              ₹{orderSummary.totalDiscountedPrice}
+              ₹{orderPlaced.totalDiscountedPrice}
             </span>
           </div>
           <div className="py-2 flex justify-between">
             <p>Money saved</p>
             <span className="font-semibold text-green-500">
-              ₹{orderSummary.discount}
+              ₹{orderPlaced.discount}
             </span>
           </div>
           <div className="pb-4 pt-2 border-b flex justify-between">
@@ -75,25 +74,25 @@ function OrderPlaced() {
           </div>
           <div className="py-4 flex justify-between font-semibold">
             <p>Order total</p>
-            <span>₹{orderSummary.totalDiscountedPrice + 50}</span>
+            <span>₹{orderPlaced.totalDiscountedPrice + 50}</span>
           </div>
         </div>
         <div className="grid grid-col-2 grid-flow-col border-b py-4">
           <div>
             <h5 className="text-base font-medium mb-1">Shipping Address</h5>
             <p className="text-sm">
-              {orderSummary.shippingAddress.firstName +
+              {orderPlaced.shippingAddress.firstName +
                 " " +
-                orderSummary.shippingAddress.lastName}
+                orderPlaced.shippingAddress.lastName}
             </p>
-            <p className="text-sm">{orderSummary.shippingAddress.streetAddress}</p>
-            <p className="text-sm">{orderSummary.shippingAddress.city}, {orderSummary.shippingAddress.state} - {orderSummary.shippingAddress.zipCode}</p>
+            <p className="text-sm">{orderPlaced.shippingAddress.streetAddress}</p>
+            <p className="text-sm">{orderPlaced.shippingAddress.city}, {orderPlaced.shippingAddress.state} - {orderPlaced.shippingAddress.zipCode}</p>
           </div>
           <div>
             <h5 className="text-base font-medium mb-1">Payment Information</h5>
-            <p className="text-sm">Method: {orderSummary.paymentMethod}</p>
-            <p className="text-sm">Status: {orderSummary.paymentStatus}</p>
-            <p className="text-sm">Date: {orderSummary.orderDate}</p>
+            <p className="text-sm">Method: {orderPlaced.paymentMethod}</p>
+            <p className="text-sm">Status: {orderPlaced.paymentStatus}</p>
+            <p className="text-sm">Date: {orderPlaced.orderDate}</p>
           </div>
         </div>
         <Link

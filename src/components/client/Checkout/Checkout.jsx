@@ -14,11 +14,9 @@ const steps = ["Login", "Address", "Payment", "Order Placed"];
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(1);
   const location = useLocation();
-    // console.log(location.search);
   const querySearch = new URLSearchParams(location.search);
   const step = querySearch.get("step");
 
-  //   console.log(step);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -49,17 +47,6 @@ export default function Checkout() {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            {/* <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Button
-                color="inherit"
-                disabled={activeStep === 1}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                Back
-              </Button>
-            </Box> */}
-
             <div className="mt-8">
               {step == 1 && <DeliveryAddressForm />}
               {step == 2 && <PaymentMethod />}

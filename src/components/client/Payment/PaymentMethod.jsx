@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { axiosInstance } from "../../admin/Utility/axiosApiConfig";
 import toast from "react-hot-toast";
-import { setOrderSummary } from "../../../features/order/orderSlice";
+import { setOrderPlaced } from "../../../features/order/orderSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { emptyCart } from "../../../features/cart/cartSlice";
@@ -36,8 +36,8 @@ function PaymentMethod() {
       )
       .then((res) => {
         console.log(res.data);
-        sessionStorage.setItem("orderSummary", JSON.stringify(res.data));
-        dispatch(setOrderSummary(res.data));
+        sessionStorage.setItem("orderPlaced", JSON.stringify(res.data));
+        dispatch(setOrderPlaced(res.data));
         dispatch(emptyCart());
         toast.success("Order Placed");
         navigate("/checkout?step=3");

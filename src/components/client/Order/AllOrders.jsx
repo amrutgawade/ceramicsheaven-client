@@ -33,11 +33,11 @@ function AllOrders() {
             className="flex items-center justify-between border px-8 py-4 bg-slate-200 space-x-10 rounded w-full"
           >
             <div className="w-1/6 flex">
-                <AvatarGroup max={3} total={Number(item.totalItem)}>
-                  {item.orderItems.map((itemImg, id) => (
-                    <Avatar key={id} alt="" src={itemImg.product.imageUrl} />
-                  ))}
-                </AvatarGroup>
+              <AvatarGroup max={3} total={Number(item.totalItem)}>
+                {item.orderItems.map((itemImg, id) => (
+                  <Avatar key={id} alt="" src={itemImg.product.imageUrl} />
+                ))}
+              </AvatarGroup>
             </div>
             <div>
               <h2 className="font-semibold">Order Id</h2>
