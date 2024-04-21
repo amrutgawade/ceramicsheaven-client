@@ -54,11 +54,12 @@ function App() {
           {token && <Route path="/cart" element={<AddToCart />} />}
           {token && <Route path="/checkout" element={<Checkout />} />}
           {token && <Route path="/profile" element={<UserProfile />} />}
+          {token && <Route path="/orders" element={<AllOrders />} />}
+          {token && <Route path="/orders/:id" element={<OrderSummary />} />}
 
           <Route path="/store" element={<Store />} />
           <Route path="/store/product/:id" element={<ViewProduct />} />
-          <Route path="/orders" element={<AllOrders />} />
-          <Route path="/orders/:id" element={<OrderSummary />} />
+
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/Forgot-Password" element={<Reset />} />
