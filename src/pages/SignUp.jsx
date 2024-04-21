@@ -94,11 +94,11 @@ function SignUp() {
     <main className="w-full flex flex-col items-center justify-center py-4">
       <div className="max-w-sm w-full text-gray-600">
         <div className="text-center">
-          <img
+          {/* <img
             src="src\assets\frontend\assets\img\logo.svg"
             width={100}
             className="mx-auto"
-          />
+          /> */}
           <div className="mt-5 space-y-2">
             <h3 className="text-gray-800 font-bold text-3xl">Sign-up</h3>
             <p className="">
