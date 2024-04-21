@@ -363,12 +363,12 @@ function Store() {
               </form>
 
               {/* Product grid */}
-              <div className="lg:col-span-3 grid grid-cols-2 lg:grid-cols-3">
+              <div className="lg:col-span-3 grid grid-cols-2 gap-x-4 lg:grid-cols-3">
                 {products.map((item) => (
                   <Link
                     key={item.id}
                     to={`/store/product/${item.id}`}
-                    className="mx-auto h-fit my-2 cursor-pointer flex flex-col gap-x-8 bg-white rounded shadow-lg overflow-hidden w-40 lg:w-56 border border-solid border-gray-300 "
+                    className="mx-auto h-fit my-2 cursor-pointer flex flex-col gap-x-8 bg-white rounded shadow-lg overflow-hidden w-fit lg:w-56 border border-solid border-gray-300 "
                   >
                     <div className="w-full h-32 lg:h-44">
                       <img

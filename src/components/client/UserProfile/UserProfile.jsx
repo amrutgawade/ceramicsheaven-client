@@ -11,6 +11,7 @@ function UserProfile() {
   const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
+  const [role, setRole] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -42,6 +43,7 @@ function UserProfile() {
       email,
       gender,
       mobile: Number(mobile),
+      role,
     };
     const response = await axiosInstance
       .put("http://localhost:8081/api/users/profile/update", updateUser)
@@ -100,6 +102,7 @@ function UserProfile() {
     setGender(response.data.gender);
     setEmail(response.data.email);
     setMobile(response.data.mobile);
+    setRole(response.data.role);
   };
   useEffect(() => {
     fetchData();
@@ -163,9 +166,9 @@ function UserProfile() {
                 className="w-full px-5 py-3 outline-none border bg-indigo-50 rounded"
               >
                 <option value="">Select</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
               </select>
             </div>
             <div>

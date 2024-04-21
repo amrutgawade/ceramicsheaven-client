@@ -70,6 +70,7 @@ function Login() {
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Server Error")
       });
 
     // console.log(response);
