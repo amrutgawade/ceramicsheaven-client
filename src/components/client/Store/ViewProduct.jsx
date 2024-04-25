@@ -22,47 +22,56 @@ function ViewProduct() {
   const [sizes, setSizes] = useState([]);
   const [size, setSize] = useState("");
   const [quantity, SetQuantity] = useState(1);
+  const [maxQuantity, SetMaxQuantity] = useState(0);
+  // console.log(maxQuantity);
 
   const increment = () => {
-    SetQuantity(Number(quantity) + 1);
+    quantity < 1 ? SetQuantity(1) : SetQuantity(Number(quantity) + 1);
   };
   const decrement = () => {
-    SetQuantity(Number(quantity) - 1);
+    quantity <= 1 ? SetQuantity(1) : SetQuantity(Number(quantity) - 1);
   };
 
   const addToCartHandler = async (productId) => {
-    const cartItem = {
-      productId,
-      quantity: Number(quantity),
-      size,
-    };
-    await axiosInstance
-      .put("http://localhost:8081/api/cart/add", cartItem)
-      .then((res) => {
-        const data = res.data;
-        toast.success(data.message);
-        navigate("/cart");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    // console.log(data.cartItems);
-    // const fetchData = async () => {
-    await axiosInstance
-      .get("http://localhost:8081/api/cart/", {})
-      .then((res) => {
-        const fetchData = res.data;
-        dispatch(addCartItem(fetchData.cartItems));
-        dispatch(setTotalItem(fetchData.totalItem));
-        dispatch(seTotalPrice(fetchData.totalPrice));
-        dispatch(setTotalDiscountedPrice(fetchData.totalDiscountedPrice));
-        dispatch(setDiscount(fetchData.discount));
-        // console.log(fetchData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    // };
+    if (quantity < 1) {
+      toast.error("At-least 1 Quantity");
+    } else if (quantity > maxQuantity) {
+      toast.error("Quantity Reach Out");
+    } else {
+      const cartItem = {
+        productId,
+        quantity: Number(quantity),
+        size,
+      };
+      await axiosInstance
+        .put("http://localhost:8081/api/cart/add", cartItem)
+        .then((res) => {
+          const data = res.data;
+          if (data.message == "Quantity Reach Out") {
+            toast.error(data.message);
+          } else {
+            toast.success(data.message);
+            navigate("/cart");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      await axiosInstance
+        .get("http://localhost:8081/api/cart/", {})
+        .then((res) => {
+          const fetchData = res.data;
+          dispatch(addCartItem(fetchData.cartItems));
+          dispatch(setTotalItem(fetchData.totalItem));
+          dispatch(seTotalPrice(fetchData.totalPrice));
+          dispatch(setTotalDiscountedPrice(fetchData.totalDiscountedPrice));
+          dispatch(setDiscount(fetchData.discount));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const fetchData = async () => {
@@ -72,7 +81,8 @@ function ViewProduct() {
         const data = res.data;
         setProduct(data);
         setSizes(data.sizes);
-        // console.log(data);
+        setSize(data.sizes[0].width + "X" + data.sizes[0].height);
+        // console.log(data.sizes[0].width + "X" + data.sizes[0].height);
       })
       .catch((err) => {
         console.log(err);
@@ -81,6 +91,15 @@ function ViewProduct() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const result = sizes.filter((item) => {
+      return item.width + "X" + item.height == size;
+    });
+    SetMaxQuantity(result[0]?.quantity);
+    // console.log("Result: ", result[0]?.quantity);
+  }, [size]);
+
   return (
     <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-8 mx-auto">
@@ -185,16 +204,15 @@ function ViewProduct() {
                 <span className="mr-3">Sizes:</span>
                 <div className="relative">
                   <select
-                    onChange={(e) => {
-                      setSize(e.target.value);
-                    }}
+                    onChange={(e) => setSize(e.target.value)}
+                    // onLoad={(e) => setSize(e.target.value)}
                     // onContextMenuCapture={(e) => {
                     //   setSize(e.target.value);
                     // }}
-                    defaultValue={size}
+                    value={size}
                     className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10"
                   >
-                    <option value="">Select Size</option>
+                    {/* <option value="">Select Size</option> */}
                     {sizes.map((item, idx) => (
                       <option key={idx} value={item.width + "X" + item.height}>
                         {item.width + " X " + item.height}
@@ -216,6 +234,7 @@ function ViewProduct() {
                   </span>
                 </div>
               </div>
+              <span className="ml-4">{maxQuantity} left</span>
             </div>
             <div className="flex mb-6">
               <div className="flex items-center gap-x-2 text-white">
@@ -229,7 +248,7 @@ function ViewProduct() {
                 <input
                   className="text-center text-black w-16 py-2 border outline-none"
                   type="number"
-                  defaultValue={1}
+                  // min={1}
                   onChange={(e) => SetQuantity(e.target.value)}
                   value={quantity}
                 />

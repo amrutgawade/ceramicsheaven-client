@@ -12,6 +12,7 @@ import {
   setTotalDiscountedPrice,
   setTotalItem,
 } from "../../features/cart/cartSlice";
+import { setSearchProduct } from "../../features/product/productSlice";
 
 function Navbar() {
   const { token, user } = useSelector((state) => state.auth);
@@ -141,6 +142,7 @@ function Navbar() {
                 <input
                   type="text"
                   placeholder="Search"
+                  onChange={(e) => dispatch(setSearchProduct(e.target.value))}
                   className="w-[24rem] px-2 py-2 text-gray-500 bg-transparent rounded-md outline-none"
                 />
               </div>
