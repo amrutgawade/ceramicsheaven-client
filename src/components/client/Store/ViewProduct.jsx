@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { TiArrowBack } from "react-icons/ti";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getAxiosInstance } from "../../admin/Utility/axiosApiConfig";
+import { getAxiosInstance } from "../../../utility/axiosApiConfig";
 import { useDispatch } from "react-redux";
 import {
   addCartItem,

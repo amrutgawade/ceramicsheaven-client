@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PaginationButtons from "../Utility/PaginationButtons";
 import axios from "axios";
-import { useSelector } from "react-redux";
 
 function Products() {
-  const { token } = useSelector((state) => state.auth);
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(5);
   const [loading, setLoading] = useState(true);
@@ -14,23 +12,19 @@ function Products() {
   const [products, setProducts] = useState([]);
   const [tableItems, setTableItems] = useState([]);
 
+  const fetchData = async () => {
+    await axios
+      .get("http://localhost:8081/products/all", {})
+      .then((res) => {
+        const data = res.data;
+        setTableItems(data);
+        // console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      await axios
-        .get("http://localhost:8081/products/all", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          const data = res.data;
-          setTableItems(data);
-          // console.log(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
     fetchData();
   }, []);
 
@@ -46,17 +40,13 @@ function Products() {
       return array;
     };
 
-    // setTimeout(() => {
     setLoading(false);
-    // }, 100);
 
     let result = getProducts(currentPage + 1, limit);
 
     setTotalPages(Math.ceil(tableItems.length / limit));
     setProducts(result);
   }, [limit, currentPage, tableItems]);
-
-  // console.log(products);
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 md:px-0">

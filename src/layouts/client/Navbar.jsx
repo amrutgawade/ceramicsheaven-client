@@ -4,7 +4,7 @@ import logo from "../../assets/frontend/img/logo.svg";
 import { BsCart } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAxiosInstance } from "../../components/admin/Utility/axiosApiConfig";
+import { getAxiosInstance } from "../../utility/axiosApiConfig";
 import {
   addCartItem,
   seTotalPrice,

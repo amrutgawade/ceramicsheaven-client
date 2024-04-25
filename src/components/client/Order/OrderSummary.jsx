@@ -2,7 +2,7 @@ import { Box, Step, StepLabel, Stepper } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { getAxiosInstance } from "../../admin/Utility/axiosApiConfig";
+import { getAxiosInstance } from "../../../utility/axiosApiConfig";
 import { setOrderSummary } from "../../../features/order/orderSlice";
 
 const steps = ["Placed", "Confirmed", "Shipped", "Delivered"];

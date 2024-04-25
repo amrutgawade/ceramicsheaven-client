@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import { MdDeleteOutline } from "react-icons/md";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAxiosInstance } from "../../admin/Utility/axiosApiConfig";
+import { getAxiosInstance } from "../../../utility/axiosApiConfig";
 import toast from "react-hot-toast";
 import { removeAddress } from "../../../features/auth/authSlice";
 import { addshippingAddress } from "../../../features/payment/paymentSlice";

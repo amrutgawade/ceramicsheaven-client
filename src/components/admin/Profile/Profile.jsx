@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { getAxiosInstance } from "../Utility/axiosApiConfig";
+import { getAxiosInstance } from "../../../utility/axiosApiConfig";
 import { useSelector } from "react-redux";
 
 function Profile() {
@@ -170,9 +170,9 @@ function Profile() {
                 className="w-full px-5 py-3 outline-none border bg-indigo-50 rounded"
               >
                 <option value="">Select</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
               </select>
             </div>
             <div>

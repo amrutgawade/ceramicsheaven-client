@@ -33,6 +33,7 @@ function PaginationButtons({ setCurrentPage, currentPage, totalPages }) {
         }
         containerClassName="flex items-center justify-end gap-x-1 mt-8 mb-4"
         pageClassName="block border border-solid border-indigo-500/20 h-10 w-10  flex items-center justify-center hover:bg-indigo-500/20 rounded-md"
+        pageLinkClassName="w-full h-full content-center text-center"
         activeClassName="bg-indigo-500 text-white"
       />
     </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
-import { getAxiosInstance } from "../../admin/Utility/axiosApiConfig";
+import { getAxiosInstance } from "../../../utility/axiosApiConfig";
 import toast from "react-hot-toast";
 import { setOrderPlaced } from "../../../features/order/orderSlice";
 import { useDispatch, useSelector } from "react-redux";

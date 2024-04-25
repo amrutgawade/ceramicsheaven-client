@@ -48,7 +48,7 @@ function Sidebar() {
       icon: <HiUserCircle />,
     },
     {
-      key: "products",
+      key: "addProducts",
       label: "Add Product",
       path: "/admin/products/add",
       icon: <IoBagAdd />,

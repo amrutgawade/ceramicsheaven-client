@@ -8,7 +8,7 @@ import {
   setTotalDiscountedPrice,
   setTotalItem,
 } from "../../../features/cart/cartSlice";
-import { getAxiosInstance } from "../../admin/Utility/axiosApiConfig";
+import { getAxiosInstance } from "../../../utility/axiosApiConfig";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 

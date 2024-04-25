@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getAxiosInstance } from "../../admin/Utility/axiosApiConfig";
+import { getAxiosInstance } from "../../../utility/axiosApiConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { setOrderItems } from "../../../features/order/orderSlice";
 import { Link } from "react-router-dom";
