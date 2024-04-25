@@ -2,10 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
-import { axiosInstance } from "../../admin/Utility/axiosApiConfig";
+import { getAxiosInstance } from "../../admin/Utility/axiosApiConfig";
 
 function UserProfile() {
   const { token } = useSelector((state) => state.auth);
+  const axiosInstance = getAxiosInstance();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [gender, setGender] = useState("");

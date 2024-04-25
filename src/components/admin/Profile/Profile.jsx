@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { axiosInstance } from "../Utility/axiosApiConfig";
+import { getAxiosInstance } from "../Utility/axiosApiConfig";
 import { useSelector } from "react-redux";
 
 function Profile() {
   const { token } = useSelector((state) => state.auth);
+  const axiosInstance = getAxiosInstance();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [gender, setGender] = useState("");

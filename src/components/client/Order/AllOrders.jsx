@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { axiosInstance } from "../../admin/Utility/axiosApiConfig";
+import { getAxiosInstance } from "../../admin/Utility/axiosApiConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { setOrderItems } from "../../../features/order/orderSlice";
 import { Link } from "react-router-dom";
@@ -8,6 +8,7 @@ import { Avatar, AvatarGroup } from "@mui/material";
 function AllOrders() {
   const { orderItems } = useSelector((state) => state.order);
   const dispatch = useDispatch();
+  const axiosInstance = getAxiosInstance();
   const fetchData = async () => {
     await axiosInstance
       .get("http://localhost:8081/api/orders/user", {})

@@ -4,7 +4,7 @@ import logo from "../../assets/frontend/img/logo.svg";
 import { BsCart } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { axiosInstance } from "../../components/admin/Utility/axiosApiConfig";
+import { getAxiosInstance } from "../../components/admin/Utility/axiosApiConfig";
 import {
   addCartItem,
   seTotalPrice,
@@ -17,6 +17,7 @@ function Navbar() {
   const { token, user } = useSelector((state) => state.auth);
   const { totalItem } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const axiosInstance = getAxiosInstance();
   const [state, setState] = useState(false);
 
   const navigation = [
@@ -26,19 +27,21 @@ function Navbar() {
   ];
 
   const fetchData = async () => {
-    await axiosInstance
-      .get("http://localhost:8081/api/cart/", {})
-      .then((res) => {
-        const data = res.data;
-        dispatch(addCartItem(data.cartItems));
-        dispatch(setTotalItem(data.totalItem));
-        dispatch(seTotalPrice(data.totalPrice));
-        dispatch(setTotalDiscountedPrice(data.totalDiscountedPrice));
-        dispatch(setDiscount(data.discount));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (token) {
+      await axiosInstance
+        .get("http://localhost:8081/api/cart/", {})
+        .then((res) => {
+          const data = res.data;
+          dispatch(addCartItem(data.cartItems));
+          dispatch(setTotalItem(data.totalItem));
+          dispatch(seTotalPrice(data.totalPrice));
+          dispatch(setTotalDiscountedPrice(data.totalDiscountedPrice));
+          dispatch(setDiscount(data.discount));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   useEffect(() => {

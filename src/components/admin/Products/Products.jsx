@@ -14,54 +14,6 @@ function Products() {
   const [products, setProducts] = useState([]);
   const [tableItems, setTableItems] = useState([]);
 
-  // const tableItems = [
-  //   {
-  //     product:
-  //       "https://ik.imagekit.io/dj/tiles/tiles-1.jpg?updatedAt=1708156723963",
-  //     name: "Tile 1",
-  //     brand: "Kajaria",
-  //     category: "Indoor",
-  //     quantity: "22",
-  //     price: "₹10",
-  //   },
-  //   {
-  //     product:
-  //       "https://ik.imagekit.io/dj/tiles/tiles-2.jpg?updatedAt=1708156724029",
-  //     name: "Tile 2",
-  //     brand: "SOMANY",
-  //     category: "Outdoor",
-  //     quantity: "12",
-  //     price: "₹90",
-  //   },
-  //   {
-  //     product:
-  //       "https://ik.imagekit.io/dj/tiles/tiles-6.jpg?updatedAt=1708156725845",
-  //     name: "Tile 3",
-  //     brand: "AGL Tiles",
-  //     category: "Outdoor",
-  //     quantity: "34",
-  //     price: "₹80",
-  //   },
-  //   {
-  //     product:
-  //       "https://ik.imagekit.io/dj/tiles/tiles-7.jpg?updatedAt=1708156724072",
-  //     name: "Tile 4",
-  //     brand: "Bajaj Tiles",
-  //     category: "Outdoor",
-  //     quantity: "10",
-  //     price: "₹12",
-  //   },
-  //   {
-  //     product:
-  //       "https://ik.imagekit.io/dj/tiles/tiles-10.jpg?updatedAt=1708156725824",
-  //     name: "Tile 5",
-  //     brand: "JOHNSON",
-  //     category: "Outdoor",
-  //     quantity: "44",
-  //     price: "₹75",
-  //   },
-  // ];
-
   useEffect(() => {
     const fetchData = async () => {
       await axios
@@ -115,33 +67,28 @@ function Products() {
           </h3>
         </div>
         <div className="mt-3 md:mt-0">
-          <Link
-            className="inline-block px-4 py-2 text-white duration-150 font-medium bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 md:text-sm"
-            to={"/admin/products/add"}
-          >
-            Add product
-          </Link>
+          <div className="flex justify-end gap-x-4">
+            <input
+              placeholder="Search..."
+              type="text"
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-fit px-3 py-2 outline-none border border-indigo-200 bg-indigo-50 rounded"
+            />
+            <select
+              name="records"
+              id="records"
+              className="px-3 py-2 outline-none border border-indigo-200 bg-indigo-50 rounded"
+              onClick={(e) => setLimit(e.target.value)}
+              defaultValue={limit}
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="25">25</option>
+            </select>
+          </div>
         </div>
       </div>
-      <div className="mt-8 flex justify-end gap-x-4">
-        <input
-          placeholder="Search..."
-          type="text"
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-fit px-5 py-3 outline-none border border-indigo-200 bg-indigo-50 rounded"
-        />
-        <select
-          name="records"
-          id="records"
-          className="px-3 py-3 outline-none border border-indigo-200 bg-indigo-50 rounded"
-          onClick={(e) => setLimit(e.target.value)}
-          defaultValue={limit}
-        >
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="25">25</option>
-        </select>
-      </div>
+
       {loading ? (
         <div className="flex justify-center items-center h-[55vh]">
           <div className="animate-spin h-16 w-16 rounded-full border-4 border-r-transparent border-indigo-500"></div>

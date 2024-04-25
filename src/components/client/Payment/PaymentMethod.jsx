@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
-import { axiosInstance } from "../../admin/Utility/axiosApiConfig";
+import { getAxiosInstance } from "../../admin/Utility/axiosApiConfig";
 import toast from "react-hot-toast";
 import { setOrderPlaced } from "../../../features/order/orderSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,6 +25,7 @@ function PaymentMethod() {
   // console.log(shippingAddress);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const axiosInstance = getAxiosInstance();
   const [selected, setSelected] = useState(plans[0]);
 
   const paymentHandler = async (paymentMethod) => {

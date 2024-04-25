@@ -8,7 +8,7 @@ import {
   setTotalDiscountedPrice,
   setTotalItem,
 } from "../../../features/cart/cartSlice";
-import { axiosInstance } from "../../admin/Utility/axiosApiConfig";
+import { getAxiosInstance } from "../../admin/Utility/axiosApiConfig";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
@@ -17,6 +17,7 @@ function AddToCart() {
   const { cartItems, totalPrice, totalDiscountedPrice, discount } = useSelector(
     (state) => state.cart
   );
+  const axiosInstance = getAxiosInstance();
 
   const quantityIncrementHandler = async (cartItemId) => {
     await axiosInstance

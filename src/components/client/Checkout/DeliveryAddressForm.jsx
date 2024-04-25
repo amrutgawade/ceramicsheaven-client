@@ -3,13 +3,14 @@ import { Grid } from "@mui/material";
 import AddressCard from "../AddressCard/AddressCard";
 import { Button } from "@mui/material";
 import { TextField } from "@mui/material";
-import { axiosInstance } from "../../admin/Utility/axiosApiConfig";
+import { getAxiosInstance } from "../../admin/Utility/axiosApiConfig";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { addAddress } from "../../../features/auth/authSlice";
 
 const DeliveryAddressForm = () => {
   const dispatch = useDispatch();
+  const axiosInstance = getAxiosInstance();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);

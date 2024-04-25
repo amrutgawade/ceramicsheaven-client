@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import { MdDeleteOutline } from "react-icons/md";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { axiosInstance } from "../../admin/Utility/axiosApiConfig";
+import { getAxiosInstance } from "../../admin/Utility/axiosApiConfig";
 import toast from "react-hot-toast";
 import { removeAddress } from "../../../features/auth/authSlice";
 import { addshippingAddress } from "../../../features/payment/paymentSlice";
@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const AddressCard = () => {
   const { address } = useSelector((state) => state.auth);
+  const axiosInstance = getAxiosInstance();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

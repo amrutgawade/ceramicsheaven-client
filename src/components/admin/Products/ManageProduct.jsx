@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { axiosInstance } from "../Utility/axiosApiConfig";
+import { getAxiosInstance } from "../Utility/axiosApiConfig";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 function ManageProduct() {
   const { pathname } = useLocation();
+  const axiosInstance = getAxiosInstance();
   const { token } = useSelector((state) => state.auth);
   const [imageUrl, setImageUrl] = useState("");
   const [title, setTitle] = useState("");

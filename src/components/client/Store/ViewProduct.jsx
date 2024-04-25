@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { TiArrowBack } from "react-icons/ti";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
-import { axiosInstance } from "../../admin/Utility/axiosApiConfig";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getAxiosInstance } from "../../admin/Utility/axiosApiConfig";
 import { useDispatch } from "react-redux";
 import {
   addCartItem,
@@ -16,6 +16,8 @@ import toast from "react-hot-toast";
 function ViewProduct() {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const axiosInstance = getAxiosInstance();
   const [product, setProduct] = useState({});
   const [sizes, setSizes] = useState([]);
   const [size, setSize] = useState("");
@@ -39,6 +41,7 @@ function ViewProduct() {
       .then((res) => {
         const data = res.data;
         toast.success(data.message);
+        navigate("/cart");
       })
       .catch((err) => {
         console.log(err);
@@ -54,7 +57,7 @@ function ViewProduct() {
         dispatch(seTotalPrice(fetchData.totalPrice));
         dispatch(setTotalDiscountedPrice(fetchData.totalDiscountedPrice));
         dispatch(setDiscount(fetchData.discount));
-        console.log(fetchData);
+        // console.log(fetchData);
       })
       .catch((err) => {
         console.log(err);
@@ -69,7 +72,7 @@ function ViewProduct() {
         const data = res.data;
         setProduct(data);
         setSizes(data.sizes);
-        console.log(data);
+        // console.log(data);
       })
       .catch((err) => {
         console.log(err);

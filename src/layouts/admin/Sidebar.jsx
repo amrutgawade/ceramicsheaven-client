@@ -1,19 +1,22 @@
-import React, { useContext, useState } from "react";
-import { FaSquarePollVertical } from "react-icons/fa6";
+import React, { useState } from "react";
+import {
+  FaSquarePollVertical,
+} from "react-icons/fa6";
 import { FaChevronCircleRight } from "react-icons/fa";
 
 import {
-  HiOutlineAnnotation,
+  HiAnnotation,
   HiOutlineCog,
-  HiOutlineCube,
-  HiOutlineDocumentText,
+  HiTruck,
   HiOutlineLogout,
   HiOutlineQuestionMarkCircle,
-  HiOutlineShoppingCart,
-  HiOutlineUserCircle,
-  HiOutlineUsers,
-  HiOutlineViewGrid,
+  HiCurrencyRupee,
+  HiUserCircle,
+  HiUserGroup,
+  HiViewGrid,
 } from "react-icons/hi";
+import { IoBagAdd, IoBagCheck } from "react-icons/io5";
+
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
@@ -36,43 +39,49 @@ function Sidebar() {
       key: "dashboard",
       label: "Dashboard",
       path: "/admin",
-      icon: <HiOutlineViewGrid />,
+      icon: <HiViewGrid />,
     },
     {
       key: "profile",
       label: "Profile",
       path: "/admin/profile",
-      icon: <HiOutlineUserCircle />,
+      icon: <HiUserCircle />,
+    },
+    {
+      key: "products",
+      label: "Add Product",
+      path: "/admin/products/add",
+      icon: <IoBagAdd />,
     },
     {
       key: "products",
       label: "Products",
       path: "/admin/products",
-      icon: <HiOutlineCube />,
+      icon: <IoBagCheck />,
     },
     {
       key: "orders",
       label: "Orders",
       path: "/admin/orders",
-      icon: <HiOutlineShoppingCart />,
+      icon: <HiTruck />,
     },
     {
       key: "customers",
       label: "Customers",
       path: "/admin/customers",
-      icon: <HiOutlineUsers />,
+      icon: <HiUserGroup />,
     },
     {
       key: "transactions",
       label: "Transactions",
       path: "/admin/transactions",
-      icon: <HiOutlineDocumentText />,
+      icon: <HiCurrencyRupee />,
     },
     {
       key: "complaints",
       label: "Complaints",
       path: "/admin/complaints",
-      icon: <HiOutlineAnnotation />,
+      icon: <HiAnnotation />,
     },
   ];
   const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
