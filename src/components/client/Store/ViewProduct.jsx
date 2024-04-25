@@ -3,7 +3,7 @@ import { TiArrowBack } from "react-icons/ti";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getAxiosInstance } from "../../../utility/axiosApiConfig";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addCartItem,
   seTotalPrice,
@@ -14,6 +14,7 @@ import {
 import toast from "react-hot-toast";
 
 function ViewProduct() {
+  const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -33,44 +34,49 @@ function ViewProduct() {
   };
 
   const addToCartHandler = async (productId) => {
-    if (quantity < 1) {
-      toast.error("At-least 1 Quantity");
-    } else if (quantity > maxQuantity) {
-      toast.error("Quantity Reach Out");
-    } else {
-      const cartItem = {
-        productId,
-        quantity: Number(quantity),
-        size,
-      };
-      await axiosInstance
-        .put("http://localhost:8081/api/cart/add", cartItem)
-        .then((res) => {
-          const data = res.data;
-          if (data.message == "Quantity Reach Out") {
-            toast.error(data.message);
-          } else {
-            toast.success(data.message);
-            navigate("/cart");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    if (token) {
+      if (quantity < 1) {
+        toast.error("At-least 1 Quantity");
+      } else if (quantity > maxQuantity) {
+        toast.error("Quantity Reach Out");
+      } else {
+        const cartItem = {
+          productId,
+          quantity: Number(quantity),
+          size,
+        };
+        await axiosInstance
+          .put("http://localhost:8081/api/cart/add", cartItem)
+          .then((res) => {
+            const data = res.data;
+            if (data.message == "Quantity Reach Out") {
+              toast.error(data.message);
+            } else {
+              toast.success(data.message);
+              navigate("/cart");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
 
-      await axiosInstance
-        .get("http://localhost:8081/api/cart/", {})
-        .then((res) => {
-          const fetchData = res.data;
-          dispatch(addCartItem(fetchData.cartItems));
-          dispatch(setTotalItem(fetchData.totalItem));
-          dispatch(seTotalPrice(fetchData.totalPrice));
-          dispatch(setTotalDiscountedPrice(fetchData.totalDiscountedPrice));
-          dispatch(setDiscount(fetchData.discount));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        await axiosInstance
+          .get("http://localhost:8081/api/cart/", {})
+          .then((res) => {
+            const fetchData = res.data;
+            dispatch(addCartItem(fetchData.cartItems));
+            dispatch(setTotalItem(fetchData.totalItem));
+            dispatch(seTotalPrice(fetchData.totalPrice));
+            dispatch(setTotalDiscountedPrice(fetchData.totalDiscountedPrice));
+            dispatch(setDiscount(fetchData.discount));
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    } else {
+      toast.error("Please Login First");
+      navigate("/login");
     }
   };
 

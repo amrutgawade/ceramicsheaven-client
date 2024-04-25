@@ -34,7 +34,7 @@ function AllOrders() {
             className="flex items-center justify-between border p-2 md:px-8 md:py-4 bg-slate-200 space-x-10 rounded w-full"
           >
             <div className="w-1/6 flex">
-              <AvatarGroup max={3} total={Number(item.totalItem)}>
+              <AvatarGroup max={4} total={Number(item.totalItem)}>
                 {item.orderItems.map((itemImg, id) => (
                   <Avatar key={id} alt="" src={itemImg.product.imageUrl} />
                 ))}

@@ -112,7 +112,7 @@ function Orders() {
                       </td>
                       <td className="px-6 py-0 whitespace-nowrap">
                         <div className="w-1/6 flex">
-                          <AvatarGroup max={3} total={Number(item.totalItem)}>
+                          <AvatarGroup max={4} total={Number(item.totalItem)}>
                             {item.orderItems.map((itemImg, id) => (
                               <Avatar
                                 key={id}
