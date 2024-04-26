@@ -71,12 +71,12 @@ function Sidebar() {
       path: "/admin/customers",
       icon: <HiUserGroup />,
     },
-    {
-      key: "transactions",
-      label: "Transactions",
-      path: "/admin/transactions",
-      icon: <HiCurrencyRupee />,
-    },
+    // {
+    //   key: "transactions",
+    //   label: "Transactions",
+    //   path: "/admin/transactions",
+    //   icon: <HiCurrencyRupee />,
+    // },
     {
       key: "complaints",
       label: "Complaints",

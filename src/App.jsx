@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import MasterLayout from "./layouts/client/MasterLayout";
 import AdminLayout from "./layouts/admin/AdminLayout";
@@ -35,9 +35,6 @@ import UserProfile from "./components/client/UserProfile/UserProfile";
 
 function App() {
   const { token, role } = useSelector((state) => state.auth);
-  // const { cartItems } = useSelector((state) => state.cart);
-  // console.log(cartItems.length);
-  // const Navigate = useNavigate();
 
   return (
     <>
@@ -82,7 +79,7 @@ function App() {
               />
               <Route path="/admin/orders" element={<Orders />} />
               <Route path="/admin/customers" element={<Customers />} />
-              <Route path="/admin/transactions" element={<Transactions />} />
+              {/* <Route path="/admin/transactions" element={<Transactions />} /> */}
               <Route path="/admin/complaints" element={<Message />} />
               <Route path="/admin/settings" element={<Settings />} />
               <Route path="/admin/support" element={<Support />} />

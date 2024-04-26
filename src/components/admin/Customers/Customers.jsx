@@ -137,6 +137,7 @@ function Customers() {
         <input
           placeholder="Search..."
           type="text"
+          onChange={(e) => setSearch(e.target.value)}
           className="w-fit px-3 py-2 outline-none border border-indigo-200 bg-indigo-50 rounded"
         />
         <select
@@ -171,7 +172,13 @@ function Customers() {
                 </tr>
               </thead>
               <tbody className="text-gray-600 divide-y">
-                {customers.map((item, idx) => (
+                {customers
+                  .filter((item) => {
+                    return search === ""
+                      ? item
+                      : item.email.toLowerCase().includes(search) || item.mobile.toString().includes(search) || item.role.toLowerCase().includes(search) || item.firstName.concat(" ", item.lastName).includes(search);
+                  })
+                .map((item, idx) => (
                   <tr key={idx}>
                     <td className="py-4 px-6 whitespace-nowrap text-center">
                       {idx + 1}
