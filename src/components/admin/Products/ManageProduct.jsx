@@ -18,7 +18,6 @@ function ManageProduct() {
   const [discountPrice, setDiscountPrice] = useState(0);
   const [discountPercent, setDiscountPercent] = useState(0);
   const [categoryName, setCategoryName] = useState("");
-  const [categoryId, setCategoryId] = useState("");
   const [description, setDescription] = useState("");
   const [sizes, setSizes] = useState([]);
 
@@ -48,10 +47,11 @@ function ManageProduct() {
       price: Number(price),
       discountedPrice: Number(discountPrice),
       discountedPercent: Number(discountPercent),
-      category: { categoryName, id: categoryId },
+      categoryName,
       discription: description,
       sizes: Object.values(sizes),
     };
+    console.log(productData);
     // Axios request
     await axiosInstance
       .put(
@@ -90,7 +90,6 @@ function ManageProduct() {
         setPrice(res.data.price);
         setDiscountPrice(res.data.discountedPrice);
         setDiscountPercent(res.data.discountedPercent);
-        setCategoryId(res.data.category.id);
         setCategoryName(res.data.category.categoryName);
         setDescription(res.data.discription);
         setSizes([...res.data.sizes]);
@@ -267,10 +266,9 @@ function ManageProduct() {
                 }}
                 value={categoryName}
               >
-                <option value="">Select</option>
-                <option value="indoor">Indoor</option>
-                <option value="outdoor">Outdoor</option>
-                <option value="bathroom">Bathroom</option>
+                <option value="Indoor">Indoor</option>
+                <option value="Outdoor">Outdoor</option>
+                <option value="Bathroom">Bathroom</option>
               </select>
             </div>
             <div>

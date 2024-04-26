@@ -16,7 +16,7 @@ function Orders() {
 
   const fetchData = async () => {
     await axiosInstance
-      .get("http://localhost:8081/api/orders/user", {})
+      .get("http://localhost:8081/api/admin/orders/", {})
       .then((res) => {
         const data = res.data;
         setTableItems(data);

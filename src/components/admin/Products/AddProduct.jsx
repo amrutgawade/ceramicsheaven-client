@@ -242,9 +242,9 @@ function AddProduct() {
                 defaultValue={categoryName}
               >
                 <option value="">Select</option>
-                <option value="indoor">Indoor</option>
-                <option value="outdoor">Outdoor</option>
-                <option value="bathroom">Bathroom</option>
+                <option value="Indoor">Indoor</option>
+                <option value="Outdoor">Outdoor</option>
+                <option value="Bathroom">Bathroom</option>
               </select>
             </div>
             <div>

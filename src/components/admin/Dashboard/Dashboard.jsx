@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlinePendingActions } from "react-icons/md";
 import {
   LuArrowDown,
@@ -10,8 +10,26 @@ import {
 import BarChart from "./BarChart";
 import PieChart from "./PieChart";
 import ColumnChart from "./ColumnChart";
+import { getAxiosInstance } from "../../../utility/axiosApiConfig";
 
 function Dashboard() {
+  const [totalSales, setTotalSales] = useState(0);
+  const axiosInstance = getAxiosInstance();
+  const fetchData = async () => {
+    await axiosInstance
+      .get("http://localhost:8081/api/admin/orders/totalSales", {})
+      .then((res) => {
+        const data = res.data;
+        setTotalSales(data);
+        // console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <div className="max-w-screen-xl mx-auto px-4 md:px-0">
       {/* <h3 className="text-gray-800 text-xl font-bold sm:text-2xl">Dashboard</h3> */}
@@ -23,7 +41,7 @@ function Dashboard() {
           />
           <div className="mt-4 flex items-end justify-between w-full">
             <div>
-              <h4 className="text-2xl font-bold">₹350K</h4>
+              <h4 className="text-2xl font-bold">₹{totalSales}</h4>
               <span className="text-sm font-medium">Total Sales</span>
             </div>
             <div className="flex items-center gap-1 text-sm font-medium">
