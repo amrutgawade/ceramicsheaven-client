@@ -1,10 +1,11 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { getAxiosInstance } from "../../../utility/axiosApiConfig";
+import { useNavigate } from "react-router-dom";
 
 function AddProduct() {
   const axiosInstance = getAxiosInstance();
+  const navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState("");
   const [title, setTitle] = useState("");
   const [brand, setBrand] = useState("");
@@ -15,9 +16,11 @@ function AddProduct() {
   const [discountPercent, setDiscountPercent] = useState(0);
   const [categoryName, setCategoryName] = useState("");
   const [description, setDescription] = useState("");
-  const [sizes, setSizes] = useState([{ width: 0, height: 0, quantity: 0 }]);
+  const [sizes, setSizes] = useState([
+    { width: null, height: null, quantity: null },
+  ]);
   const addSizeHandler = () => {
-    setSizes([...sizes, { width: 0, height: 0, quantity: 0 }]);
+    setSizes([...sizes, { width: null, height: null, quantity: null }]);
   };
 
   const removeSizeHandler = (index) => {
@@ -46,7 +49,7 @@ function AddProduct() {
       description,
       sizes,
     };
-    console.log(productData);
+    // console.log(productData);
     // Axios request
     const response = await axiosInstance
       .post("http://localhost:8081/api/admin/product/", productData)
@@ -64,6 +67,7 @@ function AddProduct() {
         setDescription("");
         setSizes([{ width: null, height: null, quantity: null }]);
         toast.success("Product Added Successfully");
+        navigate("/admin/products")
       })
       .catch((err) => {
         console.log(err);
@@ -239,7 +243,7 @@ function AddProduct() {
                 onChange={(e) => {
                   setCategoryName(e.target.value);
                 }}
-                defaultValue={categoryName}
+                value={categoryName}
               >
                 <option value="">Select</option>
                 <option value="Indoor">Indoor</option>
@@ -293,7 +297,7 @@ function AddProduct() {
                     <input
                       type="number"
                       name="width"
-                      value={sizes.width}
+                      value={data.width}
                       onChange={(e) => inputChangeHandler(e, i)}
                       className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
                       placeholder="Width"
@@ -309,7 +313,7 @@ function AddProduct() {
                     <input
                       type="number"
                       name="height"
-                      value={sizes.height}
+                      value={data.height}
                       onChange={(e) => inputChangeHandler(e, i)}
                       className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
                       placeholder="Height"
@@ -325,7 +329,7 @@ function AddProduct() {
                     <input
                       type="number"
                       name="quantity"
-                      value={sizes.quantity}
+                      value={data.quantity}
                       onChange={(e) => inputChangeHandler(e, i)}
                       className="w-full px-5 py-3 outline-none border rounded hover:border-indigo-500 focus:border-indigo-500"
                       placeholder="Quantity"

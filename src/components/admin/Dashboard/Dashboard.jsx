@@ -14,13 +14,19 @@ import { getAxiosInstance } from "../../../utility/axiosApiConfig";
 
 function Dashboard() {
   const [totalSales, setTotalSales] = useState(0);
+  const [pendingOrders, setPendingOrders] = useState(0);
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [totalUsers, setTotalUsers] = useState(0);
   const axiosInstance = getAxiosInstance();
   const fetchData = async () => {
     await axiosInstance
-      .get("http://localhost:8081/api/admin/orders/totalSales", {})
+      .get("http://localhost:8081/api/admin/totalData", {})
       .then((res) => {
         const data = res.data;
-        setTotalSales(data);
+        setTotalSales(data.totalSales);
+        setPendingOrders(data.pendingOrders);
+        setTotalUsers(data.totalUsers);
+        setTotalProducts(data.totalProducts);
         // console.log(data);
       })
       .catch((err) => {
@@ -57,7 +63,7 @@ function Dashboard() {
           />
           <div className="mt-4 flex items-end justify-between w-full">
             <div>
-              <h4 className="text-2xl font-bold">11</h4>
+              <h4 className="text-2xl font-bold">{pendingOrders}</h4>
               <span className="text-sm font-medium">Pending Orders</span>
             </div>
             <div className="flex items-center gap-1 text-sm font-medium">
@@ -73,7 +79,7 @@ function Dashboard() {
           />
           <div className="mt-4 flex items-end justify-between w-full">
             <div>
-              <h4 className="text-2xl font-bold">2.450</h4>
+              <h4 className="text-2xl font-bold">{totalProducts}</h4>
               <span className="text-sm font-medium">Total Product</span>
             </div>
             <div className="flex items-center gap-1 text-sm font-medium">
@@ -89,7 +95,7 @@ function Dashboard() {
           />
           <div className="mt-4 flex items-end justify-between w-full">
             <div>
-              <h4 className="text-2xl font-bold">3.456</h4>
+              <h4 className="text-2xl font-bold">{totalUsers}</h4>
               <span className="text-sm font-medium">Total Users</span>
             </div>
             <div className="flex items-center gap-1 text-sm font-medium">
