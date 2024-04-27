@@ -41,7 +41,7 @@ function OrderSummary() {
     fetchData();
   }, []);
   return (
-    <div className="p-4 md:px-28 md:my-12">
+    <div className="p-4 md:px-28 md:my-4">
       <Box sx={{ width: "100%" }}>
         <div className="flex flex-col">
           <div className="py-4 border-b">

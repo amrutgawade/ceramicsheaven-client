@@ -528,7 +528,7 @@ function Store() {
               </form>
 
               {/* Product grid */}
-              <div className="lg:col-span-3 h-fit grid grid-cols-2 gap-x-4 lg:grid-cols-3">
+              <div className="lg:col-span-3 h-fit grid grid-cols-2 gap-x-4 md:gap-4 lg:grid-cols-3">
                 {products
                   .filter((item) => {
                     return searchProduct.toLowerCase() == ""
@@ -540,7 +540,7 @@ function Store() {
                     <Link
                       key={item.id}
                       to={`/store/product/${item.id}`}
-                      className="mx-auto h-fit my-2 cursor-pointer flex flex-col gap-x-8 bg-white rounded shadow-lg overflow-hidden w-fit lg:w-56 border border-solid border-gray-300 "
+                      className="mx-auto w-full h-fit my-2 cursor-pointer flex flex-col gap-x-8 bg-white rounded shadow-lg overflow-hidden lg:w-56 border border-solid border-gray-300 "
                     >
                       <div className="w-full h-32 lg:h-44">
                         <img
@@ -551,7 +551,7 @@ function Store() {
                       </div>
 
                       <div className="w-full max-h-fit px-4 py-3">
-                        <h3 className="text-base mb-0.5 font-medium text-gray-900">
+                        <h3 className="text-sm mb-0.5 font-medium text-gray-900">
                           {item.title}
                         </h3>
                         <p className="text-sm mb-1 font-light text-gray-900">

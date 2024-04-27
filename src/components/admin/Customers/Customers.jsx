@@ -207,12 +207,12 @@ function Customers() {
                       {" "}
                       <span
                         className={`px-3 py-2 rounded-full font-semibold text-xs ${
-                          item.status == "Active"
+                          item.createdAt == "Active"
                             ? "text-green-600 bg-green-50"
                             : "text-blue-600 bg-blue-50"
                         }`}
                       >
-                        {item.status}
+                        {item.createdAt.substring(0,10)}
                       </span>
                     </td>
                     <td className="text-center px-6 whitespace-nowrap space-x-2">
