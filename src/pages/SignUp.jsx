@@ -35,11 +35,22 @@ function SignUp() {
   };
 
   const validationHandler = () => {
-    if (password === confirmPassword) {
-      return true;
-    } else {
+    if (
+      firstName == "" ||
+      lastName == "" ||
+      gender == "" ||
+      email == "" ||
+      mobile == "" ||
+      password == "" ||
+      confirmPassword == ""
+    ) {
+      toast.error("All fields are required");
+      return false;
+    } else if (password != confirmPassword) {
       toast.error("Password didn't matched");
       return false;
+    } else {
+      return true;
     }
   };
 
@@ -222,7 +233,7 @@ function SignUp() {
             Sign Up
           </button>
           <button
-          type="submit"
+            type="submit"
             onClick={resetHandler}
             className="w-full px-4 py-2 text-white font-medium bg-slate-800 hover:bg-slate-700 active:bg-slate-700 rounded-lg duration-150"
           >
